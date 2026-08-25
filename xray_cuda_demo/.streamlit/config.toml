@@ -1,0 +1,12 @@
+# Section 23: dark technical theme for the CUDA X-Ray Processing Lab.
+# UI/presentation only -- has no effect on any compute path.
+[theme]
+base = "dark"
+primaryColor = "#39D98A"
+backgroundColor = "#0E1117"
+secondaryBackgroundColor = "#161B22"
+textColor = "#E6EDF3"
+font = "sans serif"
+
+[server]
+headless = false

@@ -1,0 +1,96 @@
+{
+  "timestamp_utc": "2026-08-24T20:05:59.783161+00:00",
+  "environment": {
+    "os_platform": "Windows-11-10.0.26200-SP0",
+    "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "cpu_logical_cores": 16,
+    "gpu_available": true,
+    "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_vram_bytes": 8585216000,
+    "gpu_compute_capability": "8.9",
+    "gpu_driver_version": "13.2",
+    "cuda_runtime_version": "13.2",
+    "python_version": "3.13.9",
+    "opencv_version": "5.0.0.93",
+    "numpy_version": "2.3.5",
+    "pybind11_version": "3.1.0",
+    "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399"
+  },
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "seed": 42,
+  "resolution": [
+    224,
+    224
+  ],
+  "warmup_runs": 3,
+  "measurement_runs": 7,
+  "batch_sweep": {
+    "batch_sizes": [
+      100
+    ],
+    "results": [
+      {
+        "batch_size": 100,
+        "production": {
+          "total_ms": {
+            "mean": 4.244964531489781,
+            "median": 4.301216125488281,
+            "min": 3.8750720024108887,
+            "max": 4.4502716064453125,
+            "std": 0.205911179037359,
+            "n": 7
+          }
+        },
+        "variants": {
+          "no_graph": {
+            "total_ms": {
+              "mean": 5.813749177115304,
+              "median": 5.870259761810303,
+              "min": 5.51853609085083,
+              "max": 6.1561279296875,
+              "std": 0.22138130415274027,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.7327130825573294,
+            "gain_vs_no_graph": 1.0,
+            "break_even_calls": null
+          },
+          "graph_kernels_only": {
+            "total_ms": {
+              "mean": 4.334011486598423,
+              "median": 4.277440071105957,
+              "min": 3.806879997253418,
+              "max": 4.841248035430908,
+              "std": 0.38844976262708014,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 1.0055584774975415,
+            "gain_vs_no_graph": 1.3723768572384727,
+            "break_even_calls": null
+          },
+          "graph_full_pipeline": {
+            "total_ms": {
+              "mean": 4.661481176103864,
+              "median": 4.862688064575195,
+              "min": 4.142144203186035,
+              "max": 4.93884801864624,
+              "std": 0.3133809771731946,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.8845346582732191,
+            "gain_vs_no_graph": 1.2072046744218063,
+            "break_even_calls": 0.08058979834536266
+          }
+        },
+        "graph_setup_cost_ms": {
+          "capture_ms": 0.03689999878406525,
+          "instantiate_ms": 0.04430000111460686
+        }
+      }
+    ]
+  },
+  "experiment_id": "cuda_graphs_20260824T200600"
+}

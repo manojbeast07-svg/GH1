@@ -1,0 +1,21 @@
+{
+  "release_id": "section20-final-release-20260824",
+  "timestamp_utc": "2026-08-24T13:52:20.366124+00:00",
+  "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "gpu_vram_bytes": 8585216000,
+  "gpu_compute_capability": "8.9",
+  "cpu": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+  "cuda_runtime_version": "13.2",
+  "nvidia_driver_version": "13.2",
+  "python_version": "3.13.9",
+  "opencv_version": "5.0.0.93",
+  "numpy_version": "2.3.5",
+  "pybind11_version": "3.1.0",
+  "test_count": 1874,
+  "benchmark_id": "20260824_135124_seed42_batch119_224x224",
+  "canonical_benchmark_id": "20260824_055212_seed42_batch122_224x224",
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "environment_label": "LOCAL ENVIRONMENT",
+  "build_config": "Release"
+}

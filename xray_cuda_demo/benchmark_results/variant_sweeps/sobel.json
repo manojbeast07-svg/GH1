@@ -1,0 +1,107 @@
+{
+  "timestamp_utc": "2026-08-24T12:12:22.731627+00:00",
+  "resolution": [
+    224,
+    224
+  ],
+  "image_count": 125,
+  "seed": 42,
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "warmup_runs": 5,
+  "measurement_runs": 20,
+  "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "filter": "sobel",
+  "kernel_size": 3,
+  "rows": [
+    {
+      "variant": "basic",
+      "kernel_ms": {
+        "mean": 0.38304959833621977,
+        "median": 0.38286399841308594,
+        "min": 0.36131200194358826,
+        "max": 0.4352000057697296,
+        "std": 0.015298523328287603,
+        "coefficient_of_variation": 0.03993875308768606,
+        "n": 20
+      },
+      "speedup_vs_basic": 1.0,
+      "is_production_default": false,
+      "max_abs_diff_vs_cpu": null,
+      "correctness": null,
+      "error": null
+    },
+    {
+      "variant": "shared",
+      "kernel_ms": {
+        "mean": 0.3773424029350281,
+        "median": 0.3778560012578964,
+        "min": 0.3705280125141144,
+        "max": 0.3850240111351013,
+        "std": 0.0038474393844389605,
+        "coefficient_of_variation": 0.01019614905325502,
+        "n": 20
+      },
+      "speedup_vs_basic": 1.0151247126132665,
+      "is_production_default": false,
+      "max_abs_diff_vs_cpu": 0,
+      "correctness": "PASS",
+      "error": null
+    },
+    {
+      "variant": "shared_const",
+      "kernel_ms": {
+        "mean": 0.4275424018502235,
+        "median": 0.41622400283813477,
+        "min": 0.3830080032348633,
+        "max": 0.5297600030899048,
+        "std": 0.0355056618041535,
+        "coefficient_of_variation": 0.08304594269597576,
+        "n": 20
+      },
+      "speedup_vs_basic": 0.8959335885248864,
+      "is_production_default": false,
+      "max_abs_diff_vs_cpu": 0,
+      "correctness": "PASS",
+      "error": null
+    },
+    {
+      "variant": "specialized",
+      "kernel_ms": {
+        "mean": 0.3677584037184715,
+        "median": 0.36764800548553467,
+        "min": 0.35651201009750366,
+        "max": 0.378495991230011,
+        "std": 0.0050888017911194525,
+        "coefficient_of_variation": 0.013837350118082035,
+        "n": 20
+      },
+      "speedup_vs_basic": 1.0415794566844325,
+      "is_production_default": true,
+      "max_abs_diff_vs_cpu": 0,
+      "correctness": "PASS",
+      "error": null
+    },
+    {
+      "variant": "separable",
+      "kernel_ms": {
+        "mean": 0.572094401717186,
+        "median": 0.5703679919242859,
+        "min": 0.5473600029945374,
+        "max": 0.5986239910125732,
+        "std": 0.0155278745827196,
+        "coefficient_of_variation": 0.02714215439988833,
+        "n": 20
+      },
+      "speedup_vs_basic": 0.6695566276937277,
+      "is_production_default": false,
+      "max_abs_diff_vs_cpu": 0,
+      "correctness": "PASS",
+      "error": null
+    }
+  ],
+  "rejected_notes": {
+    "shared": "Shared memory: a modest gain, not the winning variant.",
+    "shared_const": "Shared + constant memory: Basic Sobel was already hand-optimized (one launch, minimal arithmetic), so there was limited headroom left for this variant to win.",
+    "separable": "Separable two-pass: the intermediate pass's extra global-memory round trip outweighed the reduced arithmetic for a kernel this small -- rejected as production default."
+  }
+}

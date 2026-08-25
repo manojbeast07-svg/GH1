@@ -1,0 +1,37 @@
+{
+  "timestamp_utc": "2026-08-24T12:12:22.731627+00:00",
+  "resolution": [
+    224,
+    224
+  ],
+  "image_count": 125,
+  "seed": 42,
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "warmup_runs": 5,
+  "measurement_runs": 20,
+  "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "experiment": "laplacian_threshold_fusion",
+  "unfused_combined_kernel_ms": {
+    "mean": 0.8414479982107878,
+    "median": 0.8430399931967258,
+    "min": 0.8013439998030663,
+    "max": 0.8976320028305054,
+    "std": 0.022830832512761516,
+    "coefficient_of_variation": 0.02713279080978009,
+    "n": 20
+  },
+  "fused_kernel_ms": {
+    "mean": 0.7650815933942795,
+    "median": 0.754688024520874,
+    "min": 0.7505919933319092,
+    "max": 0.8028159737586975,
+    "std": 0.01587511771702027,
+    "coefficient_of_variation": 0.02074957475658304,
+    "n": 20
+  },
+  "combined_kernel_speedup": 1.0998147197316683,
+  "max_abs_diff_fused_vs_unfused": 0,
+  "bit_exact_vs_unfused": true,
+  "wired_into_production": false,
+  "note": "Experimental (Section 10): kept as a tested, benchmarked capability; NOT wired into the production pipeline because it permanently discards the standalone Laplacian output that per-stage introspection (visualization/benchmarking/correctness) depends on."
+}

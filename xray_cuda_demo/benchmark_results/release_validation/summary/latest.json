@@ -1,0 +1,1086 @@
+{
+  "benchmark_id": "20260824_135124_seed42_batch119_224x224",
+  "timestamp_utc": "2026-08-24T13:51:26.218135+00:00",
+  "environment": {
+    "os_platform": "Windows-11-10.0.26200-SP0",
+    "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "cpu_logical_cores": 16,
+    "gpu_available": true,
+    "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_vram_bytes": 8585216000,
+    "gpu_compute_capability": "8.9",
+    "gpu_driver_version": "13.2",
+    "cuda_runtime_version": "13.2",
+    "python_version": "3.13.9",
+    "opencv_version": "5.0.0.93",
+    "numpy_version": "2.3.5",
+    "pybind11_version": "3.1.0",
+    "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399"
+  },
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "cpu": {
+    "mode1_kernel_only_ms": null,
+    "mode2_gpu_processing_ms": null,
+    "mode3_pipeline_ms": {
+      "mean": 30.364505000034114,
+      "median": 29.979549999552546,
+      "min": 27.677199999743607,
+      "max": 33.310099999653175,
+      "std": 1.4191218834416477,
+      "coefficient_of_variation": 0.046736210039981,
+      "n": 20
+    },
+    "mode4_end_to_end_ms": {
+      "mean": 83.28429270655224,
+      "median": 82.89933770607067,
+      "min": 80.59698770626173,
+      "max": 86.2298877061713,
+      "std": 1.4191218834416477,
+      "coefficient_of_variation": 0.017039490128611022,
+      "n": 20
+    }
+  },
+  "basic_cuda": {
+    "mode1_kernel_only_ms": {
+      "mean": 3.512326407432556,
+      "median": 3.5037921667099,
+      "min": 3.452479839324951,
+      "max": 3.6531195640563965,
+      "std": 0.04946250003885616,
+      "coefficient_of_variation": 0.014082546523633693,
+      "n": 20
+    },
+    "mode2_gpu_processing_ms": {
+      "mean": 5.684295964241028,
+      "median": 5.639776229858398,
+      "min": 4.941375732421875,
+      "max": 6.199967861175537,
+      "std": 0.3269973004917958,
+      "coefficient_of_variation": 0.05752643819901042,
+      "n": 20
+    },
+    "mode3_pipeline_ms": {
+      "mean": 5.684295964241028,
+      "median": 5.639776229858398,
+      "min": 4.941375732421875,
+      "max": 6.199967861175537,
+      "std": 0.3269973004917958,
+      "coefficient_of_variation": 0.05752643819901042,
+      "n": 20
+    },
+    "mode4_end_to_end_ms": {
+      "mean": 58.60408367075915,
+      "median": 58.55956393637652,
+      "min": 57.86116343894,
+      "max": 59.11975556769366,
+      "std": 0.3269973004917958,
+      "coefficient_of_variation": 0.005579769872845107,
+      "n": 20
+    }
+  },
+  "enhanced_cuda": {
+    "mode1_kernel_only_ms": {
+      "mean": 1.3065136194229126,
+      "median": 1.2840960025787354,
+      "min": 1.2472319602966309,
+      "max": 1.423359990119934,
+      "std": 0.053637593960871435,
+      "coefficient_of_variation": 0.04105398762284864,
+      "n": 20
+    },
+    "mode2_gpu_processing_ms": {
+      "mean": 3.526521623134613,
+      "median": 3.4014720916748047,
+      "min": 3.0392000675201416,
+      "max": 4.959775924682617,
+      "std": 0.4976180370959569,
+      "coefficient_of_variation": 0.14110732621955116,
+      "n": 20
+    },
+    "mode3_pipeline_ms": {
+      "mean": 3.526521623134613,
+      "median": 3.4014720916748047,
+      "min": 3.0392000675201416,
+      "max": 4.959775924682617,
+      "std": 0.4976180370959569,
+      "coefficient_of_variation": 0.14110732621955116,
+      "n": 20
+    },
+    "mode4_end_to_end_ms": {
+      "mean": 56.446309329652735,
+      "median": 56.321259798192926,
+      "min": 55.95898777403826,
+      "max": 57.87956363120074,
+      "std": 0.4976180370959569,
+      "coefficient_of_variation": 0.008815776319224205,
+      "n": 20
+    }
+  },
+  "cpu_images_per_second": 1428.8408550132035,
+  "basic_images_per_second": 2030.5752184190492,
+  "enhanced_images_per_second": 2108.198063136896,
+  "speedups": {
+    "basic_vs_cpu": 1.4211346290208684,
+    "enhanced_vs_cpu": 1.4754603745687374,
+    "enhanced_vs_basic_compute_only": 2.688319781146982,
+    "enhanced_vs_basic_end_to_end": 1.0382270225765298
+  },
+  "per_filter": {
+    "benchmark_id": "20260824_135135_seed42_batch119_224x224",
+    "timestamp_utc": "2026-08-24T13:51:35.195439+00:00",
+    "resolution": [
+      224,
+      224
+    ],
+    "image_count": 119,
+    "seed": 42,
+    "total_basic_compute_ms": 5.567086369171738,
+    "total_enhanced_compute_ms": 2.252942406386137,
+    "total_reduction_ms": 3.314143962785601,
+    "rows": [
+      {
+        "filter": "gaussian",
+        "basic_kernel_ms": {
+          "mean": 1.745657604932785,
+          "median": 1.7495680451393127,
+          "min": 1.6938560009002686,
+          "max": 1.830623984336853,
+          "std": 0.039369141639149036,
+          "coefficient_of_variation": 0.022552613712965155,
+          "n": 20
+        },
+        "enhanced_kernel_ms": {
+          "mean": 0.5246464028954506,
+          "median": 0.5166079998016357,
+          "min": 0.4925439953804016,
+          "max": 0.621567964553833,
+          "std": 0.03214957373947734,
+          "coefficient_of_variation": 0.061278555541500544,
+          "n": 20
+        },
+        "kernel_speedup": 3.327303104145465,
+        "basic_pct_of_total_basic_compute": 31.356754488299792,
+        "enhanced_pct_of_total_enhanced_compute": 23.287164439192956,
+        "absolute_reduction_ms": 1.2210112020373343,
+        "pct_of_total_compute_reduction": 36.842430979101195
+      },
+      {
+        "filter": "median",
+        "basic_kernel_ms": {
+          "mean": 2.3082895636558534,
+          "median": 2.3064318895339966,
+          "min": 2.277791976928711,
+          "max": 2.347327947616577,
+          "std": 0.016415470400476972,
+          "coefficient_of_variation": 0.007111529965277953,
+          "n": 20
+        },
+        "enhanced_kernel_ms": {
+          "mean": 0.41244959980249407,
+          "median": 0.411408007144928,
+          "min": 0.38630399107933044,
+          "max": 0.43331199884414673,
+          "std": 0.013349692982083378,
+          "coefficient_of_variation": 0.03236684673345791,
+          "n": 20
+        },
+        "kernel_speedup": 5.5965372854312445,
+        "basic_pct_of_total_basic_compute": 41.46315344482929,
+        "enhanced_pct_of_total_enhanced_compute": 18.30715239916361,
+        "absolute_reduction_ms": 1.8958399638533594,
+        "pct_of_total_compute_reduction": 57.20451450334312
+      },
+      {
+        "filter": "sobel",
+        "basic_kernel_ms": {
+          "mean": 0.5855391979217529,
+          "median": 0.5844320058822632,
+          "min": 0.5618879795074463,
+          "max": 0.6141759753227234,
+          "std": 0.013125209906131993,
+          "coefficient_of_variation": 0.022415595664162433,
+          "n": 20
+        },
+        "enhanced_kernel_ms": {
+          "mean": 0.6309615999460221,
+          "median": 0.6310400068759918,
+          "min": 0.603551983833313,
+          "max": 0.6785280108451843,
+          "std": 0.01725951633772235,
+          "coefficient_of_variation": 0.027354305458840725,
+          "n": 20
+        },
+        "kernel_speedup": 0.9280108297744981,
+        "basic_pct_of_total_basic_compute": 10.517875223999237,
+        "enhanced_pct_of_total_enhanced_compute": 28.00611316816237,
+        "absolute_reduction_ms": -0.04542240202426917,
+        "pct_of_total_compute_reduction": -1.3705621280884486
+      },
+      {
+        "filter": "laplacian",
+        "basic_kernel_ms": {
+          "mean": 0.7913184046745301,
+          "median": 0.7864000201225281,
+          "min": 0.7582079768180847,
+          "max": 0.8518720269203186,
+          "std": 0.020725596535409417,
+          "coefficient_of_variation": 0.0261912226645782,
+          "n": 20
+        },
+        "enhanced_kernel_ms": {
+          "mean": 0.5933568030595779,
+          "median": 0.5908480286598206,
+          "min": 0.5734400153160095,
+          "max": 0.6133760213851929,
+          "std": 0.011249168528338222,
+          "coefficient_of_variation": 0.018958522882577808,
+          "n": 20
+        },
+        "kernel_speedup": 1.3336299518168246,
+        "basic_pct_of_total_basic_compute": 14.21422899160555,
+        "enhanced_pct_of_total_enhanced_compute": 26.33697165882549,
+        "absolute_reduction_ms": 0.19796160161495213,
+        "pct_of_total_compute_reduction": 5.973234833424726
+      },
+      {
+        "filter": "threshold",
+        "basic_kernel_ms": {
+          "mean": 0.13628159798681735,
+          "median": 0.1371999979019165,
+          "min": 0.11603199690580368,
+          "max": 0.17814399302005768,
+          "std": 0.016181826938042352,
+          "coefficient_of_variation": 0.1187381655123213,
+          "n": 20
+        },
+        "enhanced_kernel_ms": {
+          "mean": 0.0915280006825924,
+          "median": 0.08739199861884117,
+          "min": 0.06515199691057205,
+          "max": 0.23552000522613525,
+          "std": 0.03533875592050207,
+          "coefficient_of_variation": 0.38609775868537144,
+          "n": 20
+        },
+        "kernel_speedup": 1.4889607220791898,
+        "basic_pct_of_total_basic_compute": 2.4479878512661393,
+        "enhanced_pct_of_total_enhanced_compute": 4.062598334655573,
+        "absolute_reduction_ms": 0.04475359730422496,
+        "pct_of_total_compute_reduction": 1.3503818122194278
+      }
+    ],
+    "_file_path": "per_filter\\20260824_135135_seed42_batch119_224x224.json"
+  },
+  "batch_sweep": {
+    "benchmark_id": "20260824_135131_seed42_batch1013_224x224",
+    "timestamp_utc": "2026-08-24T13:51:31.996517+00:00",
+    "resolution": [
+      224,
+      224
+    ],
+    "seed": 42,
+    "warmup_runs": 3,
+    "measurement_runs": 10,
+    "rows": [
+      {
+        "requested_batch_size": 1,
+        "effective_batch_size": 1,
+        "cpu_total_ms": {
+          "mean": 0.22444999776780605,
+          "median": 0.20864999896730296,
+          "min": 0.1967999996850267,
+          "max": 0.31489999673794955,
+          "std": 0.03647261473953244,
+          "coefficient_of_variation": 0.162497728234613,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 0.19964799731969834,
+          "median": 0.18664000183343887,
+          "min": 0.16585597395896912,
+          "max": 0.2934400141239166,
+          "std": 0.036560589741293455,
+          "coefficient_of_variation": 0.18312525160344392,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 0.2368256002664566,
+          "median": 0.22127999365329742,
+          "min": 0.13900801539421082,
+          "max": 0.3880639970302582,
+          "std": 0.06780452343265153,
+          "coefficient_of_variation": 0.28630571760976636,
+          "n": 10
+        },
+        "cpu_images_per_second": 4455.335308287692,
+        "basic_images_per_second": 5008.815582550973,
+        "enhanced_images_per_second": 4222.51647995353,
+        "basic_speedup_vs_cpu": 1.124228646322918,
+        "enhanced_speedup_vs_cpu": 0.9477438145000939,
+        "enhanced_vs_basic_gain": 0.8430169588721443
+      },
+      {
+        "requested_batch_size": 8,
+        "effective_batch_size": 8,
+        "cpu_total_ms": {
+          "mean": 1.8873699991672765,
+          "median": 1.8055999971693382,
+          "min": 1.6174999982467853,
+          "max": 2.388100001553539,
+          "std": 0.2594846524288258,
+          "coefficient_of_variation": 0.13748478175626008,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 0.5431936025619507,
+          "median": 0.53438401222229,
+          "min": 0.505728006362915,
+          "max": 0.6226879954338074,
+          "std": 0.033066756358529154,
+          "coefficient_of_variation": 0.06087471612804556,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 0.374726402759552,
+          "median": 0.35761600732803345,
+          "min": 0.3222079873085022,
+          "max": 0.45878398418426514,
+          "std": 0.046646537050058536,
+          "coefficient_of_variation": 0.12448158631616328,
+          "n": 10
+        },
+        "cpu_images_per_second": 4238.702535024752,
+        "basic_images_per_second": 14727.713953677516,
+        "enhanced_images_per_second": 21348.909340485687,
+        "basic_speedup_vs_cpu": 3.4745806840610274,
+        "enhanced_speedup_vs_cpu": 5.036661375521841,
+        "enhanced_vs_basic_gain": 1.4495738719283622
+      },
+      {
+        "requested_batch_size": 16,
+        "effective_batch_size": 16,
+        "cpu_total_ms": {
+          "mean": 3.7292399996658787,
+          "median": 3.617949998442782,
+          "min": 3.4596000041346997,
+          "max": 4.415900002641138,
+          "std": 0.3140262706838601,
+          "coefficient_of_variation": 0.08420650607415861,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 0.9876288115978241,
+          "median": 0.9211999773979187,
+          "min": 0.8399999141693115,
+          "max": 1.2371200323104858,
+          "std": 0.1383833100993266,
+          "coefficient_of_variation": 0.14011672044626233,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 0.6117952167987823,
+          "median": 0.6067360043525696,
+          "min": 0.5259520411491394,
+          "max": 0.7394240498542786,
+          "std": 0.06279653064597666,
+          "coefficient_of_variation": 0.10264305591429666,
+          "n": 10
+        },
+        "cpu_images_per_second": 4290.418423441109,
+        "basic_images_per_second": 16200.418428573972,
+        "enhanced_images_per_second": 26152.541832085546,
+        "basic_speedup_vs_cpu": 3.775953025947643,
+        "enhanced_speedup_vs_cpu": 6.095569068321786,
+        "enhanced_vs_basic_gain": 1.6143127381178142
+      },
+      {
+        "requested_batch_size": 32,
+        "effective_batch_size": 32,
+        "cpu_total_ms": {
+          "mean": 7.379819999914616,
+          "median": 7.239449998451164,
+          "min": 7.029599997622427,
+          "max": 8.638600003905594,
+          "std": 0.46440936760486934,
+          "coefficient_of_variation": 0.0629296334612826,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 1.6847167611122131,
+          "median": 1.6273759007453918,
+          "min": 1.4698238372802734,
+          "max": 1.9661439657211304,
+          "std": 0.15867602703521633,
+          "coefficient_of_variation": 0.0941855810412083,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 0.9460928022861481,
+          "median": 0.954736053943634,
+          "min": 0.7941440343856812,
+          "max": 1.0622398853302002,
+          "std": 0.06701094215596164,
+          "coefficient_of_variation": 0.0708291427585494,
+          "n": 10
+        },
+        "cpu_images_per_second": 4336.149120218412,
+        "basic_images_per_second": 18994.290754770136,
+        "enhanced_images_per_second": 33823.32042128941,
+        "basic_speedup_vs_cpu": 4.380451462382686,
+        "enhanced_speedup_vs_cpu": 7.800313015892252,
+        "enhanced_vs_basic_gain": 1.7807098384442273
+      },
+      {
+        "requested_batch_size": 64,
+        "effective_batch_size": 64,
+        "cpu_total_ms": {
+          "mean": 14.231789998302702,
+          "median": 14.063799997529713,
+          "min": 13.693499997316394,
+          "max": 15.64870000584051,
+          "std": 0.5831283571501649,
+          "coefficient_of_variation": 0.04097364823537372,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 2.938041639328003,
+          "median": 2.904304027557373,
+          "min": 2.616192102432251,
+          "max": 3.252512216567993,
+          "std": 0.18989514069120922,
+          "coefficient_of_variation": 0.06463323669389606,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 1.8540672183036804,
+          "median": 1.8088800311088562,
+          "min": 1.5726079940795898,
+          "max": 2.205024003982544,
+          "std": 0.21597512837232896,
+          "coefficient_of_variation": 0.11648721591115155,
+          "n": 10
+        },
+        "cpu_images_per_second": 4496.9747310515895,
+        "basic_images_per_second": 21783.21748177751,
+        "enhanced_images_per_second": 34518.705345836795,
+        "basic_speedup_vs_cpu": 4.8439715107502135,
+        "enhanced_speedup_vs_cpu": 7.675983835863095,
+        "enhanced_vs_basic_gain": 1.584646775652541
+      },
+      {
+        "requested_batch_size": 128,
+        "effective_batch_size": 128,
+        "cpu_total_ms": {
+          "mean": 29.441870000300696,
+          "median": 29.04964999834192,
+          "min": 27.75400000246009,
+          "max": 32.775200001196936,
+          "std": 1.472856523178338,
+          "coefficient_of_variation": 0.05002591626018644,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 5.567235088348388,
+          "median": 5.434271812438965,
+          "min": 5.25219202041626,
+          "max": 6.194720268249512,
+          "std": 0.29866935158671126,
+          "coefficient_of_variation": 0.053647698875119075,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 3.3765439987182617,
+          "median": 3.2736159563064575,
+          "min": 2.548959970474243,
+          "max": 4.350912094116211,
+          "std": 0.5022853836242549,
+          "coefficient_of_variation": 0.14875724522319944,
+          "n": 10
+        },
+        "cpu_images_per_second": 4347.549934793296,
+        "basic_images_per_second": 22991.66425859938,
+        "enhanced_images_per_second": 37908.58346539801,
+        "basic_speedup_vs_cpu": 5.288418673376897,
+        "enhanced_speedup_vs_cpu": 8.719528017842164,
+        "enhanced_vs_basic_gain": 1.6487968438917764
+      },
+      {
+        "requested_batch_size": 256,
+        "effective_batch_size": 256,
+        "cpu_total_ms": {
+          "mean": 57.44833000062499,
+          "median": 57.363350002560765,
+          "min": 55.472200001531746,
+          "max": 59.440700002596714,
+          "std": 1.1012892161380066,
+          "coefficient_of_variation": 0.019170082335309407,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 11.344272041320801,
+          "median": 11.514031887054443,
+          "min": 9.396320343017578,
+          "max": 12.433856010437012,
+          "std": 0.9153888889916754,
+          "coefficient_of_variation": 0.0806917258028923,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 7.055891275405884,
+          "median": 6.993600130081177,
+          "min": 6.261536121368408,
+          "max": 8.152095794677734,
+          "std": 0.5269492136390007,
+          "coefficient_of_variation": 0.07468216176682632,
+          "n": 10
+        },
+        "cpu_images_per_second": 4456.1782735410225,
+        "basic_images_per_second": 22566.45460083609,
+        "enhanced_images_per_second": 36281.73819689049,
+        "basic_speedup_vs_cpu": 5.064082542394351,
+        "enhanced_speedup_vs_cpu": 8.141895581762679,
+        "enhanced_vs_basic_gain": 1.607773079052757
+      },
+      {
+        "requested_batch_size": 512,
+        "effective_batch_size": 512,
+        "cpu_total_ms": {
+          "mean": 116.81106999967596,
+          "median": 116.38569999922765,
+          "min": 115.89470000035362,
+          "max": 119.68250000063563,
+          "std": 1.1724297947126405,
+          "coefficient_of_variation": 0.010036975046251121,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 22.72825222015381,
+          "median": 22.826671600341797,
+          "min": 20.642271041870117,
+          "max": 24.0199031829834,
+          "std": 1.0704024719470144,
+          "coefficient_of_variation": 0.047095679050844795,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 13.034560203552246,
+          "median": 13.089808464050293,
+          "min": 10.524032592773438,
+          "max": 16.1046085357666,
+          "std": 1.6166718222638383,
+          "coefficient_of_variation": 0.12402964097118171,
+          "n": 10
+        },
+        "cpu_images_per_second": 4383.146220657171,
+        "basic_images_per_second": 22527.02913715444,
+        "enhanced_images_per_second": 39280.18989551079,
+        "basic_speedup_vs_cpu": 5.1394655809079834,
+        "enhanced_speedup_vs_cpu": 8.961642600556788,
+        "enhanced_vs_basic_gain": 1.7436915296888795
+      }
+    ],
+    "_file_path": "batch_sweeps\\20260824_135131_seed42_batch1013_224x224.json"
+  },
+  "resolution_sweep": {
+    "benchmark_id": "20260824_135133_seed42_batch122_224x224",
+    "timestamp_utc": "2026-08-24T13:51:33.236031+00:00",
+    "seed": 42,
+    "warmup_runs": 2,
+    "measurement_runs": 10,
+    "rows": [
+      {
+        "width": 1733,
+        "height": 858,
+        "pixel_count": 1486914,
+        "image_count": 1,
+        "cpu_ms_per_image": 13.353360001929104,
+        "basic_ms_per_image": 1.7722175598144532,
+        "enhanced_ms_per_image": 0.9924096167087555,
+        "cpu_images_per_second": 74.8875189357236,
+        "basic_images_per_second": 564.2648073663696,
+        "enhanced_images_per_second": 1007.6484378662284,
+        "cpu_total_ms": {
+          "mean": 13.353360001929104,
+          "median": 13.035550000495277,
+          "min": 11.034000002837274,
+          "max": 15.952200003084727,
+          "std": 1.489343308972915,
+          "coefficient_of_variation": 0.11153322525250242,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 1.7722175598144532,
+          "median": 1.7471999526023865,
+          "min": 1.6365759372711182,
+          "max": 1.9351038932800293,
+          "std": 0.10745183387932239,
+          "coefficient_of_variation": 0.06063128834507899,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 0.9924096167087555,
+          "median": 1.010528028011322,
+          "min": 0.8702399730682373,
+          "max": 1.0678720474243164,
+          "std": 0.06294749331443997,
+          "coefficient_of_variation": 0.06342894330589029,
+          "n": 10
+        }
+      },
+      {
+        "width": 902,
+        "height": 1128,
+        "pixel_count": 1017456,
+        "image_count": 1,
+        "cpu_ms_per_image": 5.799890000344021,
+        "basic_ms_per_image": 1.219216001033783,
+        "enhanced_ms_per_image": 0.6787648022174835,
+        "cpu_images_per_second": 172.41706307200394,
+        "basic_images_per_second": 820.1992092886676,
+        "enhanced_images_per_second": 1473.264371890028,
+        "cpu_total_ms": {
+          "mean": 5.799890000344021,
+          "median": 5.648749996908009,
+          "min": 5.303800004185177,
+          "max": 6.5264000004390255,
+          "std": 0.46419039501421805,
+          "coefficient_of_variation": 0.08003434461458485,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 1.219216001033783,
+          "median": 1.2079039812088013,
+          "min": 1.167680025100708,
+          "max": 1.3115520477294922,
+          "std": 0.04791172232681946,
+          "coefficient_of_variation": 0.039297156768115515,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 0.6787648022174835,
+          "median": 0.6653760075569153,
+          "min": 0.6400319933891296,
+          "max": 0.7545920014381409,
+          "std": 0.03835144872112306,
+          "coefficient_of_variation": 0.05650182301119799,
+          "n": 10
+        }
+      },
+      {
+        "width": 858,
+        "height": 958,
+        "pixel_count": 821964,
+        "image_count": 1,
+        "cpu_ms_per_image": 5.026530001487117,
+        "basic_ms_per_image": 1.101196789741516,
+        "enhanced_ms_per_image": 0.6059935867786408,
+        "cpu_images_per_second": 198.9444009493918,
+        "basic_images_per_second": 908.1029016028372,
+        "enhanced_images_per_second": 1650.1824801741395,
+        "cpu_total_ms": {
+          "mean": 5.026530001487117,
+          "median": 4.9777500025811605,
+          "min": 4.563999995298218,
+          "max": 5.830000001878943,
+          "std": 0.36446984168016455,
+          "coefficient_of_variation": 0.07250923431718001,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 1.101196789741516,
+          "median": 1.047711968421936,
+          "min": 1.0157760381698608,
+          "max": 1.4593279361724854,
+          "std": 0.13530365156056195,
+          "coefficient_of_variation": 0.12286963857960555,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 0.6059935867786408,
+          "median": 0.5862879753112793,
+          "min": 0.5537279844284058,
+          "max": 0.6955199837684631,
+          "std": 0.0477889486427999,
+          "coefficient_of_variation": 0.07886048579629011,
+          "n": 10
+        }
+      },
+      {
+        "width": 224,
+        "height": 224,
+        "pixel_count": 50176,
+        "image_count": 119,
+        "cpu_ms_per_image": 0.22562285716461503,
+        "basic_ms_per_image": 0.05024941187946737,
+        "enhanced_ms_per_image": 0.030440793518258742,
+        "cpu_images_per_second": 4432.175057824028,
+        "basic_images_per_second": 19900.73042842148,
+        "enhanced_images_per_second": 32850.6548096451,
+        "cpu_total_ms": {
+          "mean": 26.84912000258919,
+          "median": 26.360800002294127,
+          "min": 26.099400005477946,
+          "max": 30.703600001288578,
+          "std": 1.3943288783320393,
+          "coefficient_of_variation": 0.05193201409199175,
+          "n": 10
+        },
+        "basic_total_ms": {
+          "mean": 5.979680013656616,
+          "median": 6.0135838985443115,
+          "min": 5.581664085388184,
+          "max": 6.374335289001465,
+          "std": 0.32252272398323545,
+          "coefficient_of_variation": 0.053936451991853415,
+          "n": 10
+        },
+        "enhanced_total_ms": {
+          "mean": 3.6224544286727904,
+          "median": 3.6433441638946533,
+          "min": 3.3864641189575195,
+          "max": 3.749408006668091,
+          "std": 0.10126772286644521,
+          "coefficient_of_variation": 0.02795555468272601,
+          "n": 10
+        }
+      }
+    ],
+    "_file_path": "resolution_sweeps\\20260824_135133_seed42_batch122_224x224.json"
+  },
+  "correctness": {
+    "canonical_pipeline": {
+      "basic_vs_cpu": {
+        "max_abs_diff": 255,
+        "mean_abs_diff": 0.04552546465014577,
+        "rmse": 3.407197306553756,
+        "differing_pixel_count": 1066,
+        "differing_pixel_percentage": 0.017853123392214027
+      },
+      "enhanced_vs_cpu": {
+        "max_abs_diff": 255,
+        "mean_abs_diff": 0.04552546465014577,
+        "rmse": 3.407197306553756,
+        "differing_pixel_count": 1066,
+        "differing_pixel_percentage": 0.017853123392214027
+      },
+      "enhanced_vs_basic": {
+        "max_abs_diff": 0,
+        "mean_abs_diff": 0.0,
+        "rmse": 0.0,
+        "differing_pixel_count": 0,
+        "differing_pixel_percentage": 0.0
+      }
+    },
+    "detailed": {
+      "benchmark_id": "20260824_135135_seed42_batch119_224x224",
+      "timestamp_utc": "2026-08-24T13:51:35.490666+00:00",
+      "resolution": [
+        224,
+        224
+      ],
+      "image_count": 119,
+      "filter_level": {
+        "gaussian": {
+          "cpu_vs_basic_max_abs_diff": 1,
+          "cpu_vs_enhanced_max_abs_diff": 1,
+          "basic_vs_enhanced_max_abs_diff": 0,
+          "tolerance": 1,
+          "pass": true
+        },
+        "median": {
+          "cpu_vs_basic_max_abs_diff": 0,
+          "cpu_vs_enhanced_max_abs_diff": 0,
+          "basic_vs_enhanced_max_abs_diff": 0,
+          "tolerance": 0,
+          "pass": true
+        },
+        "sobel": {
+          "cpu_vs_basic_max_abs_diff": 0,
+          "cpu_vs_enhanced_max_abs_diff": 0,
+          "basic_vs_enhanced_max_abs_diff": 0,
+          "tolerance": 0,
+          "pass": true
+        },
+        "laplacian": {
+          "cpu_vs_basic_max_abs_diff": 0,
+          "cpu_vs_enhanced_max_abs_diff": 0,
+          "basic_vs_enhanced_max_abs_diff": 0,
+          "tolerance": 0,
+          "pass": true
+        },
+        "threshold": {
+          "cpu_vs_basic_max_abs_diff": 0,
+          "cpu_vs_enhanced_max_abs_diff": 0,
+          "basic_vs_enhanced_max_abs_diff": 0,
+          "tolerance": 0,
+          "pass": true
+        }
+      },
+      "known_expected_differences": {
+        "gaussian": "\u00b11 (measured, justified float non-associativity -- Section 6)",
+        "median": "exact (0)",
+        "sobel": "exact (0)",
+        "laplacian": "exact (0)",
+        "threshold": "exact (0)"
+      },
+      "pipeline_level": {
+        "basic_vs_cpu": {
+          "max_abs_diff": 255,
+          "mean_abs_diff": 0.04552546465014577,
+          "rmse": 3.407197306553756,
+          "differing_pixel_count": 1066,
+          "differing_pixel_percentage": 0.017853123392214027
+        },
+        "enhanced_vs_cpu": {
+          "max_abs_diff": 255,
+          "mean_abs_diff": 0.04552546465014577,
+          "rmse": 3.407197306553756,
+          "differing_pixel_count": 1066,
+          "differing_pixel_percentage": 0.017853123392214027
+        },
+        "enhanced_vs_basic": {
+          "max_abs_diff": 0,
+          "mean_abs_diff": 0.0,
+          "rmse": 0.0,
+          "differing_pixel_count": 0,
+          "differing_pixel_percentage": 0.0
+        }
+      },
+      "baseline_comparison_note": "matches established Section 5 baseline (~0.0178%)",
+      "overall_pass": true,
+      "_file_path": "correctness\\20260824_135135_seed42_batch119_224x224.json"
+    }
+  },
+  "manifest": {
+    "benchmark_id": "20260824_135124_seed42_batch119_224x224",
+    "timestamp_utc": "2026-08-24T13:51:26.218135+00:00",
+    "status": "VALID",
+    "validation_notes": [],
+    "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+    "dataset_path": "C:\\Users\\manoj\\Desktop\\dev\\GH1\\data",
+    "valid_image_count": 9463,
+    "environment": {
+      "os_platform": "Windows-11-10.0.26200-SP0",
+      "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+      "cpu_logical_cores": 16,
+      "gpu_available": true,
+      "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "gpu_vram_bytes": 8585216000,
+      "gpu_compute_capability": "8.9",
+      "gpu_driver_version": "13.2",
+      "cuda_runtime_version": "13.2",
+      "python_version": "3.13.9",
+      "opencv_version": "5.0.0.93",
+      "numpy_version": "2.3.5",
+      "pybind11_version": "3.1.0",
+      "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399"
+    },
+    "seed": 42,
+    "requested_batch_size": 122,
+    "selected_image_count": 119,
+    "selected_relative_paths": [
+      "train\\fractured\\101-rotated3-rotated1-rotated1.jpg",
+      "train\\fractured\\103-rotated3-rotated1-rotated3.jpg",
+      "train\\fractured\\109-rotated1-rotated3-rotated2.jpg",
+      "train\\fractured\\109-rotated3-rotated3-rotated1.jpg",
+      "train\\fractured\\110-rotated1-rotated3-rotated1.jpg",
+      "train\\fractured\\111-rotated1-rotated1-rotated1.jpg",
+      "train\\fractured\\111-rotated1-rotated2-rotated2.jpg",
+      "train\\fractured\\115-rotated3-rotated2-rotated2.jpg",
+      "train\\fractured\\116-rotated3-rotated2-rotated1.jpg",
+      "train\\fractured\\117-rotated1-rotated3.jpg",
+      "train\\fractured\\12-rotated3-rotated3-rotated3.jpg",
+      "train\\fractured\\14-rotated1-rotated1-rotated1.jpg",
+      "train\\fractured\\15-rotated1-rotated2-rotated1.jpg",
+      "train\\fractured\\16-rotated2-rotated2-rotated3.jpg",
+      "train\\fractured\\17-rotated1-rotated3-rotated2.jpg",
+      "train\\fractured\\20-rotated1-rotated3.jpg",
+      "train\\fractured\\20-rotated3-rotated1-rotated2.jpg",
+      "train\\fractured\\23-rotated2-rotated3.jpg",
+      "train\\fractured\\25-rotated1-rotated3-rotated2.jpg",
+      "train\\fractured\\25.jpg",
+      "train\\fractured\\26-rotated2-rotated1-rotated3.jpg",
+      "train\\fractured\\27-rotated2-rotated3.jpg",
+      "train\\fractured\\29-rotated2-rotated1-rotated2.jpg",
+      "train\\fractured\\29-rotated3-rotated3-rotated1.jpg",
+      "train\\fractured\\29.jpg",
+      "train\\fractured\\32-rotated3-rotated3-rotated3.jpg",
+      "train\\fractured\\33-rotated2-rotated3.jpg",
+      "train\\fractured\\34-rotated3-rotated3-rotated3.jpg",
+      "train\\fractured\\39-rotated1-rotated2-rotated2.jpg",
+      "train\\fractured\\44-rotated3-rotated1-rotated1.jpg",
+      "train\\fractured\\45-rotated1-rotated2-rotated3.jpg",
+      "train\\fractured\\45-rotated1-rotated2.jpg",
+      "train\\fractured\\46-rotated2-rotated2.jpg",
+      "train\\fractured\\50-rotated2-rotated3.jpg",
+      "train\\fractured\\51-rotated3-rotated1-rotated2.jpg",
+      "train\\fractured\\53-rotated2-rotated1-rotated3.jpg",
+      "train\\fractured\\53-rotated2-rotated3-rotated1.jpg",
+      "train\\fractured\\54-rotated2-rotated3.jpg",
+      "train\\fractured\\54-rotated3-rotated3.jpg",
+      "train\\fractured\\58-rotated1-rotated1.jpg",
+      "train\\fractured\\66-rotated3-rotated2-rotated1.jpg",
+      "train\\fractured\\69-rotated2-rotated2-rotated1.jpg",
+      "train\\fractured\\73-rotated3-rotated2-rotated3.jpg",
+      "train\\fractured\\74-rotated2-rotated1.jpg",
+      "train\\fractured\\75-rotated1-rotated1.jpg",
+      "train\\fractured\\76-rotated1-rotated2.jpg",
+      "train\\fractured\\77-rotated2-rotated3-rotated2.jpg",
+      "train\\fractured\\77-rotated3-rotated2.jpg",
+      "train\\fractured\\77-rotated3.jpg",
+      "train\\fractured\\78-rotated1-rotated3.jpg",
+      "train\\fractured\\79-rotated2-rotated2-rotated1.jpg",
+      "train\\fractured\\81-rotated2-rotated1-rotated1.jpg",
+      "train\\fractured\\81-rotated3-rotated2-rotated3.jpg",
+      "train\\fractured\\83-rotated1-rotated3.jpg",
+      "train\\fractured\\83-rotated2-rotated1-rotated2.jpg",
+      "train\\fractured\\88-rotated1-rotated3-rotated3.jpg",
+      "train\\fractured\\88-rotated1.jpg",
+      "train\\fractured\\89-rotated1-rotated1-rotated1.jpg",
+      "train\\fractured\\90.jpg",
+      "train\\fractured\\95-rotated2-rotated3.jpg",
+      "train\\fractured\\96-rotated2-rotated1-rotated1.jpg",
+      "train\\fractured\\96-rotated2-rotated2-rotated3.jpg",
+      "train\\fractured\\97-rotated1-rotated3.jpg",
+      "train\\fractured\\97-rotated2-rotated1-rotated2.jpg",
+      "train\\fractured\\97-rotated3-rotated1-rotated1.jpg",
+      "train\\fractured\\98-rotated2-rotated3-rotated2.jpg",
+      "train\\not fractured\\10-rotated2-rotated1-rotated3-rotated1.jpg",
+      "train\\not fractured\\12-rotated1-rotated1-rotated3.jpg",
+      "train\\not fractured\\12-rotated1-rotated2-rotated1-rotated1.jpg",
+      "train\\not fractured\\12-rotated1-rotated2-rotated2.jpg",
+      "train\\not fractured\\14-rotated3-rotated3-rotated2-rotated1.jpg",
+      "train\\not fractured\\15-rotated3-rotated2-rotated3-rotated1.jpg",
+      "train\\not fractured\\21-rotated1-rotated1-rotated3.jpg",
+      "train\\not fractured\\21-rotated1-rotated3-rotated3-rotated1.jpg",
+      "train\\not fractured\\23-rotated2-rotated2-rotated1-rotated1.jpg",
+      "train\\not fractured\\26-rotated2-rotated2-rotated1-rotated1.jpg",
+      "train\\not fractured\\27-rotated2-rotated1-rotated1-rotated1.jpg",
+      "train\\not fractured\\28-rotated1-rotated3-rotated2-rotated1.jpg",
+      "train\\not fractured\\31-rotated1-rotated1-rotated1-rotated1.jpg",
+      "train\\not fractured\\31-rotated3-rotated3-rotated2.jpg",
+      "train\\not fractured\\32-rotated2-rotated3-rotated2-rotated1.jpg",
+      "train\\not fractured\\32-rotated2.jpg",
+      "train\\not fractured\\33-rotated2-rotated1-rotated1.jpg",
+      "train\\not fractured\\34-rotated3-rotated1-rotated1-rotated1.jpg",
+      "train\\not fractured\\36-rotated3-rotated1-rotated2-rotated1.jpg",
+      "train\\not fractured\\36-rotated3-rotated3-rotated2.jpg",
+      "train\\not fractured\\37-rotated1-rotated1-rotated2-rotated1.jpg",
+      "train\\not fractured\\37-rotated1-rotated1-rotated3.jpg",
+      "train\\not fractured\\37-rotated2-rotated2-rotated1.jpg",
+      "train\\not fractured\\38-rotated1-rotated3-rotated1.jpg",
+      "train\\not fractured\\40-rotated2-rotated2-rotated2-rotated1.jpg",
+      "train\\not fractured\\41-rotated2-rotated1-rotated2.jpg",
+      "train\\not fractured\\41-rotated3-rotated2-rotated2.jpg",
+      "train\\not fractured\\46-rotated1-rotated3.jpg",
+      "train\\not fractured\\46-rotated3-rotated3-rotated1.jpg",
+      "train\\not fractured\\46-rotated3-rotated3-rotated3.jpg",
+      "train\\not fractured\\47-rotated1-rotated1-rotated3-rotated1.jpg",
+      "train\\not fractured\\48-rotated2-rotated2-rotated2.jpg",
+      "train\\not fractured\\52-rotated2-rotated3-rotated1.jpg",
+      "train\\not fractured\\53-rotated2-rotated3-rotated2.jpg",
+      "train\\not fractured\\54-rotated3-rotated3-rotated2.jpg",
+      "train\\not fractured\\55-rotated1-rotated1-rotated3-rotated1.jpg",
+      "train\\not fractured\\55-rotated3-rotated1.jpg",
+      "train\\not fractured\\57-rotated1-rotated2-rotated3-rotated1.jpg",
+      "train\\not fractured\\62-rotated2-rotated1-rotated3-rotated1.jpg",
+      "train\\not fractured\\63-rotated3-rotated2-rotated2-rotated1.jpg",
+      "train\\not fractured\\65-rotated1-rotated3-rotated3.jpg",
+      "train\\not fractured\\66-rotated1.jpg",
+      "train\\not fractured\\70-rotated1-rotated2-rotated1-rotated1.jpg",
+      "train\\not fractured\\8-rotated2-rotated1-rotated1-rotated1.jpg",
+      "train\\not fractured\\8-rotated3-rotated2-rotated3.jpg",
+      "train\\not fractured\\9-rotated1-rotated1-rotated1.jpg",
+      "train\\not fractured\\9-rotated2-rotated2-rotated3.jpg",
+      "val\\fractured\\2-rotated2.jpg",
+      "val\\fractured\\2-rotated3-rotated2-rotated3.jpg",
+      "val\\fractured\\5-rotated2-rotated3-rotated1.jpg",
+      "val\\fractured\\6-rotated1-rotated1-rotated2.jpg",
+      "val\\fractured\\7-rotated2-rotated3-rotated2.jpg",
+      "val\\fractured\\9-rotated1.jpg"
+    ],
+    "resolution": [
+      224,
+      224
+    ],
+    "filter_config": {
+      "gaussian_enabled": true,
+      "gaussian_kernel_size": 5,
+      "gaussian_sigma": 0.0,
+      "median_enabled": true,
+      "median_kernel_size": 3,
+      "sobel_enabled": true,
+      "sobel_kernel_size": 3,
+      "sobel_mode": "magnitude",
+      "laplacian_enabled": true,
+      "laplacian_kernel_size": 3,
+      "laplacian_scale": 1.0,
+      "laplacian_delta": 0.0,
+      "threshold_enabled": true,
+      "threshold_value": 128,
+      "threshold_max_value": 255
+    },
+    "basic_cuda_config": {
+      "gaussian_variant": "basic",
+      "gaussian_block": [
+        16,
+        16
+      ],
+      "median_variant": "basic",
+      "median_block": [
+        16,
+        16
+      ],
+      "sobel_variant": "basic",
+      "sobel_block": [
+        16,
+        16
+      ],
+      "laplacian_variant": "basic",
+      "laplacian_block": [
+        16,
+        16
+      ],
+      "threshold_variant": "basic",
+      "threshold_block": [
+        16,
+        16
+      ]
+    },
+    "enhanced_cuda_config": {
+      "gaussian_variant": "specialized",
+      "gaussian_block": [
+        16,
+        16
+      ],
+      "median_variant": "network3x3",
+      "median_block": [
+        16,
+        16
+      ],
+      "sobel_variant": "specialized",
+      "sobel_block": [
+        16,
+        16
+      ],
+      "laplacian_variant": "specialized",
+      "laplacian_block": [
+        16,
+        16
+      ],
+      "threshold_variant": "vectorized",
+      "threshold_block": [
+        16,
+        16
+      ]
+    },
+    "warmup_runs": 2,
+    "measurement_runs": 20,
+    "result_file_paths": {
+      "raw_cpu": "raw\\cpu\\20260824_135124_seed42_batch119_224x224.json",
+      "raw_basic_cuda": "raw\\basic_cuda\\20260824_135124_seed42_batch119_224x224.json",
+      "raw_enhanced_cuda": "raw\\enhanced_cuda\\20260824_135124_seed42_batch119_224x224.json",
+      "aggregated": "aggregated\\20260824_135124_seed42_batch119_224x224.json"
+    }
+  }
+}

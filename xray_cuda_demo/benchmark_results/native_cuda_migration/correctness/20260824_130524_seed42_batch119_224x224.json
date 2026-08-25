@@ -1,0 +1,78 @@
+{
+  "benchmark_id": "20260824_130524_seed42_batch119_224x224",
+  "timestamp_utc": "2026-08-24T13:05:24.791742+00:00",
+  "resolution": [
+    224,
+    224
+  ],
+  "image_count": 119,
+  "filter_level": {
+    "gaussian": {
+      "cpu_vs_basic_max_abs_diff": 1,
+      "cpu_vs_enhanced_max_abs_diff": 1,
+      "basic_vs_enhanced_max_abs_diff": 0,
+      "tolerance": 1,
+      "pass": true
+    },
+    "median": {
+      "cpu_vs_basic_max_abs_diff": 0,
+      "cpu_vs_enhanced_max_abs_diff": 0,
+      "basic_vs_enhanced_max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true
+    },
+    "sobel": {
+      "cpu_vs_basic_max_abs_diff": 0,
+      "cpu_vs_enhanced_max_abs_diff": 0,
+      "basic_vs_enhanced_max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true
+    },
+    "laplacian": {
+      "cpu_vs_basic_max_abs_diff": 0,
+      "cpu_vs_enhanced_max_abs_diff": 0,
+      "basic_vs_enhanced_max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true
+    },
+    "threshold": {
+      "cpu_vs_basic_max_abs_diff": 0,
+      "cpu_vs_enhanced_max_abs_diff": 0,
+      "basic_vs_enhanced_max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true
+    }
+  },
+  "known_expected_differences": {
+    "gaussian": "\u00b11 (measured, justified float non-associativity -- Section 6)",
+    "median": "exact (0)",
+    "sobel": "exact (0)",
+    "laplacian": "exact (0)",
+    "threshold": "exact (0)"
+  },
+  "pipeline_level": {
+    "basic_vs_cpu": {
+      "max_abs_diff": 255,
+      "mean_abs_diff": 0.04552546465014577,
+      "rmse": 3.407197306553756,
+      "differing_pixel_count": 1066,
+      "differing_pixel_percentage": 0.017853123392214027
+    },
+    "enhanced_vs_cpu": {
+      "max_abs_diff": 255,
+      "mean_abs_diff": 0.04552546465014577,
+      "rmse": 3.407197306553756,
+      "differing_pixel_count": 1066,
+      "differing_pixel_percentage": 0.017853123392214027
+    },
+    "enhanced_vs_basic": {
+      "max_abs_diff": 0,
+      "mean_abs_diff": 0.0,
+      "rmse": 0.0,
+      "differing_pixel_count": 0,
+      "differing_pixel_percentage": 0.0
+    }
+  },
+  "baseline_comparison_note": "matches established Section 5 baseline (~0.0178%)",
+  "overall_pass": true
+}

@@ -1,0 +1,40 @@
+{
+  "experiment_id": "persistent_api_realistic_workload_20260824T193559",
+  "timestamp_utc": "2026-08-24T19:35:59.599416+00:00",
+  "environment": {
+    "os_platform": "Windows-11-10.0.26200-SP0",
+    "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "cpu_logical_cores": 16,
+    "gpu_available": true,
+    "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_vram_bytes": 8585216000,
+    "gpu_compute_capability": "8.9",
+    "gpu_driver_version": "13.2",
+    "cuda_runtime_version": "13.2",
+    "python_version": "3.13.9",
+    "opencv_version": "5.0.0.93",
+    "numpy_version": "2.3.5",
+    "pybind11_version": "3.1.0",
+    "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399"
+  },
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "description": "Section 20C realistic Streamlit-workload simulation (spec item 31): select batch(32) -> process(Enhanced) -> change gaussian_sigma (same shape) -> process(Enhanced) -> change batch size to 8 -> process(Enhanced) -> select new batch(64, different seed) -> process(Enhanced) -> switch to Basic -> process(Basic). Backend total_ms only, 2 discarded warmup passes, 5 measured passes with alternating stateless/persistent execution order.",
+  "stateless_pass_totals_ms": [
+    7.564,
+    7.868,
+    7.873,
+    7.593,
+    7.393
+  ],
+  "persistent_pass_totals_ms": [
+    10.24,
+    10.545,
+    9.772,
+    10.884,
+    10.649
+  ],
+  "stateless_median_ms": 7.593,
+  "persistent_median_ms": 10.545,
+  "gain": 0.7200568990042674,
+  "decision": "REJECTED for Streamlit/production adoption -- see research/section20c_decision.md"
+}

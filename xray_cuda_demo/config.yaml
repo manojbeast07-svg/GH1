@@ -1,0 +1,17 @@
+project:
+  name: xray_cuda_demo
+
+cuda:
+  enabled: true
+
+benchmark:
+  warmup_runs: 2
+  measurement_runs: 5
+
+dataset:
+  # Relative to the xray_cuda_demo/ project root (where this file lives).
+  # The actual X-ray dataset (train/val, fractured/not fractured, ~9,463
+  # .jpg files) was placed one level up, at the workspace root, rather
+  # than inside xray_cuda_demo/data.
+  path: "../data"
+  extensions: [".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"]

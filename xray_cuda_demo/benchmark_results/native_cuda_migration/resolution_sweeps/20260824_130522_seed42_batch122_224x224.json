@@ -1,0 +1,165 @@
+{
+  "benchmark_id": "20260824_130522_seed42_batch122_224x224",
+  "timestamp_utc": "2026-08-24T13:05:22.295385+00:00",
+  "seed": 42,
+  "warmup_runs": 2,
+  "measurement_runs": 10,
+  "rows": [
+    {
+      "width": 1733,
+      "height": 858,
+      "pixel_count": 1486914,
+      "image_count": 1,
+      "cpu_ms_per_image": 13.683440000022529,
+      "basic_ms_per_image": 1.4801471710205079,
+      "enhanced_ms_per_image": 0.9051904082298279,
+      "cpu_images_per_second": 73.0810381014097,
+      "basic_images_per_second": 675.6084932490437,
+      "enhanced_images_per_second": 1104.7399430088747,
+      "cpu_total_ms": {
+        "mean": 13.683440000022529,
+        "median": 14.096700000663986,
+        "min": 11.552399999345653,
+        "max": 15.952800000377465,
+        "std": 1.3271208619661459,
+        "coefficient_of_variation": 0.0969873702785236,
+        "n": 10
+      },
+      "basic_total_ms": {
+        "mean": 1.4801471710205079,
+        "median": 1.4217279553413391,
+        "min": 1.317599892616272,
+        "max": 1.8341119289398193,
+        "std": 0.15330234143938776,
+        "coefficient_of_variation": 0.10357236391141521,
+        "n": 10
+      },
+      "enhanced_total_ms": {
+        "mean": 0.9051904082298279,
+        "median": 0.8787040412425995,
+        "min": 0.7561599612236023,
+        "max": 1.2570559978485107,
+        "std": 0.1408263018871377,
+        "coefficient_of_variation": 0.1555764407209471,
+        "n": 10
+      }
+    },
+    {
+      "width": 902,
+      "height": 1128,
+      "pixel_count": 1017456,
+      "image_count": 1,
+      "cpu_ms_per_image": 6.070989998988807,
+      "basic_ms_per_image": 0.9688319981098175,
+      "enhanced_ms_per_image": 0.7030432045459747,
+      "cpu_images_per_second": 164.7177808177186,
+      "basic_images_per_second": 1032.1706982748208,
+      "enhanced_images_per_second": 1422.3876904489819,
+      "cpu_total_ms": {
+        "mean": 6.070989998988807,
+        "median": 5.8996999978262465,
+        "min": 5.68339999881573,
+        "max": 7.261899998411536,
+        "std": 0.46156934744576666,
+        "coefficient_of_variation": 0.0760286786047492,
+        "n": 10
+      },
+      "basic_total_ms": {
+        "mean": 0.9688319981098175,
+        "median": 0.9545600116252899,
+        "min": 0.9116159677505493,
+        "max": 1.072543978691101,
+        "std": 0.04383406241668065,
+        "coefficient_of_variation": 0.04524423481284734,
+        "n": 10
+      },
+      "enhanced_total_ms": {
+        "mean": 0.7030432045459747,
+        "median": 0.6899040341377258,
+        "min": 0.5876480340957642,
+        "max": 0.9508479833602905,
+        "std": 0.11636845651678557,
+        "coefficient_of_variation": 0.16552106010602338,
+        "n": 10
+      }
+    },
+    {
+      "width": 858,
+      "height": 958,
+      "pixel_count": 821964,
+      "image_count": 1,
+      "cpu_ms_per_image": 5.80818000016734,
+      "basic_ms_per_image": 0.8847616374492645,
+      "enhanced_ms_per_image": 0.5407840013504028,
+      "cpu_images_per_second": 172.17097265773253,
+      "basic_images_per_second": 1130.2479195221026,
+      "enhanced_images_per_second": 1849.1671305047475,
+      "cpu_total_ms": {
+        "mean": 5.80818000016734,
+        "median": 5.7628499998827465,
+        "min": 5.17490000493126,
+        "max": 6.391899994923733,
+        "std": 0.3481738841363026,
+        "coefficient_of_variation": 0.05994543628576789,
+        "n": 10
+      },
+      "basic_total_ms": {
+        "mean": 0.8847616374492645,
+        "median": 0.8492640256881714,
+        "min": 0.800864040851593,
+        "max": 1.0921920537948608,
+        "std": 0.09270780580566099,
+        "coefficient_of_variation": 0.10478280463530744,
+        "n": 10
+      },
+      "enhanced_total_ms": {
+        "mean": 0.5407840013504028,
+        "median": 0.5102240145206451,
+        "min": 0.4811199903488159,
+        "max": 0.6710720062255859,
+        "std": 0.06597209152705658,
+        "coefficient_of_variation": 0.12199342318248378,
+        "n": 10
+      }
+    },
+    {
+      "width": 224,
+      "height": 224,
+      "pixel_count": 50176,
+      "image_count": 119,
+      "cpu_ms_per_image": 0.2375472269078204,
+      "basic_ms_per_image": 0.04379721689624946,
+      "enhanced_ms_per_image": 0.023914352785639404,
+      "cpu_images_per_second": 4209.689218506632,
+      "basic_images_per_second": 22832.501032403135,
+      "enhanced_images_per_second": 41815.89227873652,
+      "cpu_total_ms": {
+        "mean": 28.268120002030628,
+        "median": 28.214300000399817,
+        "min": 27.655400001094677,
+        "max": 29.216299997642636,
+        "std": 0.5069847370973648,
+        "coefficient_of_variation": 0.017934858669799963,
+        "n": 10
+      },
+      "basic_total_ms": {
+        "mean": 5.211868810653686,
+        "median": 5.170112133026123,
+        "min": 4.597984313964844,
+        "max": 5.696640491485596,
+        "std": 0.32227654335456934,
+        "coefficient_of_variation": 0.06183512192321444,
+        "n": 10
+      },
+      "enhanced_total_ms": {
+        "mean": 2.845807981491089,
+        "median": 2.811215877532959,
+        "min": 2.3687360286712646,
+        "max": 3.322495937347412,
+        "std": 0.30401881319342805,
+        "coefficient_of_variation": 0.10683040288408159,
+        "n": 10
+      }
+    }
+  ]
+}

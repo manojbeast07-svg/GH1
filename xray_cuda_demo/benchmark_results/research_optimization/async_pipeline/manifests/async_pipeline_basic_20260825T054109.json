@@ -1,0 +1,444 @@
+{
+  "timestamp_utc": "2026-08-25T05:41:07.142249+00:00",
+  "environment": {
+    "os_platform": "Windows-11-10.0.26200-SP0",
+    "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "cpu_logical_cores": 16,
+    "gpu_available": true,
+    "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_vram_bytes": 8585216000,
+    "gpu_compute_capability": "8.9",
+    "gpu_driver_version": "13.2",
+    "cuda_runtime_version": "13.2",
+    "python_version": "3.13.9",
+    "opencv_version": "5.0.0.93",
+    "numpy_version": "2.3.5",
+    "pybind11_version": "3.1.0",
+    "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399"
+  },
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "seed": 42,
+  "resolution": [
+    224,
+    224
+  ],
+  "impl": "basic",
+  "warmup_runs": 3,
+  "measurement_runs": 7,
+  "batch_sweep": {
+    "batch_sizes": [
+      8,
+      32,
+      64,
+      100
+    ],
+    "chunk_size": 16,
+    "results": [
+      {
+        "batch_size": 8,
+        "chunk_size": 16,
+        "production": {
+          "total_ms": {
+            "mean": 0.556886864559991,
+            "median": 0.5645760297775269,
+            "min": 0.4874880015850067,
+            "max": 0.6191999912261963,
+            "std": 0.04016114730683103,
+            "n": 7
+          }
+        },
+        "variants": {
+          "sequential_1buf": {
+            "total_ms": {
+              "mean": 0.9426000118255615,
+              "median": 0.9351000189781189,
+              "min": 0.8607000112533569,
+              "max": 1.0398000478744507,
+              "std": 0.06259383347329436,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.6037600452564399,
+            "num_chunks": 1,
+            "chunk_size_used": 8,
+            "h2d_compute_overlap_ms": 0.0,
+            "compute_d2h_overlap_ms": 0.0,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pageable": {
+            "total_ms": {
+              "mean": 0.9562428678785052,
+              "median": 0.8526999950408936,
+              "min": 0.8184000253677368,
+              "max": 1.437600016593933,
+              "std": 0.2239302394162827,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.6621039440142732,
+            "num_chunks": 1,
+            "chunk_size_used": 8,
+            "h2d_compute_overlap_ms": 0.0,
+            "compute_d2h_overlap_ms": 0.0,
+            "host_stage_ms": 0.0
+          },
+          "async_3buf_pageable": {
+            "total_ms": {
+              "mean": 0.9349571466445923,
+              "median": 0.919700026512146,
+              "min": 0.7979000210762024,
+              "max": 1.2896000146865845,
+              "std": 0.16667239598582384,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.613869754814094,
+            "num_chunks": 1,
+            "chunk_size_used": 8,
+            "h2d_compute_overlap_ms": 0.0,
+            "compute_d2h_overlap_ms": 0.0,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pinned": {
+            "total_ms": {
+              "mean": 1.4843142884118217,
+              "median": 1.4515000581741333,
+              "min": 1.2720999717712402,
+              "max": 1.9342999458312988,
+              "std": 0.22316073064524033,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.38896039073378796,
+            "num_chunks": 1,
+            "chunk_size_used": 8,
+            "h2d_compute_overlap_ms": 0.0,
+            "compute_d2h_overlap_ms": 0.0,
+            "host_stage_ms": 0.13980001211166382
+          },
+          "async_3buf_pinned": {
+            "total_ms": {
+              "mean": 1.3981143065861292,
+              "median": 1.3702000379562378,
+              "min": 1.266800045967102,
+              "max": 1.5871000289916992,
+              "std": 0.1257638519682953,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.4120391286951333,
+            "num_chunks": 1,
+            "chunk_size_used": 8,
+            "h2d_compute_overlap_ms": 0.0,
+            "compute_d2h_overlap_ms": 0.0,
+            "host_stage_ms": 0.0869000032544136
+          }
+        }
+      },
+      {
+        "batch_size": 32,
+        "chunk_size": 16,
+        "production": {
+          "total_ms": {
+            "mean": 1.624598843710763,
+            "median": 1.627392053604126,
+            "min": 1.5542080402374268,
+            "max": 1.6938239336013794,
+            "std": 0.04902364205943759,
+            "n": 7
+          }
+        },
+        "variants": {
+          "sequential_1buf": {
+            "total_ms": {
+              "mean": 2.646042857851301,
+              "median": 2.572000026702881,
+              "min": 2.35260009765625,
+              "max": 3.351599931716919,
+              "std": 0.33931700547575716,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.6327340733702579,
+            "num_chunks": 2,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 0.8206720352172852,
+            "compute_d2h_overlap_ms": 0.8371520638465881,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pageable": {
+            "total_ms": {
+              "mean": 2.776085683277675,
+              "median": 2.6301000118255615,
+              "min": 2.4788999557495117,
+              "max": 3.2112998962402344,
+              "std": 0.3004048282815046,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.6187567188650547,
+            "num_chunks": 2,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 0.8278400897979736,
+            "compute_d2h_overlap_ms": 0.8408319354057312,
+            "host_stage_ms": 0.0
+          },
+          "async_3buf_pageable": {
+            "total_ms": {
+              "mean": 2.7635714326586043,
+              "median": 2.8417999744415283,
+              "min": 2.32450008392334,
+              "max": 2.980299949645996,
+              "std": 0.2298042068395611,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.5726624210854044,
+            "num_chunks": 2,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 0.7283840179443359,
+            "compute_d2h_overlap_ms": 0.7517759203910828,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pinned": {
+            "total_ms": {
+              "mean": 3.4486142907823836,
+              "median": 3.4939000606536865,
+              "min": 3.1545000076293945,
+              "max": 3.6963000297546387,
+              "std": 0.20207981916640955,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.4657809397386287,
+            "num_chunks": 2,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 0.7325119972229004,
+            "compute_d2h_overlap_ms": 0.6503999829292297,
+            "host_stage_ms": 0.5587000250816345
+          },
+          "async_3buf_pinned": {
+            "total_ms": {
+              "mean": 3.5318714550563266,
+              "median": 3.5773000717163086,
+              "min": 3.339400053024292,
+              "max": 3.659600019454956,
+              "std": 0.12072605927939119,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.4549218743126963,
+            "num_chunks": 2,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 0.6451839804649353,
+            "compute_d2h_overlap_ms": 0.6595200300216675,
+            "host_stage_ms": 0.4733999967575073
+          }
+        }
+      },
+      {
+        "batch_size": 64,
+        "chunk_size": 16,
+        "production": {
+          "total_ms": {
+            "mean": 3.0574491705213274,
+            "median": 3.0448319911956787,
+            "min": 2.76528000831604,
+            "max": 3.2756481170654297,
+            "std": 0.18745092047243106,
+            "n": 7
+          }
+        },
+        "variants": {
+          "sequential_1buf": {
+            "total_ms": {
+              "mean": 4.356985739299229,
+              "median": 4.383800029754639,
+              "min": 3.8619000911712646,
+              "max": 4.905200004577637,
+              "std": 0.32032269835538396,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.6945645263308459,
+            "num_chunks": 4,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 2.5881597995758057,
+            "compute_d2h_overlap_ms": 2.5897281169891357,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pageable": {
+            "total_ms": {
+              "mean": 4.917514324188232,
+              "median": 5.033999919891357,
+              "min": 4.081900119781494,
+              "max": 5.507500171661377,
+              "std": 0.4473061225374604,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.6048534047774462,
+            "num_chunks": 4,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 2.9338879585266113,
+            "compute_d2h_overlap_ms": 2.965023994445801,
+            "host_stage_ms": 0.0
+          },
+          "async_3buf_pageable": {
+            "total_ms": {
+              "mean": 5.217314311436245,
+              "median": 5.0995001792907715,
+              "min": 4.63100004196167,
+              "max": 6.369999885559082,
+              "std": 0.5663178279082322,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.5970843973220819,
+            "num_chunks": 4,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 2.7796478271484375,
+            "compute_d2h_overlap_ms": 2.778304100036621,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pinned": {
+            "total_ms": {
+              "mean": 5.247914246150425,
+              "median": 5.243000030517578,
+              "min": 5.053100109100342,
+              "max": 5.50439977645874,
+              "std": 0.16146455169903468,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.5807423180379229,
+            "num_chunks": 4,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 1.9711999893188477,
+            "compute_d2h_overlap_ms": 1.9744000434875488,
+            "host_stage_ms": 0.6260000467300415
+          },
+          "async_3buf_pinned": {
+            "total_ms": {
+              "mean": 5.75365720476423,
+              "median": 5.397600173950195,
+              "min": 5.190899848937988,
+              "max": 6.896500110626221,
+              "std": 0.6264824511925768,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.5641084728525455,
+            "num_chunks": 4,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 2.020224094390869,
+            "compute_d2h_overlap_ms": 2.022047996520996,
+            "host_stage_ms": 0.4444999694824219
+          }
+        }
+      },
+      {
+        "batch_size": 100,
+        "chunk_size": 16,
+        "production": {
+          "total_ms": {
+            "mean": 4.0919908455439975,
+            "median": 3.9726719856262207,
+            "min": 3.9052484035491943,
+            "max": 4.793439865112305,
+            "std": 0.32062867132980005,
+            "n": 7
+          }
+        },
+        "variants": {
+          "sequential_1buf": {
+            "total_ms": {
+              "mean": 7.221571445465088,
+              "median": 7.270100116729736,
+              "min": 6.218800067901611,
+              "max": 8.099800109863281,
+              "std": 0.6440255182775535,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.5464397906274258,
+            "num_chunks": 7,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 5.2032318115234375,
+            "compute_d2h_overlap_ms": 4.8666558265686035,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pageable": {
+            "total_ms": {
+              "mean": 6.981314318520682,
+              "median": 6.864799976348877,
+              "min": 6.343599796295166,
+              "max": 8.406200408935547,
+              "std": 0.6713758911511818,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.578701782908922,
+            "num_chunks": 7,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 4.88972806930542,
+            "compute_d2h_overlap_ms": 4.553376197814941,
+            "host_stage_ms": 0.0
+          },
+          "async_3buf_pageable": {
+            "total_ms": {
+              "mean": 6.759242807115827,
+              "median": 6.732999801635742,
+              "min": 6.44379997253418,
+              "max": 7.210400104522705,
+              "std": 0.24760224475680945,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.5900300167335641,
+            "num_chunks": 7,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 4.764064311981201,
+            "compute_d2h_overlap_ms": 4.426688194274902,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pinned": {
+            "total_ms": {
+              "mean": 6.888728550502232,
+              "median": 6.96120023727417,
+              "min": 6.211699962615967,
+              "max": 7.8790998458862305,
+              "std": 0.5908027152245857,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.5706877909292577,
+            "num_chunks": 7,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 3.899263858795166,
+            "compute_d2h_overlap_ms": 3.5900802612304688,
+            "host_stage_ms": 0.8795000314712524
+          },
+          "async_3buf_pinned": {
+            "total_ms": {
+              "mean": 7.8826285770961215,
+              "median": 7.968100070953369,
+              "min": 7.112100124359131,
+              "max": 8.512100219726562,
+              "std": 0.5393587493054707,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.4985720498300541,
+            "num_chunks": 7,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 4.196896076202393,
+            "compute_d2h_overlap_ms": 3.8222081661224365,
+            "host_stage_ms": 1.7407000064849854
+          }
+        }
+      }
+    ]
+  },
+  "experiment_id": "async_pipeline_basic_20260825T054109"
+}

@@ -1,0 +1,112 @@
+{
+  "timestamp_utc": "2026-08-25T05:41:23.478475+00:00",
+  "environment": {
+    "os_platform": "Windows-11-10.0.26200-SP0",
+    "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "cpu_logical_cores": 16,
+    "gpu_available": true,
+    "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_vram_bytes": 8585216000,
+    "gpu_compute_capability": "8.9",
+    "gpu_driver_version": "13.2",
+    "cuda_runtime_version": "13.2",
+    "python_version": "3.13.9",
+    "opencv_version": "5.0.0.93",
+    "numpy_version": "2.3.5",
+    "pybind11_version": "3.1.0",
+    "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399"
+  },
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "seed": 42,
+  "resolution": [
+    224,
+    224
+  ],
+  "impl": "basic",
+  "warmup_runs": 3,
+  "measurement_runs": 7,
+  "chunk_sweep": {
+    "batch_size": 64,
+    "results": [
+      {
+        "chunk_size": 1,
+        "num_chunks": 64,
+        "total_ms": {
+          "mean": 12.581271580287389,
+          "median": 12.276200294494629,
+          "min": 12.200200080871582,
+          "max": 14.050100326538086,
+          "std": 0.6736161794899724,
+          "n": 7
+        },
+        "bit_exact": true
+      },
+      {
+        "chunk_size": 4,
+        "num_chunks": 16,
+        "total_ms": {
+          "mean": 6.6556428500584195,
+          "median": 6.473499774932861,
+          "min": 5.844099998474121,
+          "max": 7.649499893188477,
+          "std": 0.7266340428824274,
+          "n": 7
+        },
+        "bit_exact": true
+      },
+      {
+        "chunk_size": 8,
+        "num_chunks": 8,
+        "total_ms": {
+          "mean": 4.655385766710554,
+          "median": 4.722300052642822,
+          "min": 4.239799976348877,
+          "max": 5.0894999504089355,
+          "std": 0.3497704506739641,
+          "n": 7
+        },
+        "bit_exact": true
+      },
+      {
+        "chunk_size": 16,
+        "num_chunks": 4,
+        "total_ms": {
+          "mean": 4.494685717991421,
+          "median": 4.622000217437744,
+          "min": 3.8461999893188477,
+          "max": 4.973599910736084,
+          "std": 0.41585340880379285,
+          "n": 7
+        },
+        "bit_exact": true
+      },
+      {
+        "chunk_size": 32,
+        "num_chunks": 2,
+        "total_ms": {
+          "mean": 4.810042858123779,
+          "median": 4.88700008392334,
+          "min": 4.034800052642822,
+          "max": 5.083799839019775,
+          "std": 0.35496926511256666,
+          "n": 7
+        },
+        "bit_exact": true
+      },
+      {
+        "chunk_size": 64,
+        "num_chunks": 1,
+        "total_ms": {
+          "mean": 4.395528623035976,
+          "median": 4.418799877166748,
+          "min": 3.773400068283081,
+          "max": 4.854100227355957,
+          "std": 0.35187370843380905,
+          "n": 7
+        },
+        "bit_exact": true
+      }
+    ]
+  },
+  "experiment_id": "async_pipeline_basic_20260825T054124"
+}

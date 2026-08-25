@@ -1,0 +1,45 @@
+{
+  "benchmark_id": "20260824_062021_seed42_batch122_224x224",
+  "runs": [
+    {
+      "run": 0,
+      "processing_ms": 29.762599999230588
+    },
+    {
+      "run": 1,
+      "processing_ms": 31.01089999836404
+    },
+    {
+      "run": 2,
+      "processing_ms": 29.085300000588177
+    },
+    {
+      "run": 3,
+      "processing_ms": 30.583700001443503
+    },
+    {
+      "run": 4,
+      "processing_ms": 29.3335999995179
+    },
+    {
+      "run": 5,
+      "processing_ms": 30.740199999854667
+    },
+    {
+      "run": 6,
+      "processing_ms": 30.834500001219567
+    },
+    {
+      "run": 7,
+      "processing_ms": 29.818999999406515
+    },
+    {
+      "run": 8,
+      "processing_ms": 30.478900000161957
+    },
+    {
+      "run": 9,
+      "processing_ms": 31.427599999005906
+    }
+  ]
+}

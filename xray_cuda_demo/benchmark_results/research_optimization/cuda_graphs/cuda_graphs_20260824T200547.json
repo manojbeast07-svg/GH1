@@ -1,0 +1,380 @@
+{
+  "timestamp_utc": "2026-08-24T20:05:45.309145+00:00",
+  "environment": {
+    "os_platform": "Windows-11-10.0.26200-SP0",
+    "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "cpu_logical_cores": 16,
+    "gpu_available": true,
+    "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_vram_bytes": 8585216000,
+    "gpu_compute_capability": "8.9",
+    "gpu_driver_version": "13.2",
+    "cuda_runtime_version": "13.2",
+    "python_version": "3.13.9",
+    "opencv_version": "5.0.0.93",
+    "numpy_version": "2.3.5",
+    "pybind11_version": "3.1.0",
+    "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399"
+  },
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "seed": 42,
+  "resolution": [
+    224,
+    224
+  ],
+  "warmup_runs": 3,
+  "measurement_runs": 7,
+  "batch_sweep": {
+    "batch_sizes": [
+      1,
+      8,
+      32,
+      64,
+      100
+    ],
+    "results": [
+      {
+        "batch_size": 1,
+        "production": {
+          "total_ms": {
+            "mean": 0.2136228574173791,
+            "median": 0.1990399956703186,
+            "min": 0.17260800302028656,
+            "max": 0.30745601654052734,
+            "std": 0.04529167677856265,
+            "n": 7
+          }
+        },
+        "variants": {
+          "no_graph": {
+            "total_ms": {
+              "mean": 0.44346000041280476,
+              "median": 0.41441601514816284,
+              "min": 0.31751200556755066,
+              "max": 0.5967640280723572,
+              "std": 0.0910550278363889,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.4802903082767142,
+            "gain_vs_no_graph": 1.0,
+            "break_even_calls": null
+          },
+          "graph_kernels_only": {
+            "total_ms": {
+              "mean": 0.150688003216471,
+              "median": 0.1533759981393814,
+              "min": 0.11369600892066956,
+              "max": 0.18172800540924072,
+              "std": 0.021242446670720425,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 1.2977258377118417,
+            "gain_vs_no_graph": 2.701961324949681,
+            "break_even_calls": null
+          },
+          "graph_full_pipeline": {
+            "total_ms": {
+              "mean": 0.14874971551554544,
+              "median": 0.13305599987506866,
+              "min": 0.12854400277137756,
+              "max": 0.231455996632576,
+              "std": 0.03714659505769583,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 1.4959114647757699,
+            "gain_vs_no_graph": 3.1145984813708045,
+            "break_even_calls": 0.2690503121241245
+          }
+        },
+        "graph_setup_cost_ms": {
+          "capture_ms": 0.03139999881386757,
+          "instantiate_ms": 0.04430000111460686
+        }
+      },
+      {
+        "batch_size": 8,
+        "production": {
+          "total_ms": {
+            "mean": 0.5985188441617149,
+            "median": 0.5080000162124634,
+            "min": 0.45683202147483826,
+            "max": 1.0504639148712158,
+            "std": 0.21145730295970674,
+            "n": 7
+          }
+        },
+        "variants": {
+          "no_graph": {
+            "total_ms": {
+              "mean": 0.6152777246066502,
+              "median": 0.5997959971427917,
+              "min": 0.5511800050735474,
+              "max": 0.7336239814758301,
+              "std": 0.05787635749260322,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.8469546623058327,
+            "gain_vs_no_graph": 1.0,
+            "break_even_calls": null
+          },
+          "graph_kernels_only": {
+            "total_ms": {
+              "mean": 0.4103268470082964,
+              "median": 0.4089599847793579,
+              "min": 0.3970879912376404,
+              "max": 0.42291200160980225,
+              "std": 0.009601840866033037,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 1.2421753597397545,
+            "gain_vs_no_graph": 1.4666373715423373,
+            "break_even_calls": null
+          },
+          "graph_full_pipeline": {
+            "total_ms": {
+              "mean": 0.43871085132871357,
+              "median": 0.42156800627708435,
+              "min": 0.401856005191803,
+              "max": 0.5259199738502502,
+              "std": 0.044178880302157816,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 1.2050250698544942,
+            "gain_vs_no_graph": 1.4227739966314317,
+            "break_even_calls": 0.6603901133363844
+          }
+        },
+        "graph_setup_cost_ms": {
+          "capture_ms": 0.049800001084804535,
+          "instantiate_ms": 0.06790000200271606
+        }
+      },
+      {
+        "batch_size": 32,
+        "production": {
+          "total_ms": {
+            "mean": 1.6940342358180456,
+            "median": 1.7422078847885132,
+            "min": 1.4080320596694946,
+            "max": 1.9514238834381104,
+            "std": 0.17701824244510653,
+            "n": 7
+          }
+        },
+        "variants": {
+          "no_graph": {
+            "total_ms": {
+              "mean": 1.7650468690054757,
+              "median": 1.6844159364700317,
+              "min": 1.566640019416809,
+              "max": 2.246920108795166,
+              "std": 0.2358464073586652,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 1.0343097848145475,
+            "gain_vs_no_graph": 1.0,
+            "break_even_calls": null
+          },
+          "graph_kernels_only": {
+            "total_ms": {
+              "mean": 1.5020662886755807,
+              "median": 1.4387199878692627,
+              "min": 1.3398399353027344,
+              "max": 1.7234880924224854,
+              "std": 0.1371227785965531,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 1.2109429906292708,
+            "gain_vs_no_graph": 1.1707739870665477,
+            "break_even_calls": null
+          },
+          "graph_full_pipeline": {
+            "total_ms": {
+              "mean": 1.5348800250462122,
+              "median": 1.4829440116882324,
+              "min": 1.4122560024261475,
+              "max": 1.6830400228500366,
+              "std": 0.1079792673574274,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 1.17483052027374,
+            "gain_vs_no_graph": 1.13585942772879,
+            "break_even_calls": 0.5072666966555803
+          }
+        },
+        "graph_setup_cost_ms": {
+          "capture_ms": 0.04439999908208847,
+          "instantiate_ms": 0.05779999867081642
+        }
+      },
+      {
+        "batch_size": 64,
+        "production": {
+          "total_ms": {
+            "mean": 3.142148630959647,
+            "median": 3.162047863006592,
+            "min": 2.8853759765625,
+            "max": 3.409952163696289,
+            "std": 0.20111001125479966,
+            "n": 7
+          }
+        },
+        "variants": {
+          "no_graph": {
+            "total_ms": {
+              "mean": 4.746147905077253,
+              "median": 4.31984806060791,
+              "min": 4.080023765563965,
+              "max": 7.288780212402344,
+              "std": 1.1360259307297413,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.7319812684711908,
+            "gain_vs_no_graph": 1.0,
+            "break_even_calls": null
+          },
+          "graph_kernels_only": {
+            "total_ms": {
+              "mean": 2.8477302278791154,
+              "median": 2.715711832046509,
+              "min": 2.5471677780151367,
+              "max": 3.3878719806671143,
+              "std": 0.36494977677702306,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 1.164353237222424,
+            "gain_vs_no_graph": 1.5906872038601219,
+            "break_even_calls": null
+          },
+          "graph_full_pipeline": {
+            "total_ms": {
+              "mean": 2.9410697392054965,
+              "median": 2.819488048553467,
+              "min": 2.631455898284912,
+              "max": 3.9164481163024902,
+              "std": 0.437614211414027,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 1.1214971684766937,
+            "gain_vs_no_graph": 1.5321391636414987,
+            "break_even_calls": 0.10410834592940753
+          }
+        },
+        "graph_setup_cost_ms": {
+          "capture_ms": 0.09109999984502792,
+          "instantiate_ms": 0.06509999930858612
+        }
+      },
+      {
+        "batch_size": 100,
+        "production": {
+          "total_ms": {
+            "mean": 4.192233392170498,
+            "median": 4.102976322174072,
+            "min": 3.9952962398529053,
+            "max": 4.655360221862793,
+            "std": 0.22779729482681849,
+            "n": 7
+          }
+        },
+        "variants": {
+          "no_graph": {
+            "total_ms": {
+              "mean": 5.911867959158761,
+              "median": 5.944699764251709,
+              "min": 5.417623996734619,
+              "max": 6.3022236824035645,
+              "std": 0.27126551179964487,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.6901906715032455,
+            "gain_vs_no_graph": 1.0,
+            "break_even_calls": null
+          },
+          "graph_kernels_only": {
+            "total_ms": {
+              "mean": 4.341353109904698,
+              "median": 4.383552074432373,
+              "min": 3.8847038745880127,
+              "max": 4.8052802085876465,
+              "std": 0.29412175362129733,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.9359935167886348,
+            "gain_vs_no_graph": 1.3561375941955678,
+            "break_even_calls": null
+          },
+          "graph_full_pipeline": {
+            "total_ms": {
+              "mean": 4.661732537405832,
+              "median": 4.616352081298828,
+              "min": 3.9095358848571777,
+              "max": 6.152895927429199,
+              "std": 0.7511153552419207,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.8887918967003237,
+            "gain_vs_no_graph": 1.287748347517537,
+            "break_even_calls": 0.13836738628813025
+          }
+        },
+        "graph_setup_cost_ms": {
+          "capture_ms": 0.07970000058412552,
+          "instantiate_ms": 0.10409999638795853
+        }
+      }
+    ]
+  },
+  "realistic_workload": {
+    "stateless_total_ms": {
+      "mean": 21.68068000173662,
+      "median": 20.716400002129376,
+      "min": 19.174600005499087,
+      "max": 26.525799999944866,
+      "std": 2.918696025101753,
+      "n": 5
+    },
+    "graph_total_ms": {
+      "mean": 14.084140001796186,
+      "median": 13.285699998959899,
+      "min": 12.375300007988699,
+      "max": 17.223699993337505,
+      "std": 2.090801155085002,
+      "n": 5
+    },
+    "gain_graph_vs_stateless": 1.5593006016808453,
+    "passes": 5,
+    "per_pass": {
+      "stateless_ms": [
+        22.09890000813175,
+        19.174600005499087,
+        20.716400002129376,
+        19.887699992978014,
+        26.525799999944866
+      ],
+      "graph_ms": [
+        13.285699998959899,
+        15.159300004597753,
+        17.223699993337505,
+        12.376700004097074,
+        12.375300007988699
+      ]
+    }
+  },
+  "experiment_id": "cuda_graphs_20260824T200547"
+}

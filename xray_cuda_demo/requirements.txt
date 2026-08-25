@@ -1,0 +1,10 @@
+numpy
+opencv-python
+streamlit
+plotly
+pandas
+pybind11
+cmake
+pytest
+pyyaml
+psutil

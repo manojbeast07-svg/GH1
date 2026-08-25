@@ -1,0 +1,107 @@
+{
+  "timestamp_utc": "2026-08-24T12:12:22.731627+00:00",
+  "resolution": [
+    224,
+    224
+  ],
+  "image_count": 125,
+  "seed": 42,
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "warmup_runs": 5,
+  "measurement_runs": 20,
+  "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "filter": "gaussian",
+  "kernel_size": 5,
+  "rows": [
+    {
+      "variant": "basic",
+      "kernel_ms": {
+        "mean": 1.2593248009681701,
+        "median": 1.248032033443451,
+        "min": 1.2350080013275146,
+        "max": 1.3432639837265015,
+        "std": 0.0315702424671205,
+        "coefficient_of_variation": 0.02506918186860869,
+        "n": 20
+      },
+      "speedup_vs_basic": 1.0,
+      "is_production_default": false,
+      "max_abs_diff_vs_cpu": null,
+      "correctness": null,
+      "error": null
+    },
+    {
+      "variant": "naive",
+      "kernel_ms": {
+        "mean": 0.5942272067070007,
+        "median": 0.5785599946975708,
+        "min": 0.5662720203399658,
+        "max": 0.647167980670929,
+        "std": 0.029551808236536498,
+        "coefficient_of_variation": 0.049731496476410564,
+        "n": 20
+      },
+      "speedup_vs_basic": 2.1192647976300307,
+      "is_production_default": false,
+      "max_abs_diff_vs_cpu": 1,
+      "correctness": "PASS",
+      "error": null
+    },
+    {
+      "variant": "shared",
+      "kernel_ms": {
+        "mean": 0.4669951930642128,
+        "median": 0.45158399641513824,
+        "min": 0.43827199935913086,
+        "max": 0.5201919674873352,
+        "std": 0.027836933841116143,
+        "coefficient_of_variation": 0.059608608941909405,
+        "n": 20
+      },
+      "speedup_vs_basic": 2.696654740073546,
+      "is_production_default": false,
+      "max_abs_diff_vs_cpu": 1,
+      "correctness": "PASS",
+      "error": null
+    },
+    {
+      "variant": "shared_const",
+      "kernel_ms": {
+        "mean": 0.43437920063734053,
+        "median": 0.43110400438308716,
+        "min": 0.4208639860153198,
+        "max": 0.48844802379608154,
+        "std": 0.014426356111202264,
+        "coefficient_of_variation": 0.03321143390391453,
+        "n": 20
+      },
+      "speedup_vs_basic": 2.8991369732262333,
+      "is_production_default": false,
+      "max_abs_diff_vs_cpu": 1,
+      "correctness": "PASS",
+      "error": null
+    },
+    {
+      "variant": "specialized",
+      "kernel_ms": {
+        "mean": 0.37119840234518053,
+        "median": 0.3691520094871521,
+        "min": 0.3563520014286041,
+        "max": 0.43007999658584595,
+        "std": 0.014639494133357476,
+        "coefficient_of_variation": 0.03943846212932804,
+        "n": 20
+      },
+      "speedup_vs_basic": 3.3925921906234753,
+      "is_production_default": true,
+      "max_abs_diff_vs_cpu": 1,
+      "correctness": "PASS",
+      "error": null
+    }
+  ],
+  "rejected_notes": {
+    "naive": "Separable convolution alone (2 passes, no shared/constant memory): a real algorithmic win over Basic's O(k^2) 2-D convolution, but leaves memory-access optimization on the table.",
+    "shared": "+ shared memory tiling: reduces redundant global reads for the separable passes.",
+    "shared_const": "+ constant memory for the 1-D coefficients: a further, smaller gain once the passes are already tiled."
+  }
+}

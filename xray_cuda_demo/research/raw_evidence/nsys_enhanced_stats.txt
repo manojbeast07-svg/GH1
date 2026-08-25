@@ -1,0 +1,11 @@
+
+NOTICE: Existing SQLite export found: research/nsys_enhanced_pipeline.sqlite
+        It is assumed file was previously exported from: research/nsys_enhanced_pipeline.nsys-rep
+        Consider using --force-export=true if needed.
+
+Processing [research/nsys_enhanced_pipeline.sqlite] with [C:\Program Files\NVIDIA Corporation\Nsight Systems 2026.1.3\target-windows-x64\reports\cuda_api_sum.py] to [research/raw_evidence/nsys_enhanced_cuda_api_sum.csv]... PROCESSED
+
+Processing [research/nsys_enhanced_pipeline.sqlite] with [C:\Program Files\NVIDIA Corporation\Nsight Systems 2026.1.3\target-windows-x64\reports\cuda_gpu_kern_sum.py] to [research/raw_evidence/nsys_enhanced_cuda_gpu_kern_sum.csv]... PROCESSED
+
+Processing [research/nsys_enhanced_pipeline.sqlite] with [C:\Program Files\NVIDIA Corporation\Nsight Systems 2026.1.3\target-windows-x64\reports\cuda_gpu_mem_time_sum.py] to [research/raw_evidence/nsys_enhanced_cuda_gpu_mem_time_sum.csv]... PROCESSED
+

@@ -1,0 +1,66 @@
+{
+  "release_id": "20260825_final_freeze",
+  "timestamp_utc": "2026-08-25T11:52:00Z",
+  "git": {
+    "branch": "main",
+    "commit": "c3763d3bd72d16d84d44eb332cbd123686e26399",
+    "note": "IMPORTANT CAVEAT (see release/final_validation.md section 12): this commit is the ONLY commit that exists in the enclosing git repository (GH1), and it predates all of Sections 1-20F -- the entire xray_cuda_demo project tree is currently UNTRACKED, uncommitted local state. This field records the git HEAD present in the environment at manifest-generation time; it does NOT mean this release corresponds to that commit's tree."
+  },
+  "environment": {
+    "os_platform": "Windows-11-10.0.26200-SP0",
+    "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "cpu_logical_cores": 16,
+    "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_vram_bytes": 8585216000,
+    "gpu_compute_capability": "8.9",
+    "gpu_driver_version": "13.2",
+    "gpu_async_engine_count": 1,
+    "cuda_runtime_version_reported_by_driver": "13.2",
+    "nvcc_version": "13.3.73",
+    "cmake_version": "4.4.2",
+    "python_version": "3.13.9",
+    "numpy_version": "2.3.5",
+    "opencv_version": "5.0.0.93",
+    "pybind11_version": "3.1.0",
+    "environment_label": "LOCAL ENVIRONMENT"
+  },
+  "test_count": {
+    "collected": 2006,
+    "passed_default_seed": 2006,
+    "passed_PYTHONHASHSEED_1": 2006,
+    "passed_PYTHONHASHSEED_99999": 2006
+  },
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "dataset_image_count": 9463,
+  "dataset_path_relative_to_project": "../data",
+  "canonical_benchmark_id": "20260824_055212_seed42_batch122_224x224",
+  "production_config": {
+    "cpu_entry_point": "cpu.pipeline.run_cpu_pipeline (cpu/filters.py, OpenCV)",
+    "basic_cuda_entry_point": "cuda.pipeline.run_basic_cuda_pipeline -> xray_cuda.run_basic_cuda_pipeline_gpu -> cuda/src/pipeline_basic.cu",
+    "enhanced_cuda_entry_point": "cuda.pipeline.run_enhanced_cuda_pipeline -> same native binding, all-Enhanced variant flags -> *_enhanced.cu dispatch functions",
+    "filters": ["gaussian", "median", "sobel", "laplacian", "threshold"],
+    "enhanced_variants": {
+      "gaussian": "specialized",
+      "median": "network3x3",
+      "sobel": "specialized",
+      "laplacian": "specialized",
+      "threshold": "vectorized"
+    },
+    "block_dim": "16x16"
+  },
+  "experimental_features": {
+    "persistent_gpu_buffers": {"status": "REJECTED", "section": "20B/20C", "wired_into_production": false},
+    "pinned_host_memory": {"status": "REJECTED", "section": "20B", "wired_into_production": false},
+    "cuda_graph_basic": {"status": "EXPERIMENTAL", "section": "20D", "wired_into_production": false},
+    "cuda_graph_enhanced": {"status": "EXPERIMENTAL", "section": "20E", "wired_into_production": false},
+    "async_multistream_pipeline": {"status": "EXPERIMENTAL", "section": "20F", "wired_into_production": false},
+    "laplacian_threshold_fusion": {"status": "EXPERIMENTAL", "section": "10", "wired_into_production": false}
+  },
+  "build": {
+    "generator": "Ninja",
+    "build_type": "Release",
+    "clean_build_verified": true,
+    "cu_file_count": 19,
+    "extension_filename": "xray_cuda.cp313-win_amd64.pyd"
+  }
+}

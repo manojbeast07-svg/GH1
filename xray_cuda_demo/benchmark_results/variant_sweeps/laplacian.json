@@ -1,0 +1,190 @@
+{
+  "timestamp_utc": "2026-08-24T12:12:22.731627+00:00",
+  "resolution": [
+    224,
+    224
+  ],
+  "image_count": 125,
+  "seed": 42,
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "warmup_runs": 5,
+  "measurement_runs": 20,
+  "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "filter": "laplacian",
+  "by_kernel_size": {
+    "3": [
+      {
+        "variant": "basic",
+        "kernel_ms": {
+          "mean": 0.5099632054567337,
+          "median": 0.5031520128250122,
+          "min": 0.4862399995326996,
+          "max": 0.607807993888855,
+          "std": 0.029845849670006218,
+          "coefficient_of_variation": 0.05852549625276524,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.0,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": null,
+        "correctness": null,
+        "error": null
+      },
+      {
+        "variant": "shared",
+        "kernel_ms": {
+          "mean": 0.4112688034772873,
+          "median": 0.40750400722026825,
+          "min": 0.40038400888442993,
+          "max": 0.43724799156188965,
+          "std": 0.009881263830381893,
+          "coefficient_of_variation": 0.024026290705338158,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.2399754154581697,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      },
+      {
+        "variant": "shared_const",
+        "kernel_ms": {
+          "mean": 0.3972096025943756,
+          "median": 0.39526399970054626,
+          "min": 0.37990400195121765,
+          "max": 0.42291200160980225,
+          "std": 0.011811213466805876,
+          "coefficient_of_variation": 0.029735468099615175,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.2838642422688364,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      },
+      {
+        "variant": "specialized",
+        "kernel_ms": {
+          "mean": 0.49934560209512713,
+          "median": 0.49510399997234344,
+          "min": 0.4864000082015991,
+          "max": 0.5314559936523438,
+          "std": 0.012251798178110403,
+          "coefficient_of_variation": 0.024535708588810982,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.0212630356952335,
+        "is_production_default": true,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      },
+      {
+        "variant": "explicit",
+        "kernel_ms": {
+          "mean": 0.5237807959318161,
+          "median": 0.5200960040092468,
+          "min": 0.5067200064659119,
+          "max": 0.5807039737701416,
+          "std": 0.015986577311205386,
+          "coefficient_of_variation": 0.030521503337603197,
+          "n": 20
+        },
+        "speedup_vs_basic": 0.9736195168238256,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      }
+    ],
+    "5": [
+      {
+        "variant": "basic",
+        "kernel_ms": {
+          "mean": 1.9320815980434418,
+          "median": 1.9125279784202576,
+          "min": 1.8617279529571533,
+          "max": 2.3176639080047607,
+          "std": 0.09710108869088921,
+          "coefficient_of_variation": 0.050257240061299904,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.0,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": null,
+        "correctness": null,
+        "error": null
+      },
+      {
+        "variant": "shared",
+        "kernel_ms": {
+          "mean": 1.106688004732132,
+          "median": 1.1074559688568115,
+          "min": 1.0926079750061035,
+          "max": 1.1192320585250854,
+          "std": 0.009030763628842146,
+          "coefficient_of_variation": 0.00816017124088012,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.7458232038135193,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      },
+      {
+        "variant": "shared_const",
+        "kernel_ms": {
+          "mean": 0.9930624037981033,
+          "median": 0.9984000027179718,
+          "min": 0.9605119824409485,
+          "max": 1.0219520330429077,
+          "std": 0.01704301983158332,
+          "coefficient_of_variation": 0.01716208343644866,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.9455792411976638,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      },
+      {
+        "variant": "specialized",
+        "kernel_ms": {
+          "mean": 0.719257602095604,
+          "median": 0.7188479900360107,
+          "min": 0.6912000179290771,
+          "max": 0.7526400089263916,
+          "std": 0.016260244382162885,
+          "coefficient_of_variation": 0.02260698299856352,
+          "n": 20
+        },
+        "speedup_vs_basic": 2.686216443752831,
+        "is_production_default": true,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      },
+      {
+        "variant": "explicit",
+        "kernel_ms": {
+          "mean": 0.7559904038906098,
+          "median": 0.7549600005149841,
+          "min": 0.7446720004081726,
+          "max": 0.7881280183792114,
+          "std": 0.009844602071352274,
+          "coefficient_of_variation": 0.013022125705152161,
+          "n": 20
+        },
+        "speedup_vs_basic": 2.5556959296046964,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      }
+    ]
+  }
+}

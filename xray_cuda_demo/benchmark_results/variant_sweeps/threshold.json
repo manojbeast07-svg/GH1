@@ -1,0 +1,70 @@
+{
+  "timestamp_utc": "2026-08-24T12:12:22.731627+00:00",
+  "resolution": [
+    224,
+    224
+  ],
+  "image_count": 125,
+  "seed": 42,
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "warmup_runs": 5,
+  "measurement_runs": 20,
+  "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "filter": "threshold",
+  "rows": [
+    {
+      "variant": "basic",
+      "kernel_ms": {
+        "mean": 0.15657279938459395,
+        "median": 0.15612799674272537,
+        "min": 0.14364799857139587,
+        "max": 0.17030400037765503,
+        "std": 0.0075024311391257625,
+        "coefficient_of_variation": 0.04791656768362007,
+        "n": 20
+      },
+      "speedup_vs_basic": 1.0,
+      "is_production_default": false,
+      "max_abs_diff_vs_cpu": null,
+      "correctness": null,
+      "error": null
+    },
+    {
+      "variant": "vectorized",
+      "kernel_ms": {
+        "mean": 0.0963919997215271,
+        "median": 0.09622399881482124,
+        "min": 0.07929600030183792,
+        "max": 0.10886400192975998,
+        "std": 0.007918261031420445,
+        "coefficient_of_variation": 0.08214645462586115,
+        "n": 20
+      },
+      "speedup_vs_basic": 1.6243339679322657,
+      "is_production_default": true,
+      "max_abs_diff_vs_cpu": 0,
+      "correctness": "PASS",
+      "error": null
+    },
+    {
+      "variant": "multi_pixel",
+      "kernel_ms": {
+        "mean": 0.17067040055990218,
+        "median": 0.16988800466060638,
+        "min": 0.14767999947071075,
+        "max": 0.19619199633598328,
+        "std": 0.011736701176590408,
+        "coefficient_of_variation": 0.06876822892597033,
+        "n": 20
+      },
+      "speedup_vs_basic": 0.9173986752883947,
+      "is_production_default": false,
+      "max_abs_diff_vs_cpu": 0,
+      "correctness": "PASS",
+      "error": null
+    }
+  ],
+  "rejected_notes": {
+    "multi_pixel": "Processing multiple pixels per thread without widening the memory transaction itself: register usage is already minimal (no shared memory, no neighborhood), so this variant measures close to flat vs. Basic."
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "timestamp_utc": "2026-08-24T12:12:22.731627+00:00",
+  "resolution": [
+    224,
+    224
+  ],
+  "image_count": 125,
+  "seed": 42,
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "warmup_runs": 5,
+  "measurement_runs": 20,
+  "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "filter": "median",
+  "by_kernel_size": {
+    "3": [
+      {
+        "variant": "basic",
+        "kernel_ms": {
+          "mean": 1.6238752007484436,
+          "median": 1.6209759712219238,
+          "min": 1.604416012763977,
+          "max": 1.6543999910354614,
+          "std": 0.014669798047663789,
+          "coefficient_of_variation": 0.009033821097152344,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.0,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": null,
+        "correctness": null,
+        "error": null
+      },
+      {
+        "variant": "shared",
+        "kernel_ms": {
+          "mean": 1.613129597902298,
+          "median": 1.6128960251808167,
+          "min": 1.599519968032837,
+          "max": 1.6426880359649658,
+          "std": 0.008596368368369934,
+          "coefficient_of_variation": 0.005329000459447641,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.0066613388410448,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      },
+      {
+        "variant": "network3x3",
+        "kernel_ms": {
+          "mean": 0.2788447991013527,
+          "median": 0.27988800406455994,
+          "min": 0.2694399952888489,
+          "max": 0.2897599935531616,
+          "std": 0.00483402241258735,
+          "coefficient_of_variation": 0.01733588873870411,
+          "n": 20
+        },
+        "speedup_vs_basic": 5.823580737319788,
+        "is_production_default": true,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      },
+      {
+        "variant": "specialized",
+        "kernel_ms": {
+          "mean": 1.5857247829437255,
+          "median": 1.584656000137329,
+          "min": 1.5748159885406494,
+          "max": 1.6100159883499146,
+          "std": 0.008198294902115497,
+          "coefficient_of_variation": 0.005170061659058045,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.0240586627736852,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      }
+    ],
+    "5": [
+      {
+        "variant": "basic",
+        "kernel_ms": {
+          "mean": 8.89998722076416,
+          "median": 8.632799625396729,
+          "min": 8.610112190246582,
+          "max": 9.629631996154785,
+          "std": 0.44146458377739123,
+          "coefficient_of_variation": 0.049602833445359346,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.0,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": null,
+        "correctness": null,
+        "error": null
+      },
+      {
+        "variant": "shared",
+        "kernel_ms": {
+          "mean": 8.569975996017456,
+          "median": 8.572144031524658,
+          "min": 8.547712326049805,
+          "max": 8.58739185333252,
+          "std": 0.009784233923657452,
+          "coefficient_of_variation": 0.0011416874362546957,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.038507835366174,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      },
+      {
+        "variant": "specialized",
+        "kernel_ms": {
+          "mean": 8.551963186264038,
+          "median": 8.552303791046143,
+          "min": 8.537919998168945,
+          "max": 8.572511672973633,
+          "std": 0.010157650812174282,
+          "coefficient_of_variation": 0.0011877566110772393,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.0406952213100158,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      }
+    ],
+    "7": [
+      {
+        "variant": "basic",
+        "kernel_ms": {
+          "mean": 29.45896644592285,
+          "median": 29.452176094055176,
+          "min": 29.43619155883789,
+          "max": 29.554336547851562,
+          "std": 0.025779368512099717,
+          "coefficient_of_variation": 0.0008750941265852728,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.0,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": null,
+        "correctness": null,
+        "error": null
+      },
+      {
+        "variant": "shared",
+        "kernel_ms": {
+          "mean": 29.367667198181152,
+          "median": 29.367695808410645,
+          "min": 29.34921646118164,
+          "max": 29.390079498291016,
+          "std": 0.011665861302398484,
+          "coefficient_of_variation": 0.00039723486457654333,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.003108835547801,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      },
+      {
+        "variant": "specialized",
+        "kernel_ms": {
+          "mean": 28.551798343658447,
+          "median": 28.547951698303223,
+          "min": 28.536544799804688,
+          "max": 28.569887161254883,
+          "std": 0.009268789922277768,
+          "coefficient_of_variation": 0.00032463068738142827,
+          "n": 20
+        },
+        "speedup_vs_basic": 1.0317727132752004,
+        "is_production_default": false,
+        "max_abs_diff_vs_cpu": 0,
+        "correctness": "PASS",
+        "error": null
+      }
+    ]
+  },
+  "rejected_notes": {
+    "shared": "Shared memory alone: the real lever for Median was removing the sorting algorithm's data-dependent branching, not memory reuse -- shared memory alone gives close to no benefit.",
+    "specialized": "Compile-time specialization without the sorting network still uses branching insertion sort -- a real but much smaller gain than network3x3's branchless network."
+  }
+}

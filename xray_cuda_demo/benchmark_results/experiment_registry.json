@@ -1,0 +1,82 @@
+{
+  "entries": [
+    {
+      "experiment": "Gaussian optimization",
+      "script": "scripts/benchmark_gaussian_optimization.py",
+      "section": 6
+    },
+    {
+      "experiment": "Median optimization",
+      "script": "scripts/benchmark_median_optimization.py",
+      "section": 7
+    },
+    {
+      "experiment": "Sobel optimization",
+      "script": "scripts/benchmark_sobel_optimization.py",
+      "section": 8
+    },
+    {
+      "experiment": "Laplacian optimization",
+      "script": "scripts/benchmark_laplacian_optimization.py",
+      "section": 9
+    },
+    {
+      "experiment": "Threshold optimization",
+      "script": "scripts/benchmark_threshold_optimization.py",
+      "section": 10
+    },
+    {
+      "experiment": "Final pipeline",
+      "script": "scripts/run_final_benchmark.py",
+      "section": 11,
+      "benchmark_id": "20260824_062021_seed42_batch122_224x224",
+      "result_files": [
+        "raw\\cpu\\20260824_062021_seed42_batch122_224x224.json",
+        "raw\\basic_cuda\\20260824_062021_seed42_batch122_224x224.json",
+        "raw\\enhanced_cuda\\20260824_062021_seed42_batch122_224x224.json",
+        "aggregated\\20260824_062021_seed42_batch122_224x224.json"
+      ],
+      "configuration": {
+        "seed": 42,
+        "images": 122
+      },
+      "last_run_utc": "2026-08-24T06:20:32.431696+00:00"
+    },
+    {
+      "experiment": "Batch sweep",
+      "script": "scripts/run_final_benchmark.py",
+      "section": 11,
+      "benchmark_id": "20260824_062028_seed42_batch1013_224x224",
+      "result_files": [
+        "batch_sweeps\\20260824_062028_seed42_batch1013_224x224.json"
+      ],
+      "configuration": {
+        "batch_sizes": [
+          1,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512
+        ],
+        "seed": 42
+      },
+      "last_run_utc": "2026-08-24T06:20:28.860161+00:00"
+    },
+    {
+      "experiment": "Resolution sweep",
+      "script": "scripts/run_final_benchmark.py",
+      "section": 11,
+      "benchmark_id": "20260824_062030_seed42_batch125_224x224",
+      "result_files": [
+        "resolution_sweeps\\20260824_062030_seed42_batch125_224x224.json"
+      ],
+      "configuration": {
+        "seed": 42
+      },
+      "last_run_utc": "2026-08-24T06:20:30.211351+00:00"
+    }
+  ]
+}

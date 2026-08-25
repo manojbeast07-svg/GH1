@@ -1,0 +1,85 @@
+{
+  "benchmark_id": "20260824_055212_seed42_batch122_224x224",
+  "runs": [
+    {
+      "run": 0,
+      "processing_ms": 29.194000000643427
+    },
+    {
+      "run": 1,
+      "processing_ms": 35.149299999829964
+    },
+    {
+      "run": 2,
+      "processing_ms": 32.59570000045642
+    },
+    {
+      "run": 3,
+      "processing_ms": 31.43389999968349
+    },
+    {
+      "run": 4,
+      "processing_ms": 34.29340000002412
+    },
+    {
+      "run": 5,
+      "processing_ms": 36.40810000069905
+    },
+    {
+      "run": 6,
+      "processing_ms": 36.35319999921194
+    },
+    {
+      "run": 7,
+      "processing_ms": 35.56839999873773
+    },
+    {
+      "run": 8,
+      "processing_ms": 33.16850000010163
+    },
+    {
+      "run": 9,
+      "processing_ms": 34.50619999966875
+    },
+    {
+      "run": 10,
+      "processing_ms": 33.629399998972076
+    },
+    {
+      "run": 11,
+      "processing_ms": 34.27229999942938
+    },
+    {
+      "run": 12,
+      "processing_ms": 35.4987999999139
+    },
+    {
+      "run": 13,
+      "processing_ms": 34.906799999589566
+    },
+    {
+      "run": 14,
+      "processing_ms": 36.28320000098029
+    },
+    {
+      "run": 15,
+      "processing_ms": 34.95980000116106
+    },
+    {
+      "run": 16,
+      "processing_ms": 35.006200001589605
+    },
+    {
+      "run": 17,
+      "processing_ms": 34.76530000079947
+    },
+    {
+      "run": 18,
+      "processing_ms": 34.8455000003014
+    },
+    {
+      "run": 19,
+      "processing_ms": 36.14130000096338
+    }
+  ]
+}

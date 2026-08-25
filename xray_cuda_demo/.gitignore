@@ -1,0 +1,14 @@
+build/
+*.pyd
+*.so
+*.lib
+*.exp
+*.pdb
+*.ilk
+__pycache__/
+*.pyc
+.pytest_cache/
+outputs/*
+!outputs/.gitkeep
+data/*
+!data/.gitkeep

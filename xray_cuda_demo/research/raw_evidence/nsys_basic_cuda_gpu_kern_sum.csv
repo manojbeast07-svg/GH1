@@ -1,0 +1,6 @@
+Time (%),Total Time (ns),Instances,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Name
+39.5,5328924,4,1332231.0,1332159.0,1331007,1333599,1066.6,"xray_cuda::median_basic_kernel(const unsigned char *, unsigned char *, int, int, int)"
+33.8,4556220,4,1139055.0,1139023.0,1138655,1139519,382.7,"xray_cuda::gaussian_basic_kernel(const unsigned char *, unsigned char *, int, int, const float *, int)"
+14.0,1884159,4,471039.8,471055.5,470784,471264,243.9,"xray_cuda::laplacian_basic_kernel(const unsigned char *, unsigned char *, int, int, const float *, int, float, float)"
+10.6,1426623,4,356655.8,356576.0,356479,356992,230.3,"xray_cuda::sobel_basic_kernel(const unsigned char *, unsigned char *, int, int, int)"
+2.1,278719,4,69679.8,69680.0,69600,69759,75.8,"xray_cuda::threshold_basic_kernel(const unsigned char *, unsigned char *, int, int, unsigned char, unsigned char)"

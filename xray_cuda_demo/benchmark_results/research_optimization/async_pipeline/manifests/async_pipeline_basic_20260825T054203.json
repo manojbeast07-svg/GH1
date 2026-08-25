@@ -1,0 +1,49 @@
+{
+  "timestamp_utc": "2026-08-25T05:42:03.035907+00:00",
+  "environment": {
+    "os_platform": "Windows-11-10.0.26200-SP0",
+    "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "cpu_logical_cores": 16,
+    "gpu_available": true,
+    "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_vram_bytes": 8585216000,
+    "gpu_compute_capability": "8.9",
+    "gpu_driver_version": "13.2",
+    "cuda_runtime_version": "13.2",
+    "python_version": "3.13.9",
+    "opencv_version": "5.0.0.93",
+    "numpy_version": "2.3.5",
+    "pybind11_version": "3.1.0",
+    "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399"
+  },
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "seed": 42,
+  "resolution": [
+    224,
+    224
+  ],
+  "impl": "basic",
+  "warmup_runs": 3,
+  "measurement_runs": 7,
+  "realistic_workload": {
+    "stateless_total_ms": {
+      "mean": 20.40582000336144,
+      "median": 20.66150000609923,
+      "min": 19.386500003747642,
+      "max": 21.147499996004626,
+      "std": 0.7659429369074309,
+      "n": 5
+    },
+    "async_total_ms": {
+      "mean": 18.715020001400262,
+      "median": 18.681100002140738,
+      "min": 17.830400000093505,
+      "max": 19.49409999360796,
+      "std": 0.6366787452268673,
+      "n": 5
+    },
+    "gain_async_vs_stateless": 1.1060108882095567,
+    "passes": 5
+  },
+  "experiment_id": "async_pipeline_basic_20260825T054203"
+}

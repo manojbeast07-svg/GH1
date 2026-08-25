@@ -1,0 +1,342 @@
+{
+  "timestamp_utc": "2026-08-25T05:41:39.309261+00:00",
+  "environment": {
+    "os_platform": "Windows-11-10.0.26200-SP0",
+    "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "cpu_logical_cores": 16,
+    "gpu_available": true,
+    "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_vram_bytes": 8585216000,
+    "gpu_compute_capability": "8.9",
+    "gpu_driver_version": "13.2",
+    "cuda_runtime_version": "13.2",
+    "python_version": "3.13.9",
+    "opencv_version": "5.0.0.93",
+    "numpy_version": "2.3.5",
+    "pybind11_version": "3.1.0",
+    "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399"
+  },
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "seed": 42,
+  "resolution": [
+    224,
+    224
+  ],
+  "impl": "enhanced",
+  "warmup_runs": 3,
+  "measurement_runs": 7,
+  "batch_sweep": {
+    "batch_sizes": [
+      32,
+      64,
+      100
+    ],
+    "chunk_size": 16,
+    "results": [
+      {
+        "batch_size": 32,
+        "chunk_size": 16,
+        "production": {
+          "total_ms": {
+            "mean": 1.059030864919935,
+            "median": 1.0264960527420044,
+            "min": 0.9890879988670349,
+            "max": 1.2487679719924927,
+            "std": 0.08683264585392599,
+            "n": 7
+          }
+        },
+        "variants": {
+          "sequential_1buf": {
+            "total_ms": {
+              "mean": 2.180371403694153,
+              "median": 2.1250998973846436,
+              "min": 1.9973000288009644,
+              "max": 2.4437999725341797,
+              "std": 0.17784975277656392,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.4830342582978387,
+            "num_chunks": 2,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 0.5594559907913208,
+            "compute_d2h_overlap_ms": 0.5623040199279785,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pageable": {
+            "total_ms": {
+              "mean": 2.4051571573529924,
+              "median": 2.2760000228881836,
+              "min": 2.0706000328063965,
+              "max": 2.9463999271392822,
+              "std": 0.3008210463470425,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.45100880598384535,
+            "num_chunks": 2,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 0.8015039563179016,
+            "compute_d2h_overlap_ms": 0.8155199289321899,
+            "host_stage_ms": 0.0
+          },
+          "async_3buf_pageable": {
+            "total_ms": {
+              "mean": 2.35028566632952,
+              "median": 2.295599937438965,
+              "min": 2.0653998851776123,
+              "max": 2.9621999263763428,
+              "std": 0.29538212736782565,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.4471580766321121,
+            "num_chunks": 2,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 0.5833600163459778,
+            "compute_d2h_overlap_ms": 0.5782720446586609,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pinned": {
+            "total_ms": {
+              "mean": 3.3104000091552734,
+              "median": 3.380000114440918,
+              "min": 2.8666000366210938,
+              "max": 3.868299961090088,
+              "std": 0.34414528460360383,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.30369704674160813,
+            "num_chunks": 2,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 0.35574403405189514,
+            "compute_d2h_overlap_ms": 0.3798399567604065,
+            "host_stage_ms": 0.541100025177002
+          },
+          "async_3buf_pinned": {
+            "total_ms": {
+              "mean": 2.778399978365217,
+              "median": 2.7535998821258545,
+              "min": 2.5532000064849854,
+              "max": 3.0399999618530273,
+              "std": 0.18287852191909404,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.3727833006549671,
+            "num_chunks": 2,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 0.38576003909111023,
+            "compute_d2h_overlap_ms": 0.3644160032272339,
+            "host_stage_ms": 0.4896000027656555
+          }
+        }
+      },
+      {
+        "batch_size": 64,
+        "chunk_size": 16,
+        "production": {
+          "total_ms": {
+            "mean": 1.7225096736635481,
+            "median": 1.732287883758545,
+            "min": 1.3892799615859985,
+            "max": 2.1449599266052246,
+            "std": 0.27657720733647667,
+            "n": 7
+          }
+        },
+        "variants": {
+          "sequential_1buf": {
+            "total_ms": {
+              "mean": 4.003942762102399,
+              "median": 4.065899848937988,
+              "min": 3.1542999744415283,
+              "max": 5.218299865722656,
+              "std": 0.7230600718853176,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.42605276768216954,
+            "num_chunks": 4,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 1.5022720098495483,
+            "compute_d2h_overlap_ms": 1.5222079753875732,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pageable": {
+            "total_ms": {
+              "mean": 3.8991428102765764,
+              "median": 3.7009999752044678,
+              "min": 3.1940999031066895,
+              "max": 5.0289998054504395,
+              "std": 0.6319097350219213,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.468059415121407,
+            "num_chunks": 4,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 2.691648006439209,
+            "compute_d2h_overlap_ms": 2.712128162384033,
+            "host_stage_ms": 0.0
+          },
+          "async_3buf_pageable": {
+            "total_ms": {
+              "mean": 4.195885760443551,
+              "median": 4.243599891662598,
+              "min": 3.1366000175476074,
+              "max": 4.8231000900268555,
+              "std": 0.5427582794302291,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.40821187858967845,
+            "num_chunks": 4,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 2.027872085571289,
+            "compute_d2h_overlap_ms": 2.061824083328247,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pinned": {
+            "total_ms": {
+              "mean": 4.254742894853864,
+              "median": 4.288000106811523,
+              "min": 3.66510009765625,
+              "max": 4.747099876403809,
+              "std": 0.35855377935682364,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.40398503745529096,
+            "num_chunks": 4,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 1.386336088180542,
+            "compute_d2h_overlap_ms": 1.3809279203414917,
+            "host_stage_ms": 0.7418000102043152
+          },
+          "async_3buf_pinned": {
+            "total_ms": {
+              "mean": 5.345871448516846,
+              "median": 5.317399978637695,
+              "min": 4.987400054931641,
+              "max": 5.662700176239014,
+              "std": 0.2534983038213016,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.32577723901115163,
+            "num_chunks": 4,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 1.30348801612854,
+            "compute_d2h_overlap_ms": 1.2990080118179321,
+            "host_stage_ms": 0.8873999714851379
+          }
+        }
+      },
+      {
+        "batch_size": 100,
+        "chunk_size": 16,
+        "production": {
+          "total_ms": {
+            "mean": 2.818230833326067,
+            "median": 2.8064000606536865,
+            "min": 2.405087947845459,
+            "max": 3.2211837768554688,
+            "std": 0.27713260374186416,
+            "n": 7
+          }
+        },
+        "variants": {
+          "sequential_1buf": {
+            "total_ms": {
+              "mean": 5.223857062203543,
+              "median": 5.454599857330322,
+              "min": 4.314499855041504,
+              "max": 5.813399791717529,
+              "std": 0.5585945897220613,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.5145015462284047,
+            "num_chunks": 7,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 3.2651519775390625,
+            "compute_d2h_overlap_ms": 3.160736083984375,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pageable": {
+            "total_ms": {
+              "mean": 5.336714267730713,
+              "median": 5.166900157928467,
+              "min": 4.343599796295166,
+              "max": 6.367499828338623,
+              "std": 0.757870107558008,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.5431496593460089,
+            "num_chunks": 7,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 2.8226559162139893,
+            "compute_d2h_overlap_ms": 2.759903907775879,
+            "host_stage_ms": 0.0
+          },
+          "async_3buf_pageable": {
+            "total_ms": {
+              "mean": 5.947999954223633,
+              "median": 5.673399925231934,
+              "min": 4.909900188446045,
+              "max": 8.631099700927734,
+              "std": 1.2776323135134937,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.494659304409773,
+            "num_chunks": 7,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 2.7267839908599854,
+            "compute_d2h_overlap_ms": 2.663007974624634,
+            "host_stage_ms": 0.0
+          },
+          "async_2buf_pinned": {
+            "total_ms": {
+              "mean": 5.97795718056815,
+              "median": 6.038099765777588,
+              "min": 4.708899974822998,
+              "max": 7.1757001876831055,
+              "std": 0.8236731259962519,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.4647819959119668,
+            "num_chunks": 7,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 2.2053120136260986,
+            "compute_d2h_overlap_ms": 2.108128070831299,
+            "host_stage_ms": 0.9768999814987183
+          },
+          "async_3buf_pinned": {
+            "total_ms": {
+              "mean": 6.279457160404751,
+              "median": 6.414100170135498,
+              "min": 5.472499847412109,
+              "max": 7.007299900054932,
+              "std": 0.598887625378224,
+              "n": 7
+            },
+            "bit_exact_vs_production": true,
+            "gain_vs_production": 0.43753605123295125,
+            "num_chunks": 7,
+            "chunk_size_used": 16,
+            "h2d_compute_overlap_ms": 2.9909119606018066,
+            "compute_d2h_overlap_ms": 2.9524478912353516,
+            "host_stage_ms": 0.6525999307632446
+          }
+        }
+      }
+    ]
+  },
+  "experiment_id": "async_pipeline_enhanced_20260825T054141"
+}

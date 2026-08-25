@@ -1,0 +1,454 @@
+{
+  "manifest": {
+    "benchmark_id": "20260824_135124_seed42_batch119_224x224",
+    "timestamp_utc": "2026-08-24T13:51:26.218135+00:00",
+    "status": "VALID",
+    "validation_notes": [],
+    "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+    "dataset_path": "C:\\Users\\manoj\\Desktop\\dev\\GH1\\data",
+    "valid_image_count": 9463,
+    "environment": {
+      "os_platform": "Windows-11-10.0.26200-SP0",
+      "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+      "cpu_logical_cores": 16,
+      "gpu_available": true,
+      "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "gpu_vram_bytes": 8585216000,
+      "gpu_compute_capability": "8.9",
+      "gpu_driver_version": "13.2",
+      "cuda_runtime_version": "13.2",
+      "python_version": "3.13.9",
+      "opencv_version": "5.0.0.93",
+      "numpy_version": "2.3.5",
+      "pybind11_version": "3.1.0",
+      "git_commit": "c3763d3bd72d16d84d44eb332cbd123686e26399"
+    },
+    "seed": 42,
+    "requested_batch_size": 122,
+    "selected_image_count": 119,
+    "selected_relative_paths": [
+      "train\\fractured\\101-rotated3-rotated1-rotated1.jpg",
+      "train\\fractured\\103-rotated3-rotated1-rotated3.jpg",
+      "train\\fractured\\109-rotated1-rotated3-rotated2.jpg",
+      "train\\fractured\\109-rotated3-rotated3-rotated1.jpg",
+      "train\\fractured\\110-rotated1-rotated3-rotated1.jpg",
+      "train\\fractured\\111-rotated1-rotated1-rotated1.jpg",
+      "train\\fractured\\111-rotated1-rotated2-rotated2.jpg",
+      "train\\fractured\\115-rotated3-rotated2-rotated2.jpg",
+      "train\\fractured\\116-rotated3-rotated2-rotated1.jpg",
+      "train\\fractured\\117-rotated1-rotated3.jpg",
+      "train\\fractured\\12-rotated3-rotated3-rotated3.jpg",
+      "train\\fractured\\14-rotated1-rotated1-rotated1.jpg",
+      "train\\fractured\\15-rotated1-rotated2-rotated1.jpg",
+      "train\\fractured\\16-rotated2-rotated2-rotated3.jpg",
+      "train\\fractured\\17-rotated1-rotated3-rotated2.jpg",
+      "train\\fractured\\20-rotated1-rotated3.jpg",
+      "train\\fractured\\20-rotated3-rotated1-rotated2.jpg",
+      "train\\fractured\\23-rotated2-rotated3.jpg",
+      "train\\fractured\\25-rotated1-rotated3-rotated2.jpg",
+      "train\\fractured\\25.jpg",
+      "train\\fractured\\26-rotated2-rotated1-rotated3.jpg",
+      "train\\fractured\\27-rotated2-rotated3.jpg",
+      "train\\fractured\\29-rotated2-rotated1-rotated2.jpg",
+      "train\\fractured\\29-rotated3-rotated3-rotated1.jpg",
+      "train\\fractured\\29.jpg",
+      "train\\fractured\\32-rotated3-rotated3-rotated3.jpg",
+      "train\\fractured\\33-rotated2-rotated3.jpg",
+      "train\\fractured\\34-rotated3-rotated3-rotated3.jpg",
+      "train\\fractured\\39-rotated1-rotated2-rotated2.jpg",
+      "train\\fractured\\44-rotated3-rotated1-rotated1.jpg",
+      "train\\fractured\\45-rotated1-rotated2-rotated3.jpg",
+      "train\\fractured\\45-rotated1-rotated2.jpg",
+      "train\\fractured\\46-rotated2-rotated2.jpg",
+      "train\\fractured\\50-rotated2-rotated3.jpg",
+      "train\\fractured\\51-rotated3-rotated1-rotated2.jpg",
+      "train\\fractured\\53-rotated2-rotated1-rotated3.jpg",
+      "train\\fractured\\53-rotated2-rotated3-rotated1.jpg",
+      "train\\fractured\\54-rotated2-rotated3.jpg",
+      "train\\fractured\\54-rotated3-rotated3.jpg",
+      "train\\fractured\\58-rotated1-rotated1.jpg",
+      "train\\fractured\\66-rotated3-rotated2-rotated1.jpg",
+      "train\\fractured\\69-rotated2-rotated2-rotated1.jpg",
+      "train\\fractured\\73-rotated3-rotated2-rotated3.jpg",
+      "train\\fractured\\74-rotated2-rotated1.jpg",
+      "train\\fractured\\75-rotated1-rotated1.jpg",
+      "train\\fractured\\76-rotated1-rotated2.jpg",
+      "train\\fractured\\77-rotated2-rotated3-rotated2.jpg",
+      "train\\fractured\\77-rotated3-rotated2.jpg",
+      "train\\fractured\\77-rotated3.jpg",
+      "train\\fractured\\78-rotated1-rotated3.jpg",
+      "train\\fractured\\79-rotated2-rotated2-rotated1.jpg",
+      "train\\fractured\\81-rotated2-rotated1-rotated1.jpg",
+      "train\\fractured\\81-rotated3-rotated2-rotated3.jpg",
+      "train\\fractured\\83-rotated1-rotated3.jpg",
+      "train\\fractured\\83-rotated2-rotated1-rotated2.jpg",
+      "train\\fractured\\88-rotated1-rotated3-rotated3.jpg",
+      "train\\fractured\\88-rotated1.jpg",
+      "train\\fractured\\89-rotated1-rotated1-rotated1.jpg",
+      "train\\fractured\\90.jpg",
+      "train\\fractured\\95-rotated2-rotated3.jpg",
+      "train\\fractured\\96-rotated2-rotated1-rotated1.jpg",
+      "train\\fractured\\96-rotated2-rotated2-rotated3.jpg",
+      "train\\fractured\\97-rotated1-rotated3.jpg",
+      "train\\fractured\\97-rotated2-rotated1-rotated2.jpg",
+      "train\\fractured\\97-rotated3-rotated1-rotated1.jpg",
+      "train\\fractured\\98-rotated2-rotated3-rotated2.jpg",
+      "train\\not fractured\\10-rotated2-rotated1-rotated3-rotated1.jpg",
+      "train\\not fractured\\12-rotated1-rotated1-rotated3.jpg",
+      "train\\not fractured\\12-rotated1-rotated2-rotated1-rotated1.jpg",
+      "train\\not fractured\\12-rotated1-rotated2-rotated2.jpg",
+      "train\\not fractured\\14-rotated3-rotated3-rotated2-rotated1.jpg",
+      "train\\not fractured\\15-rotated3-rotated2-rotated3-rotated1.jpg",
+      "train\\not fractured\\21-rotated1-rotated1-rotated3.jpg",
+      "train\\not fractured\\21-rotated1-rotated3-rotated3-rotated1.jpg",
+      "train\\not fractured\\23-rotated2-rotated2-rotated1-rotated1.jpg",
+      "train\\not fractured\\26-rotated2-rotated2-rotated1-rotated1.jpg",
+      "train\\not fractured\\27-rotated2-rotated1-rotated1-rotated1.jpg",
+      "train\\not fractured\\28-rotated1-rotated3-rotated2-rotated1.jpg",
+      "train\\not fractured\\31-rotated1-rotated1-rotated1-rotated1.jpg",
+      "train\\not fractured\\31-rotated3-rotated3-rotated2.jpg",
+      "train\\not fractured\\32-rotated2-rotated3-rotated2-rotated1.jpg",
+      "train\\not fractured\\32-rotated2.jpg",
+      "train\\not fractured\\33-rotated2-rotated1-rotated1.jpg",
+      "train\\not fractured\\34-rotated3-rotated1-rotated1-rotated1.jpg",
+      "train\\not fractured\\36-rotated3-rotated1-rotated2-rotated1.jpg",
+      "train\\not fractured\\36-rotated3-rotated3-rotated2.jpg",
+      "train\\not fractured\\37-rotated1-rotated1-rotated2-rotated1.jpg",
+      "train\\not fractured\\37-rotated1-rotated1-rotated3.jpg",
+      "train\\not fractured\\37-rotated2-rotated2-rotated1.jpg",
+      "train\\not fractured\\38-rotated1-rotated3-rotated1.jpg",
+      "train\\not fractured\\40-rotated2-rotated2-rotated2-rotated1.jpg",
+      "train\\not fractured\\41-rotated2-rotated1-rotated2.jpg",
+      "train\\not fractured\\41-rotated3-rotated2-rotated2.jpg",
+      "train\\not fractured\\46-rotated1-rotated3.jpg",
+      "train\\not fractured\\46-rotated3-rotated3-rotated1.jpg",
+      "train\\not fractured\\46-rotated3-rotated3-rotated3.jpg",
+      "train\\not fractured\\47-rotated1-rotated1-rotated3-rotated1.jpg",
+      "train\\not fractured\\48-rotated2-rotated2-rotated2.jpg",
+      "train\\not fractured\\52-rotated2-rotated3-rotated1.jpg",
+      "train\\not fractured\\53-rotated2-rotated3-rotated2.jpg",
+      "train\\not fractured\\54-rotated3-rotated3-rotated2.jpg",
+      "train\\not fractured\\55-rotated1-rotated1-rotated3-rotated1.jpg",
+      "train\\not fractured\\55-rotated3-rotated1.jpg",
+      "train\\not fractured\\57-rotated1-rotated2-rotated3-rotated1.jpg",
+      "train\\not fractured\\62-rotated2-rotated1-rotated3-rotated1.jpg",
+      "train\\not fractured\\63-rotated3-rotated2-rotated2-rotated1.jpg",
+      "train\\not fractured\\65-rotated1-rotated3-rotated3.jpg",
+      "train\\not fractured\\66-rotated1.jpg",
+      "train\\not fractured\\70-rotated1-rotated2-rotated1-rotated1.jpg",
+      "train\\not fractured\\8-rotated2-rotated1-rotated1-rotated1.jpg",
+      "train\\not fractured\\8-rotated3-rotated2-rotated3.jpg",
+      "train\\not fractured\\9-rotated1-rotated1-rotated1.jpg",
+      "train\\not fractured\\9-rotated2-rotated2-rotated3.jpg",
+      "val\\fractured\\2-rotated2.jpg",
+      "val\\fractured\\2-rotated3-rotated2-rotated3.jpg",
+      "val\\fractured\\5-rotated2-rotated3-rotated1.jpg",
+      "val\\fractured\\6-rotated1-rotated1-rotated2.jpg",
+      "val\\fractured\\7-rotated2-rotated3-rotated2.jpg",
+      "val\\fractured\\9-rotated1.jpg"
+    ],
+    "resolution": [
+      224,
+      224
+    ],
+    "filter_config": {
+      "gaussian_enabled": true,
+      "gaussian_kernel_size": 5,
+      "gaussian_sigma": 0.0,
+      "median_enabled": true,
+      "median_kernel_size": 3,
+      "sobel_enabled": true,
+      "sobel_kernel_size": 3,
+      "sobel_mode": "magnitude",
+      "laplacian_enabled": true,
+      "laplacian_kernel_size": 3,
+      "laplacian_scale": 1.0,
+      "laplacian_delta": 0.0,
+      "threshold_enabled": true,
+      "threshold_value": 128,
+      "threshold_max_value": 255
+    },
+    "basic_cuda_config": {
+      "gaussian_variant": "basic",
+      "gaussian_block": [
+        16,
+        16
+      ],
+      "median_variant": "basic",
+      "median_block": [
+        16,
+        16
+      ],
+      "sobel_variant": "basic",
+      "sobel_block": [
+        16,
+        16
+      ],
+      "laplacian_variant": "basic",
+      "laplacian_block": [
+        16,
+        16
+      ],
+      "threshold_variant": "basic",
+      "threshold_block": [
+        16,
+        16
+      ]
+    },
+    "enhanced_cuda_config": {
+      "gaussian_variant": "specialized",
+      "gaussian_block": [
+        16,
+        16
+      ],
+      "median_variant": "network3x3",
+      "median_block": [
+        16,
+        16
+      ],
+      "sobel_variant": "specialized",
+      "sobel_block": [
+        16,
+        16
+      ],
+      "laplacian_variant": "specialized",
+      "laplacian_block": [
+        16,
+        16
+      ],
+      "threshold_variant": "vectorized",
+      "threshold_block": [
+        16,
+        16
+      ]
+    },
+    "warmup_runs": 2,
+    "measurement_runs": 20,
+    "result_file_paths": {
+      "raw_cpu": "raw\\cpu\\20260824_135124_seed42_batch119_224x224.json",
+      "raw_basic_cuda": "raw\\basic_cuda\\20260824_135124_seed42_batch119_224x224.json",
+      "raw_enhanced_cuda": "raw\\enhanced_cuda\\20260824_135124_seed42_batch119_224x224.json",
+      "aggregated": "aggregated\\20260824_135124_seed42_batch119_224x224.json"
+    }
+  },
+  "cpu": {
+    "mode1_kernel_only_ms": null,
+    "mode2_gpu_processing_ms": null,
+    "mode3_pipeline_ms": {
+      "mean": 30.364505000034114,
+      "median": 29.979549999552546,
+      "min": 27.677199999743607,
+      "max": 33.310099999653175,
+      "std": 1.4191218834416477,
+      "coefficient_of_variation": 0.046736210039981,
+      "n": 20
+    },
+    "mode4_end_to_end_ms": {
+      "mean": 83.28429270655224,
+      "median": 82.89933770607067,
+      "min": 80.59698770626173,
+      "max": 86.2298877061713,
+      "std": 1.4191218834416477,
+      "coefficient_of_variation": 0.017039490128611022,
+      "n": 20
+    }
+  },
+  "basic": {
+    "mode1_kernel_only_ms": {
+      "mean": 3.512326407432556,
+      "median": 3.5037921667099,
+      "min": 3.452479839324951,
+      "max": 3.6531195640563965,
+      "std": 0.04946250003885616,
+      "coefficient_of_variation": 0.014082546523633693,
+      "n": 20
+    },
+    "mode2_gpu_processing_ms": {
+      "mean": 5.684295964241028,
+      "median": 5.639776229858398,
+      "min": 4.941375732421875,
+      "max": 6.199967861175537,
+      "std": 0.3269973004917958,
+      "coefficient_of_variation": 0.05752643819901042,
+      "n": 20
+    },
+    "mode3_pipeline_ms": {
+      "mean": 5.684295964241028,
+      "median": 5.639776229858398,
+      "min": 4.941375732421875,
+      "max": 6.199967861175537,
+      "std": 0.3269973004917958,
+      "coefficient_of_variation": 0.05752643819901042,
+      "n": 20
+    },
+    "mode4_end_to_end_ms": {
+      "mean": 58.60408367075915,
+      "median": 58.55956393637652,
+      "min": 57.86116343894,
+      "max": 59.11975556769366,
+      "std": 0.3269973004917958,
+      "coefficient_of_variation": 0.005579769872845107,
+      "n": 20
+    }
+  },
+  "enhanced": {
+    "mode1_kernel_only_ms": {
+      "mean": 1.3065136194229126,
+      "median": 1.2840960025787354,
+      "min": 1.2472319602966309,
+      "max": 1.423359990119934,
+      "std": 0.053637593960871435,
+      "coefficient_of_variation": 0.04105398762284864,
+      "n": 20
+    },
+    "mode2_gpu_processing_ms": {
+      "mean": 3.526521623134613,
+      "median": 3.4014720916748047,
+      "min": 3.0392000675201416,
+      "max": 4.959775924682617,
+      "std": 0.4976180370959569,
+      "coefficient_of_variation": 0.14110732621955116,
+      "n": 20
+    },
+    "mode3_pipeline_ms": {
+      "mean": 3.526521623134613,
+      "median": 3.4014720916748047,
+      "min": 3.0392000675201416,
+      "max": 4.959775924682617,
+      "std": 0.4976180370959569,
+      "coefficient_of_variation": 0.14110732621955116,
+      "n": 20
+    },
+    "mode4_end_to_end_ms": {
+      "mean": 56.446309329652735,
+      "median": 56.321259798192926,
+      "min": 55.95898777403826,
+      "max": 57.87956363120074,
+      "std": 0.4976180370959569,
+      "coefficient_of_variation": 0.008815776319224205,
+      "n": 20
+    }
+  },
+  "per_stage_basic_ms": {
+    "gaussian": {
+      "mean": 1.2073072075843811,
+      "median": 1.1920160055160522,
+      "min": 1.1802239418029785,
+      "max": 1.309183955192566,
+      "std": 0.032437501563131,
+      "coefficient_of_variation": 0.02686764508598685,
+      "n": 20
+    },
+    "median": {
+      "mean": 1.3459456026554109,
+      "median": 1.3460479974746704,
+      "min": 1.334272027015686,
+      "max": 1.358847975730896,
+      "std": 0.005777360644324681,
+      "coefficient_of_variation": 0.004292417637775664,
+      "n": 20
+    },
+    "sobel": {
+      "mean": 0.3728335991501808,
+      "median": 0.3676159977912903,
+      "min": 0.3604480028152466,
+      "max": 0.4044800102710724,
+      "std": 0.011856313369340649,
+      "coefficient_of_variation": 0.03180054961882557,
+      "n": 20
+    },
+    "laplacian": {
+      "mean": 0.5083648011088371,
+      "median": 0.5017600208520889,
+      "min": 0.49459201097488403,
+      "max": 0.562175989151001,
+      "std": 0.018183224397022055,
+      "coefficient_of_variation": 0.035768063322561085,
+      "n": 20
+    },
+    "threshold": {
+      "mean": 0.07787520103156567,
+      "median": 0.07628800347447395,
+      "min": 0.07168000191450119,
+      "max": 0.10239999741315842,
+      "std": 0.00697266318480999,
+      "coefficient_of_variation": 0.08953637476946884,
+      "n": 20
+    }
+  },
+  "per_stage_enhanced_ms": {
+    "gaussian": {
+      "mean": 0.34539520740509033,
+      "median": 0.3328000158071518,
+      "min": 0.32358402013778687,
+      "max": 0.40140801668167114,
+      "std": 0.025683082237317408,
+      "coefficient_of_variation": 0.07435853679114743,
+      "n": 20
+    },
+    "median": {
+      "mean": 0.23173120021820068,
+      "median": 0.22937600314617157,
+      "min": 0.2181120067834854,
+      "max": 0.27238398790359497,
+      "std": 0.010564162813650248,
+      "coefficient_of_variation": 0.04558800370300985,
+      "n": 20
+    },
+    "sobel": {
+      "mean": 0.3526655986905098,
+      "median": 0.3491840064525604,
+      "min": 0.34303998947143555,
+      "max": 0.37785598635673523,
+      "std": 0.009515922047751686,
+      "coefficient_of_variation": 0.026982847442692057,
+      "n": 20
+    },
+    "laplacian": {
+      "mean": 0.3338752031326294,
+      "median": 0.32870399951934814,
+      "min": 0.32051199674606323,
+      "max": 0.37068799138069153,
+      "std": 0.012937658036594343,
+      "coefficient_of_variation": 0.0387499817752412,
+      "n": 20
+    },
+    "threshold": {
+      "mean": 0.0428464001044631,
+      "median": 0.0363520011305809,
+      "min": 0.030719999223947525,
+      "max": 0.0798719972372055,
+      "std": 0.01445859390581358,
+      "coefficient_of_variation": 0.33745177822552935,
+      "n": 20
+    }
+  },
+  "cpu_images_per_second": 1428.8408550132035,
+  "basic_images_per_second": 2030.5752184190492,
+  "enhanced_images_per_second": 2108.198063136896,
+  "basic_speedup_vs_cpu": 1.4211346290208684,
+  "enhanced_speedup_vs_cpu": 1.4754603745687374,
+  "enhanced_speedup_vs_basic_compute_only": 2.688319781146982,
+  "enhanced_speedup_vs_basic_end_to_end": 1.0382270225765298,
+  "correctness_basic_vs_cpu": {
+    "max_abs_diff": 255,
+    "mean_abs_diff": 0.04552546465014577,
+    "rmse": 3.407197306553756,
+    "differing_pixel_count": 1066,
+    "differing_pixel_percentage": 0.017853123392214027
+  },
+  "correctness_enhanced_vs_cpu": {
+    "max_abs_diff": 255,
+    "mean_abs_diff": 0.04552546465014577,
+    "rmse": 3.407197306553756,
+    "differing_pixel_count": 1066,
+    "differing_pixel_percentage": 0.017853123392214027
+  },
+  "correctness_enhanced_vs_basic": {
+    "max_abs_diff": 0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "differing_pixel_count": 0,
+    "differing_pixel_percentage": 0.0
+  }
+}

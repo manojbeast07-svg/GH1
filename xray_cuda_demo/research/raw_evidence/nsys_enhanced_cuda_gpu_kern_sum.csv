@@ -1,0 +1,7 @@
+Time (%),Total Time (ns),Instances,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Name
+28.2,1372318,4,343079.5,343103.5,341952,344159,901.8,"void xray_cuda::<unnamed>::sobel_specialized_kernel<(int)2>(const unsigned char *, unsigned char *, int, int)"
+26.3,1284032,4,321008.0,321232.0,319744,321824,895.4,"void xray_cuda::<unnamed>::laplacian_specialized_kernel<(int)3>(const unsigned char *, unsigned char *, int, int, float, float)"
+18.3,891168,4,222792.0,223232.0,221376,223328,945.1,"xray_cuda::<unnamed>::median_network9_kernel(const unsigned char *, unsigned char *, int, int)"
+13.1,640448,4,160112.0,158000.0,156128,168320,5542.7,"void xray_cuda::<unnamed>::gaussian_specialized_h_kernel<(int)5>(const unsigned char *, float *, int, int)"
+12.1,588864,4,147216.0,147280.0,146336,147968,671.5,"void xray_cuda::<unnamed>::gaussian_specialized_v_kernel<(int)5>(const float *, unsigned char *, int, int)"
+2.0,98016,4,24504.0,24496.0,24416,24608,80.0,"xray_cuda::<unnamed>::threshold_vectorized_kernel(const unsigned char *, unsigned char *, int, int, unsigned char, unsigned char)"
