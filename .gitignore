@@ -1,4 +1,2 @@
-# The X-ray dataset (~9,463 images, ~198MB) lives here deliberately, one
-# level outside xray_cuda_demo/ (see xray_cuda_demo/config.yaml's
-# dataset.path comment) -- it must never be committed to this repository.
-data/
+# The X-ray dataset previously lived here ignored; it is now intentionally
+# tracked in this repository (confirmed 2026-08-26) and is no longer excluded.

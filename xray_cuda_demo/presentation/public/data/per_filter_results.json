@@ -1,0 +1,42 @@
+[
+  {
+    "filter": "gaussian",
+    "basic_kernel_ms": 1.9288320541381836,
+    "enhanced_kernel_ms": 0.5560320019721985,
+    "kernel_speedup": 3.4545159302194115,
+    "absolute_reduction_ms": 1.3806240051984786,
+    "pct_of_total_compute_reduction": 36.98444481658173
+  },
+  {
+    "filter": "median",
+    "basic_kernel_ms": 2.5792160034179688,
+    "enhanced_kernel_ms": 0.45099200308322906,
+    "kernel_speedup": 5.69585055751399,
+    "absolute_reduction_ms": 2.1275584086775776,
+    "pct_of_total_compute_reduction": 56.99347995074032
+  },
+  {
+    "filter": "sobel",
+    "basic_kernel_ms": 0.6397280097007751,
+    "enhanced_kernel_ms": 0.7043040096759796,
+    "kernel_speedup": 0.8995800422899082,
+    "absolute_reduction_ms": -0.0718128025531769,
+    "pct_of_total_compute_reduction": -1.9237363852515583
+  },
+  {
+    "filter": "laplacian",
+    "basic_kernel_ms": 0.8585599958896637,
+    "enhanced_kernel_ms": 0.6650879979133606,
+    "kernel_speedup": 1.3550909240460423,
+    "absolute_reduction_ms": 0.238712003827095,
+    "pct_of_total_compute_reduction": 6.394667121067213
+  },
+  {
+    "filter": "threshold",
+    "basic_kernel_ms": 0.1401600018143654,
+    "enhanced_kernel_ms": 0.08846400305628777,
+    "kernel_speedup": 1.6430234093855103,
+    "absolute_reduction_ms": 0.057904000952839846,
+    "pct_of_total_compute_reduction": 1.551144496862295
+  }
+]

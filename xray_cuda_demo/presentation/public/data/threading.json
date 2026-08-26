@@ -1,0 +1,68 @@
+{
+  "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+  "cpu_physical_cores": 8,
+  "cpu_logical_processors": 16,
+  "opencv_threads": 16,
+  "opencv_threads_source": "cv2.getNumThreads() -- configured maximum, not a measurement of threads actually active during any specific call.",
+  "gpu_available": true,
+  "gpu_model": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "gpu_sm_count": 24,
+  "gpu_warp_size": 32,
+  "gpu_max_threads_per_block": 1024,
+  "gpu_compute_capability": "8.9",
+  "gpu_vram_bytes": 8585216000,
+  "gpu_free_vram_bytes": 7451181056,
+  "gpu_shared_mem_per_block_limit_bytes": 49152,
+  "gpu_async_engine_count": null,
+  "representative_width": 224,
+  "representative_height": 224,
+  "representative_batch_size": 122,
+  "block_dimensions": [
+    16,
+    16,
+    1
+  ],
+  "grid_dimensions": [
+    14,
+    14,
+    122
+  ],
+  "threads_per_block": 256,
+  "warps_per_block": 8,
+  "total_threads_launched": 6121472,
+  "per_filter": [
+    {
+      "filter_name": "Gaussian",
+      "launches_per_call": 2,
+      "pixels_per_thread": 1,
+      "note": "Separable: horizontal pass then vertical pass, each kernel one thread per element."
+    },
+    {
+      "filter_name": "Median",
+      "launches_per_call": 1,
+      "pixels_per_thread": 1,
+      "note": "One thread per output pixel."
+    },
+    {
+      "filter_name": "Sobel",
+      "launches_per_call": 1,
+      "pixels_per_thread": 1,
+      "note": "One thread per output pixel."
+    },
+    {
+      "filter_name": "Laplacian",
+      "launches_per_call": 1,
+      "pixels_per_thread": 1,
+      "note": "One thread per output pixel."
+    },
+    {
+      "filter_name": "Threshold",
+      "launches_per_call": 1,
+      "pixels_per_thread": 4,
+      "note": "Vectorized: each thread processes 4 pixels via uchar4 (width is a multiple of 4)."
+    }
+  ],
+  "registers_per_thread": null,
+  "occupancy_pct": null,
+  "gpu_utilization_pct": null
+}

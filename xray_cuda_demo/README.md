@@ -2440,6 +2440,16 @@ pytest tests/test_final_benchmark.py -v
 streamlit run app.py
 ```
 
+To reach it from another machine (e.g. viewing a remote desktop session's Streamlit app over the network
+instead of only on that box via `localhost`), bind it to all interfaces and open the printed "Network URL":
+
+```bash
+streamlit run app.py --server.address 0.0.0.0
+```
+
+This has no authentication, so only do this on a trusted network. See `presentation/README.md` for the
+equivalent remote-access setup for the standalone React presentation app (`presentation/`).
+
 ### Architecture
 
 Thin orchestrator, per the project's own layering discipline (spec item 58):

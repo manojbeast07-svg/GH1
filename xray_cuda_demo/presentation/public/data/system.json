@@ -1,0 +1,19 @@
+{
+  "environment_label": "LOCAL ENVIRONMENT",
+  "os_platform": "Windows-11-10.0.26200-SP0",
+  "cpu_model": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+  "cpu_logical_cores": 16,
+  "gpu_available": true,
+  "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "gpu_vram_bytes": 8585216000,
+  "gpu_free_vram_bytes": 7451181056,
+  "gpu_compute_capability": "8.9",
+  "gpu_driver_version": "13.2",
+  "cuda_runtime_version": "13.2",
+  "nvcc_version": "Cuda compilation tools, release 13.3, V13.3.73",
+  "cmake_version": "cmake version 4.4.2",
+  "python_version": "3.13.9",
+  "opencv_version": "5.0.0.93",
+  "numpy_version": "2.3.5",
+  "pybind11_version": "3.1.0"
+}

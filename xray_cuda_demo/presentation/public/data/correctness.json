@@ -1,0 +1,57 @@
+{
+  "canonical_pipeline": {
+    "basic_vs_cpu": {
+      "max_abs_diff": 255,
+      "mean_abs_diff": 0.04544740219345935,
+      "rmse": 3.404274894795092,
+      "differing_pixel_count": 1091,
+      "differing_pixel_percentage": 0.017822510664101707
+    },
+    "enhanced_vs_cpu": {
+      "max_abs_diff": 255,
+      "mean_abs_diff": 0.04544740219345935,
+      "rmse": 3.404274894795092,
+      "differing_pixel_count": 1091,
+      "differing_pixel_percentage": 0.017822510664101707
+    },
+    "enhanced_vs_basic": {
+      "max_abs_diff": 0,
+      "mean_abs_diff": 0.0,
+      "rmse": 0.0,
+      "differing_pixel_count": 0,
+      "differing_pixel_percentage": 0.0
+    }
+  },
+  "filter_level": {
+    "gaussian": {
+      "tolerance": 1,
+      "pass": true,
+      "cpu_vs_basic_max_abs_diff": 1,
+      "basic_vs_enhanced_max_abs_diff": 0
+    },
+    "median": {
+      "tolerance": 0,
+      "pass": true,
+      "cpu_vs_basic_max_abs_diff": 0,
+      "basic_vs_enhanced_max_abs_diff": 0
+    },
+    "sobel": {
+      "tolerance": 0,
+      "pass": true,
+      "cpu_vs_basic_max_abs_diff": 0,
+      "basic_vs_enhanced_max_abs_diff": 0
+    },
+    "laplacian": {
+      "tolerance": 0,
+      "pass": true,
+      "cpu_vs_basic_max_abs_diff": 0,
+      "basic_vs_enhanced_max_abs_diff": 0
+    },
+    "threshold": {
+      "tolerance": 0,
+      "pass": true,
+      "cpu_vs_basic_max_abs_diff": 0,
+      "basic_vs_enhanced_max_abs_diff": 0
+    }
+  }
+}

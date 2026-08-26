@@ -1,0 +1,120 @@
+{
+  "benchmark_id": "20260824_055212_seed42_batch122_224x224",
+  "timestamp_utc": "2026-08-24T05:52:14.289475+00:00",
+  "dataset_fingerprint": "f4691591df89705db97946a0c935918a89129e6d64a8dc37209abea686864aab",
+  "manifest": {
+    "seed": 42,
+    "selected_image_count": 122,
+    "resolution": [
+      224,
+      224
+    ]
+  },
+  "cpu": {
+    "mode1_kernel_only_ms": null,
+    "mode2_gpu_processing_ms": null,
+    "mode3_pipeline_ms": {
+      "mean": 34.44896500013783,
+      "median": 34.87614999994548,
+      "min": 29.194000000643427,
+      "max": 36.40810000069905,
+      "std": 1.7783301970818721,
+      "coefficient_of_variation": 0.05162216621238858,
+      "n": 20
+    },
+    "mode4_end_to_end_ms": {
+      "mean": 89.01868660052787,
+      "median": 89.44587160033552,
+      "min": 83.76372160103347,
+      "max": 90.97782160108909,
+      "std": 1.7783301970818721,
+      "coefficient_of_variation": 0.019977043753320517,
+      "n": 20
+    }
+  },
+  "basic_cuda": {
+    "mode1_kernel_only_ms": {
+      "mean": 3.6181551933288576,
+      "median": 3.5963679552078247,
+      "min": 3.527456045150757,
+      "max": 3.7261438369750977,
+      "std": 0.06017995346134774,
+      "coefficient_of_variation": 0.01663277284852439,
+      "n": 20
+    },
+    "mode2_gpu_processing_ms": {
+      "mean": 5.462505578994751,
+      "median": 5.496272087097168,
+      "min": 4.826207637786865,
+      "max": 5.951615810394287,
+      "std": 0.32293440354177927,
+      "coefficient_of_variation": 0.05911836589853112,
+      "n": 20
+    },
+    "mode3_pipeline_ms": {
+      "mean": 5.462505578994751,
+      "median": 5.496272087097168,
+      "min": 4.826207637786865,
+      "max": 5.951615810394287,
+      "std": 0.32293440354177927,
+      "coefficient_of_variation": 0.05911836589853112,
+      "n": 20
+    },
+    "mode4_end_to_end_ms": {
+      "mean": 60.03222717938479,
+      "median": 60.06599368748721,
+      "min": 59.395929238176905,
+      "max": 60.52133741078433,
+      "std": 0.32293440354177927,
+      "coefficient_of_variation": 0.005379350704027781,
+      "n": 20
+    }
+  },
+  "enhanced_cuda": {
+    "mode1_kernel_only_ms": {
+      "mean": 1.3234176099300385,
+      "median": 1.3153280019760132,
+      "min": 1.2799999713897705,
+      "max": 1.3772799968719482,
+      "std": 0.03264210771149675,
+      "coefficient_of_variation": 0.02466500934139931,
+      "n": 20
+    },
+    "mode2_gpu_processing_ms": {
+      "mean": 3.4308784127235414,
+      "median": 3.2783520221710205,
+      "min": 3.1174397468566895,
+      "max": 5.063968181610107,
+      "std": 0.48029955779051986,
+      "coefficient_of_variation": 0.13999317376253,
+      "n": 20
+    },
+    "mode3_pipeline_ms": {
+      "mean": 3.4308784127235414,
+      "median": 3.2783520221710205,
+      "min": 3.1174397468566895,
+      "max": 5.063968181610107,
+      "std": 0.48029955779051986,
+      "coefficient_of_variation": 0.13999317376253,
+      "n": 20
+    },
+    "mode4_end_to_end_ms": {
+      "mean": 58.00060001311358,
+      "median": 57.84807362256106,
+      "min": 57.68716134724673,
+      "max": 59.63368978200015,
+      "std": 0.48029955779051986,
+      "coefficient_of_variation": 0.008280941191676069,
+      "n": 20
+    }
+  },
+  "cpu_images_per_second": null,
+  "basic_images_per_second": null,
+  "enhanced_images_per_second": null,
+  "speedups": {
+    "basic_vs_cpu": 1.4828483097008451,
+    "enhanced_vs_cpu": 1.534789063913154,
+    "enhanced_vs_basic_compute_only": 2.73394820061381,
+    "enhanced_vs_basic_end_to_end": 1.0350276922275263
+  }
+}

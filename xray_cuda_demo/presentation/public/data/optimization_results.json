@@ -1,0 +1,56 @@
+[
+  {
+    "id": "persistent_buffers",
+    "name": "Persistent GPU Buffers",
+    "status": "REJECTED",
+    "section": "20B / 20C",
+    "what_we_tried": "Keep GPU input/output buffers allocated across calls instead of allocating fresh buffers on every request, to avoid repeated cudaMalloc/cudaFree overhead.",
+    "what_happened": "1.15x-1.62x faster in a microbenchmark that repeated the exact same image shape and configuration on every call -- but ~28% SLOWER in a realistic workload where batch size, filter parameters, and the selected image change between calls, which is how the real Streamlit application is actually used.",
+    "why_not_production": "The realistic-workload measurement is the deciding one, and it was a clear regression. The microbenchmark's own repeated-identical-call pattern doesn't match real usage."
+  },
+  {
+    "id": "pinned_memory",
+    "name": "Pinned Host Memory",
+    "status": "REJECTED",
+    "section": "20B",
+    "what_we_tried": "Stage image data through page-locked ('pinned') host memory before transferring it to the GPU, since pinned memory transfers are faster in isolation.",
+    "what_happened": "An isolated transfer-only benchmark showed ~1.8-1.9x faster transfers. But the real data path is always a plain NumPy array (pageable memory), so a copy into a pinned buffer is required first -- and that staging copy's cost was larger than the transfer speedup it unlocked.",
+    "why_not_production": "The isolated benefit did not survive contact with how the application actually receives its data."
+  },
+  {
+    "id": "cuda_graph_basic",
+    "name": "CUDA Graphs \u2014 Basic Pipeline",
+    "status": "EXPERIMENTAL",
+    "section": "20D",
+    "what_we_tried": "Record the sequence of GPU operations for the Basic pipeline once ('capture'), then replay that recording on future calls instead of re-issuing each step individually, reducing host-side launch overhead.",
+    "what_happened": "~1.44x-1.56x faster in the realistic workload test -- a genuine, reproducible win -- but roughly a wash at the largest batch size this project tests, where per-call overhead is already a small fraction of total time.",
+    "why_not_production": "Kept as a tested, working, documented capability -- not yet wired into the default application, since its benefit is batch-size-dependent."
+  },
+  {
+    "id": "cuda_graph_enhanced",
+    "name": "CUDA Graphs \u2014 Enhanced Pipeline",
+    "status": "EXPERIMENTAL",
+    "section": "20E",
+    "what_we_tried": "The same graph-capture idea as above, applied to the Enhanced (optimized) kernels.",
+    "what_happened": "~1.89x faster in the realistic workload test -- the single strongest result of the entire optimization research effort.",
+    "why_not_production": "No production-ready API surface has been built for it yet, and the Enhanced kernels required copying (not modifying) code into an isolated file to make capture possible, which is a real maintenance cost to weigh before adoption."
+  },
+  {
+    "id": "async_multistream",
+    "name": "Async Multi-Stream Pipeline",
+    "status": "EXPERIMENTAL",
+    "section": "20F",
+    "what_we_tried": "Split a batch into smaller chunks and overlap host-to-device transfer, GPU compute, and device-to-host transfer across separate CUDA streams, so the GPU is never idle waiting on a transfer.",
+    "what_happened": "Isolated, same-shape microbenchmarks were 1.4x-3.3x SLOWER (the chunking overhead outweighed the overlap gained on this GPU's single data-transfer engine) -- but the realistic workload showed a modest, reproducible ~1.07x-1.12x improvement.",
+    "why_not_production": "A genuinely mixed result -- positive on the metric that matters most, but negative everywhere else, and the extra complexity (three CUDA streams, careful chunk-size tuning) is hard to justify for a gain this small."
+  },
+  {
+    "id": "fusion",
+    "name": "Laplacian + Threshold Fusion",
+    "status": "EXPERIMENTAL",
+    "section": "10",
+    "what_we_tried": "Combine the Laplacian and Threshold stages into a single GPU kernel, avoiding one round-trip through GPU memory between the two stages.",
+    "what_happened": "A working, correctness-verified fused kernel exists, evaluated alongside the per-filter optimization work.",
+    "why_not_production": "Kept as a documented, tested alternative implementation rather than the default production configuration."
+  }
+]
