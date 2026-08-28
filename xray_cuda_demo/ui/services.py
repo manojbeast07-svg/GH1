@@ -30,6 +30,7 @@ try:
     from cuda.median import median_cuda_gpu, median_enhanced_cuda_gpu
     from cuda.pipeline import (
         PipelineConfig,
+        PipelineTiming,
         compute_safe_gpu_batch_size,
         run_basic_cuda_pipeline,
         run_cuda_pipeline,
@@ -200,15 +201,66 @@ def run_cpu_batch(images: List[np.ndarray], config: FilterConfig, preview_index:
     return ImplementationResult("CPU", final_outputs, stage_outputs, total_ms, per_stage_ms, compute_ms=total_ms)
 
 
+def _combine_pipeline_timings(timings: List["PipelineTiming"]) -> "PipelineTiming":
+    """Sums each timing field across the VRAM-safe chunks one logical batch
+    was split into, so a chunked call reports the same aggregate shape a
+    single native call would -- callers (ImplementationResult, the UI,
+    benchmarks) never need to know a batch was split. A stage disabled in
+    FilterConfig is None in every chunk (config doesn't change between
+    chunks), so None-ness is preserved rather than summed as 0."""
+    def _sum(attr: str) -> Optional[float]:
+        values = [getattr(t, attr) for t in timings]
+        return None if any(v is None for v in values) else sum(values)
+
+    return PipelineTiming(
+        h2d_ms=sum(t.h2d_ms for t in timings),
+        gaussian_ms=_sum("gaussian_ms"), median_ms=_sum("median_ms"), sobel_ms=_sum("sobel_ms"),
+        laplacian_ms=_sum("laplacian_ms"), threshold_ms=_sum("threshold_ms"),
+        d2h_ms=sum(t.d2h_ms for t in timings),
+        compute_ms=sum(t.compute_ms for t in timings),
+        total_ms=sum(t.total_ms for t in timings),
+    )
+
+
 def _gpu_batch(images: List[np.ndarray], config: FilterConfig, use_enhanced: bool,
                pipeline_config: Optional["PipelineConfig"]) -> Tuple[np.ndarray, object]:
     _require_cuda()
-    try:
+
+    def _run_one_call(chunk: List[np.ndarray]):
         if pipeline_config is not None:
-            return run_cuda_pipeline(images, config, pipeline_config)
+            return run_cuda_pipeline(chunk, config, pipeline_config)
         if use_enhanced:
-            return run_enhanced_cuda_pipeline(images, config)
-        return run_basic_cuda_pipeline(images, config)
+            return run_enhanced_cuda_pipeline(chunk, config)
+        return run_basic_cuda_pipeline(chunk, config)
+
+    try:
+        height, width = images[0].shape[:2]
+        try:
+            # Same live-VRAM capacity check cuda.pipeline.
+            # run_basic_cuda_pipeline_selection() already uses -- reused
+            # here, not reimplemented, so both call paths agree on what
+            # "safely fits" means.
+            safe_capacity = max(1, compute_safe_gpu_batch_size(height, width))
+        except Exception:
+            safe_capacity = len(images)  # live VRAM query unavailable; fall back to one call, as before
+
+        if len(images) <= safe_capacity:
+            return _run_one_call(images)
+
+        # Requested batch exceeds what actually fits in currently free
+        # VRAM: split into VRAM-safe chunks and reassemble, instead of
+        # letting the native call fail with an out-of-memory error. Each
+        # chunk runs the identical per-image kernels, so output values are
+        # unaffected -- this only changes how many images share one
+        # device-buffer allocation at a time.
+        chunk_outputs = []
+        chunk_timings = []
+        for start in range(0, len(images), safe_capacity):
+            chunk = images[start : start + safe_capacity]
+            out, t = _run_one_call(chunk)
+            chunk_outputs.append(out)
+            chunk_timings.append(t)
+        return np.concatenate(chunk_outputs, axis=0), _combine_pipeline_timings(chunk_timings)
     except MemoryError as exc:
         raise ServiceError(f"GPU ran out of memory for this batch ({len(images)} images): {exc}") from exc
     except Exception as exc:
@@ -620,6 +672,63 @@ def run_live_benchmark(
         enhanced_ms = statistics.median(values)
 
     return LiveBenchmarkResult(len(images), warmup_runs, measurement_runs, cpu_ms, basic_ms, enhanced_ms)
+
+
+_PER_FILTER_STAGES = ["gaussian", "median", "sobel", "laplacian", "threshold"]
+
+
+def run_live_per_filter_comparison(
+    images: List[np.ndarray], config: FilterConfig, warmup_runs: int = 1, measurement_runs: int = 3,
+) -> List[dict]:
+    """Live, per-filter Basic-vs-Enhanced kernel-time comparison (Presentation
+    Mode's "Enhanced CUDA" slide). Reuses run_gpu_batch()'s own per-stage
+    timing breakdown (PipelineTiming's *_ms fields, already exposed via
+    ImplementationResult.per_stage_ms) rather than re-measuring filters
+    individually -- these are the SAME per-stage numbers a batched pipeline
+    run already produces, just repeated warmup_runs+measurement_runs times
+    for a stable median, mirroring run_live_benchmark()'s convention."""
+    _require_cuda()
+
+    for _ in range(warmup_runs):
+        run_gpu_batch(images, config, use_enhanced=False)
+        run_gpu_batch(images, config, use_enhanced=True)
+
+    basic_samples: Dict[str, List[float]] = {s: [] for s in _PER_FILTER_STAGES}
+    enhanced_samples: Dict[str, List[float]] = {s: [] for s in _PER_FILTER_STAGES}
+    for _ in range(measurement_runs):
+        basic_result = run_gpu_batch(images, config, use_enhanced=False)
+        enhanced_result = run_gpu_batch(images, config, use_enhanced=True)
+        for stage in _PER_FILTER_STAGES:
+            if basic_result.per_stage_ms.get(stage) is not None:
+                basic_samples[stage].append(basic_result.per_stage_ms[stage])
+            if enhanced_result.per_stage_ms.get(stage) is not None:
+                enhanced_samples[stage].append(enhanced_result.per_stage_ms[stage])
+
+    basic_medians = {s: (statistics.median(v) if v else None) for s, v in basic_samples.items()}
+    enhanced_medians = {s: (statistics.median(v) if v else None) for s, v in enhanced_samples.items()}
+    total_reduction = sum(
+        basic_medians[s] - enhanced_medians[s]
+        for s in _PER_FILTER_STAGES
+        if basic_medians[s] is not None and enhanced_medians[s] is not None
+    )
+
+    rows = []
+    for stage in _PER_FILTER_STAGES:
+        b, e = basic_medians[stage], enhanced_medians[stage]
+        if b is None or e is None:
+            rows.append({
+                "filter": stage, "basic_kernel_ms": None, "enhanced_kernel_ms": None,
+                "kernel_speedup": None, "absolute_reduction_ms": None, "pct_of_total_compute_reduction": None,
+            })
+            continue
+        reduction = b - e
+        rows.append({
+            "filter": stage, "basic_kernel_ms": b, "enhanced_kernel_ms": e,
+            "kernel_speedup": (b / e) if e > 0 else None,
+            "absolute_reduction_ms": reduction,
+            "pct_of_total_compute_reduction": (reduction / total_reduction * 100.0) if total_reduction else None,
+        })
+    return rows
 
 
 # -- device / environment info -----------------------------------------------------

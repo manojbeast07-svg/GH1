@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { checkApiStatus, fetchLaunchConfig } from "../data/apiClient.js";
 import { MetricCard } from "./MetricCard.jsx";
-import { isMissing } from "../data/loadPresentationData.js";
+import { isMissing } from "../utils/isMissing.js";
 
 const BLOCK_PRESETS = [
   { label: "16 × 16 (production default)", x: 16, y: 16 },
@@ -57,7 +57,7 @@ export function LaunchConfigExplorer({ width = 224, height = 224 }) {
 
   return (
     <div className="card" style={{ marginTop: "0.8rem" }}>
-      <h4 style={{ marginTop: 0 }}>Launch Configuration Explorer — {width}×{height}</h4>
+      <h3 style={{ marginTop: 0 }}>For {width}×{height} images</h3>
       <p style={{ color: "var(--muted)", fontSize: "0.82rem" }}>
         Change the batch size or block size below — every number recalculates live, from this machine's real
         GPU, via the same function the production kernels' launch geometry is built from.

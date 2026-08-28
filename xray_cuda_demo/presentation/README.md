@@ -7,48 +7,50 @@ X-ray → CPU/OpenCV → Basic CUDA → Enhanced CUDA → "What changed?" → "W
 ```
 
 **This is a presentation/education layer, not the production backend, and it does not replace the
-existing Streamlit application** (`../app.py`). Almost everything here displays real, already-measured
-project data from static exported JSON. One opt-in section ("Try It Yourself") can trigger a real,
-live pipeline run through a small local API server (see below) — but that server only calls the existing,
-unmodified `cpu.pipeline`/`cuda.pipeline` code via `ui/services.py`, exactly like the Streamlit app already
-does; no kernel, filter, or benchmark methodology lives in this app or its API server.
+existing Streamlit application** (`../app.py`).
+
+**No presentation mode: nothing here is pre-recorded.** Every benchmark, per-filter speedup, batch/resolution
+sweep, correctness check, and system/threading number is computed **fresh, on every load**, by calling a small
+local API server (`scripts/presentation_api_server.py`) that runs the real CPU/Basic/Enhanced pipeline through
+`ui/services.py` — the same, unmodified backend the Streamlit app uses. This app REQUIRES that server running;
+without it, every metric renders as "Not available" rather than falling back to a cached/historical number. A
+"🔄 Recalculate Metrics" button in the sidebar re-runs everything on demand, so you can watch the numbers
+change between runs (small run-to-run GPU timing variance is real, not a bug).
+
+The one exception is the "What Didn't Work?" slide's five optimization-experiment summaries — those document
+this project's own past research (Sections 20B–20F, `research/*_decision.md`), a historical record of what
+was tried and why, not a metric that can be "recalculated" by re-running the pipeline. That one section still
+loads from `public/data/optimization_results.json`.
 
 ## Data source — no fabricated numbers
 
-Every number shown comes from `public/data/*.json`, generated from real project artifacts by:
+Everything except the historical "What Didn't Work?" data comes from `GET /api/live_presentation_data`
+(`scripts/presentation_api_server.py`), which calls `ui/services.py`'s existing `run_live_benchmark()`,
+`run_live_per_filter_comparison()`, `run_quick_batch_sweep()`, `run_compare()`, the correctness helpers, and
+the environment/threading introspection functions directly — no pipeline, kernel, or benchmark methodology is
+reimplemented anywhere in this app or its API server. If a value isn't computable, the field is `null`; the
+app renders that as "Not available" rather than guessing.
+
+To (re)generate the static export used only for the historical optimization-experiment data:
 
 ```bash
 # from the xray_cuda_demo/ project root, with the project's Python environment active
 python scripts/export_presentation_data.py
 ```
 
-This reads the canonical benchmark (`benchmark_results/canonical.json` + `summary/`), per-filter results,
-batch/resolution sweeps, correctness results, live system/GPU info (`pipeline.environment`,
-`xray_cuda.device_info()`), and live threading metrics (`pipeline.threading_metrics`). If a source is
-unavailable, the corresponding JSON field is `null`; the app renders that as "Not available" rather than
-guessing a value. Re-run this script any time the underlying benchmark data changes.
+## Live server (required)
 
-The five "What Didn't Work?" optimization-experiment summaries
-(`public/data/optimization_results.json`) are hand-transcribed from this project's own
-`research/*_decision.md` documents (Sections 20B–20F) — the numbers in them are real, measured results from
-those sections, restructured into JSON for display, not invented for this app.
-
-## Live "Try It Yourself" section
-
-One section of the presentation (`Try It Yourself`, between Enhanced CUDA and Performance) lets a viewer pick
-a batch size or a single image and trigger a **real** CPU/Basic/Enhanced run, with freshly-measured metrics,
-correctness, and output previews — not the pre-recorded canonical benchmark shown elsewhere. This needs a
-small local API server running alongside the React dev server:
+The whole app needs this running alongside the React dev server — there is no static/pre-recorded fallback:
 
 ```bash
 # from the xray_cuda_demo/ project root, with the project's Python environment active
 python scripts/presentation_api_server.py            # listens on http://0.0.0.0:5001 by default
 ```
 
-It is a thin integration layer, exactly parallel to `app.py` (Streamlit): it calls `ui/services.py`'s
-existing `run_compare()` and correctness helpers directly — no pipeline, kernel, or correctness logic is
-reimplemented, and no production file is modified. If this server isn't running, the rest of the
-presentation still works from the static exported data; only the "Try It Yourself" section shows a
+It is a thin integration layer, exactly parallel to `app.py` (Streamlit): it only calls `ui/services.py`'s
+existing functions — no pipeline, kernel, or correctness logic is reimplemented, and no production file is
+modified. If this server (or CUDA) isn't reachable, the app still loads and renders every slide, but every
+live metric shows "Not available" instead of a number; the "Try It Yourself" section additionally shows a
 message with the start command instead of a form.
 
 ## Requirements

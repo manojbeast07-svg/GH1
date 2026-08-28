@@ -219,6 +219,59 @@ def test_run_gpu_batch_raises_service_error_when_cuda_forced_unavailable(monkeyp
 
 
 @pytest.mark.skipif(not cuda_present, reason="No usable CUDA device detected on this machine.")
+def test_run_gpu_batch_chunks_when_requested_batch_exceeds_vram_capacity(monkeypatch):
+    """A batch larger than what currently fits in free VRAM must still be
+    processed in full (chunked via the same compute_safe_gpu_batch_size()
+    cuda.pipeline.run_basic_cuda_pipeline_selection() already uses), with
+    results bit-identical to running it unchunked -- never an OOM error
+    for a batch that would have fit as several smaller native calls."""
+    from ui import services
+
+    images = [FIXTURES["random_deterministic"](size=32, seed=i) for i in range(7)]
+    config = FilterConfig()
+
+    expected_output, _unchunked_timing = services.run_basic_cuda_pipeline(images, config)
+
+    monkeypatch.setattr(services, "compute_safe_gpu_batch_size", lambda height, width: 2)
+    result = services.run_gpu_batch(images, config, use_enhanced=False)
+
+    assert len(result.final_outputs) == 7
+    for i, out in enumerate(result.final_outputs):
+        np.testing.assert_array_equal(out, expected_output[i])
+    # GPU timing is noisy run-to-run (JIT/cache warmup, etc.) so this only
+    # checks the aggregate is a real, non-fabricated, non-negative number,
+    # not that it compares a specific way to a separate unchunked call.
+    assert result.total_ms >= 0.0
+    assert result.h2d_ms is not None and result.h2d_ms >= 0.0
+    assert result.d2h_ms is not None and result.d2h_ms >= 0.0
+
+
+@pytest.mark.skipif(not cuda_present, reason="No usable CUDA device detected on this machine.")
+def test_run_gpu_batch_within_vram_capacity_is_not_chunked(monkeypatch):
+    """When the requested batch already fits, it must go through in ONE
+    native call (not silently re-chunked into 1-image calls), preserving
+    the exact behavior every existing test/benchmark already relies on."""
+    from ui import services
+
+    images = [FIXTURES["random_deterministic"](size=32, seed=i) for i in range(3)]
+    config = FilterConfig()
+
+    calls = []
+    real_run = services.run_basic_cuda_pipeline
+
+    def _spy(imgs, cfg):
+        calls.append(len(imgs))
+        return real_run(imgs, cfg)
+
+    monkeypatch.setattr(services, "compute_safe_gpu_batch_size", lambda height, width: 100)
+    monkeypatch.setattr(services, "run_basic_cuda_pipeline", _spy)
+    result = services.run_gpu_batch(images, config, use_enhanced=False)
+
+    assert calls == [3]  # one call, with all 3 images -- not split
+    assert len(result.final_outputs) == 3
+
+
+@pytest.mark.skipif(not cuda_present, reason="No usable CUDA device detected on this machine.")
 def test_run_live_benchmark_returns_measured_values_not_none_when_enabled():
     from ui import services
 
@@ -230,6 +283,42 @@ def test_run_live_benchmark_returns_measured_values_not_none_when_enabled():
     assert result.basic_ms is not None and result.basic_ms >= 0
     assert result.enhanced_ms is not None and result.enhanced_ms >= 0
     assert result.n_images == 3
+
+
+@pytest.mark.skipif(not cuda_present, reason="No usable CUDA device detected on this machine.")
+def test_run_live_per_filter_comparison_returns_all_five_filters_with_real_numbers():
+    from ui import services
+
+    images = [FIXTURES["random_deterministic"](size=32, seed=i) for i in range(4)]
+    config = FilterConfig()
+    rows = services.run_live_per_filter_comparison(images, config, warmup_runs=1, measurement_runs=2)
+
+    assert [r["filter"] for r in rows] == ["gaussian", "median", "sobel", "laplacian", "threshold"]
+    for row in rows:
+        assert row["basic_kernel_ms"] is not None and row["basic_kernel_ms"] >= 0
+        assert row["enhanced_kernel_ms"] is not None and row["enhanced_kernel_ms"] >= 0
+        assert row["kernel_speedup"] is not None and row["kernel_speedup"] > 0
+        assert row["absolute_reduction_ms"] == pytest.approx(row["basic_kernel_ms"] - row["enhanced_kernel_ms"])
+
+    # Percentages are signed contributions to the total reduction, so they
+    # should sum to ~100% (not necessarily each individually positive --
+    # a filter that got SLOWER contributes a negative share, same
+    # convention the static per-filter data already uses).
+    total_pct = sum(r["pct_of_total_compute_reduction"] for r in rows)
+    assert total_pct == pytest.approx(100.0, abs=0.5)
+
+
+@pytest.mark.skipif(not cuda_present, reason="No usable CUDA device detected on this machine.")
+def test_run_live_per_filter_comparison_respects_disabled_stages():
+    from ui import services
+
+    images = [FIXTURES["random_deterministic"](size=32, seed=i) for i in range(3)]
+    config = FilterConfig(sobel_enabled=False)
+    rows = services.run_live_per_filter_comparison(images, config, warmup_runs=1, measurement_runs=1)
+
+    sobel_row = next(r for r in rows if r["filter"] == "sobel")
+    assert sobel_row["basic_kernel_ms"] is None
+    assert sobel_row["kernel_speedup"] is None
 
 
 # -- benchmark artifact loading (spec item 60: "unavailable benchmark handling") -------------------------------------------------------

@@ -1,15 +1,33 @@
 // Client for the local presentation API server (scripts/presentation_api_server.py).
-// Unlike loadPresentationData.js (which reads static, pre-exported JSON), this
-// triggers a REAL, live CPU/Basic/Enhanced run through the actual production
-// pipeline -- every number returned is freshly measured, never cached alongside
-// the static benchmark data, and never fabricated if the server is unreachable
-// (checkApiStatus()/runLive() surface a clear error instead).
+// Section 25: this is a complete interactive application, not a slideshow --
+// nothing here auto-executes the pipeline. Every function that runs CPU/CUDA
+// work is only ever called in response to an explicit user action (a button
+// click). checkApiStatus()/fetchDatasetInfo() are cheap, read-only queries and
+// are the only ones safe to call automatically.
 
 // Uses the page's own hostname rather than a hardcoded 127.0.0.1, so this
 // works both when opened locally and when the presentation is served to a
 // remote/RDP session and accessed by IP or hostname -- the API call follows
 // wherever the page itself was loaded from.
 const API_BASE = `http://${window.location.hostname}:5001`;
+
+async function getJson(path, { signal } = {}) {
+  const res = await fetch(`${API_BASE}${path}`, signal ? { signal } : undefined);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  return data;
+}
+
+async function postJson(path, body) {
+  const res = await fetch(`${API_BASE}${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  return data;
+}
 
 export async function checkApiStatus() {
   try {
@@ -23,12 +41,14 @@ export async function checkApiStatus() {
 
 export async function fetchDatasetInfo() {
   try {
-    const res = await fetch(`${API_BASE}/api/dataset_info`, { signal: AbortSignal.timeout(4000) });
-    if (!res.ok) return null;
-    return await res.json();
+    return await getJson("/api/dataset_info", { signal: AbortSignal.timeout(4000) });
   } catch {
     return null;
   }
+}
+
+export async function fetchSystemInfo() {
+  return getJson("/api/system_info");
 }
 
 export async function fetchLaunchConfig({ width, height, batchSize, blockX, blockY }) {
@@ -36,37 +56,75 @@ export async function fetchLaunchConfig({ width, height, batchSize, blockX, bloc
     width: String(width), height: String(height), batch_size: String(batchSize),
     block_x: String(blockX), block_y: String(blockY),
   });
-  const res = await fetch(`${API_BASE}/api/launch_config?${params}`);
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error(data.error || `Request failed (${res.status})`);
-  }
-  return data;
+  return getJson(`/api/launch_config?${params}`);
 }
 
 export async function fetchPreviewStages(imageIndex = 0) {
-  const res = await fetch(`${API_BASE}/api/preview_stages?image_index=${imageIndex}`);
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error(data.error || `Request failed (${res.status})`);
-  }
-  return data;
+  return getJson(`/api/preview_stages?image_index=${imageIndex}`);
 }
 
-export async function runLive({ mode, batchSize, seed, imageIndex }) {
-  const res = await fetch(`${API_BASE}/api/run`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      mode,
-      batch_size: batchSize,
-      seed,
-      image_index: imageIndex,
-    }),
+// The core explicit-action endpoint: [Run CPU] / [Run Basic CUDA] /
+// [Run Enhanced CUDA] / [Compare All] are all this one call with different
+// runCpu/runBasic/runEnhanced flags -- never all three unless requested.
+export async function runLive({
+  mode, batchSize, seed, imageIndex, runCpu = true, runBasic = true, runEnhanced = true, filterConfig,
+}) {
+  return postJson("/api/run", {
+    mode, batch_size: batchSize, seed, image_index: imageIndex,
+    run_cpu: runCpu, run_basic: runBasic, run_enhanced: runEnhanced,
+    filter_config: filterConfig,
   });
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error(data.error || `Request failed (${res.status})`);
+}
+
+export async function runLivePerFilter({ batchSize, seed, filterConfig }) {
+  return postJson("/api/live/per_filter", { batch_size: batchSize, seed, filter_config: filterConfig });
+}
+
+export async function runLiveBatchSweep({ batchSizes, seed, filterConfig }) {
+  return postJson("/api/live/batch_sweep", { batch_sizes: batchSizes, seed, filter_config: filterConfig });
+}
+
+export async function runLiveResolutionBenchmark({ sampleSize, seed, maxResolutions, imagesPerResolution, filterConfig } = {}) {
+  return postJson("/api/live/resolution_benchmark", {
+    sample_size: sampleSize, seed, max_resolutions: maxResolutions,
+    images_per_resolution: imagesPerResolution, filter_config: filterConfig,
+  });
+}
+
+export async function fetchOptimizationLabFilters() {
+  return getJson("/api/optimization_lab/filters");
+}
+
+export async function fetchOptimizationLabVariants(filterName) {
+  return getJson(`/api/optimization_lab/variants?filter_name=${encodeURIComponent(filterName)}`);
+}
+
+export async function runLiveVariantComparison({
+  filterName, variantA, variantB, batchSize, seed, warmupRuns, measurementRuns, filterConfig,
+}) {
+  return postJson("/api/live/variant_comparison", {
+    filter_name: filterName, variant_a: variantA, variant_b: variantB,
+    batch_size: batchSize, seed, warmup_runs: warmupRuns, measurement_runs: measurementRuns,
+    filter_config: filterConfig,
+  });
+}
+
+export async function fetchOptimizationLabHistoricalSweep(filterName) {
+  try {
+    return await getJson(`/api/optimization_lab/historical_sweep?filter_name=${encodeURIComponent(filterName)}`);
+  } catch {
+    return null;
   }
-  return data;
+}
+
+export async function saveExperiment(liveRunResult, label) {
+  return postJson("/api/save_experiment", { ...liveRunResult, label });
+}
+
+export async function fetchExperiments() {
+  return getJson("/api/experiments");
+}
+
+export async function fetchExperiment(runId) {
+  return getJson(`/api/experiments/${encodeURIComponent(runId)}`);
 }

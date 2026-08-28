@@ -5,11 +5,12 @@ import { TechnicalDetail } from "../components/TechnicalDetail.jsx";
 import { BarChart } from "../components/BarChart.jsx";
 import { MetricCard } from "../components/MetricCard.jsx";
 import { Sidebar } from "../components/Sidebar.jsx";
+import { ProvenanceBadge } from "../components/ProvenanceBadge.jsx";
 
-const SLIDES = [
-  { id: "a", title: "Section A" },
-  { id: "b", title: "Section B" },
-  { id: "c", title: "Section C" },
+const PAGES = [
+  { id: "a", title: "Page A" },
+  { id: "b", title: "Page B" },
+  { id: "c", title: "Page C" },
 ];
 
 function ModeReader() {
@@ -17,14 +18,12 @@ function ModeReader() {
   return <div data-testid="mode">{mode}</div>;
 }
 
-describe("6. Simple/Technical mode", () => {
+describe("Simple/Technical mode", () => {
   it("defaults to simple mode, and technical detail starts collapsed", () => {
     render(
       <ModeProvider>
         <ModeReader />
-        <TechnicalDetail label="detail">
-          <div>secret technical content</div>
-        </TechnicalDetail>
+        <TechnicalDetail label="detail"><div>secret technical content</div></TechnicalDetail>
       </ModeProvider>,
     );
     expect(screen.getByTestId("mode").textContent).toBe("simple");
@@ -35,7 +34,7 @@ describe("6. Simple/Technical mode", () => {
     render(
       <ModeProvider>
         <ModeReader />
-        <Sidebar slides={SLIDES} activeId="a" onJump={() => {}} onFullscreen={() => {}} focusMode={false} onToggleFocus={() => {}} />
+        <Sidebar pages={PAGES} activeId="a" onSelect={() => {}} />
       </ModeProvider>,
     );
     fireEvent.click(screen.getByText("Technical Mode"));
@@ -45,9 +44,7 @@ describe("6. Simple/Technical mode", () => {
   it("technical detail can be expanded by clicking its own toggle regardless of mode", () => {
     render(
       <ModeProvider>
-        <TechnicalDetail label="detail">
-          <div>secret technical content</div>
-        </TechnicalDetail>
+        <TechnicalDetail label="detail"><div>secret technical content</div></TechnicalDetail>
       </ModeProvider>,
     );
     fireEvent.click(screen.getByText(/Show detail/));
@@ -55,16 +52,10 @@ describe("6. Simple/Technical mode", () => {
   });
 });
 
-describe("9. performance bars", () => {
+describe("performance bars", () => {
   it("computes bar widths proportional to the largest real value, not a fixed scale", () => {
     const { container } = render(
-      <BarChart
-        bars={[
-          { label: "A", value: 100, kind: "cpu" },
-          { label: "B", value: 50, kind: "basic" },
-        ]}
-        formatValue={(v) => `${v}`}
-      />,
+      <BarChart bars={[{ label: "A", value: 100, kind: "cpu" }, { label: "B", value: 50, kind: "basic" }]} formatValue={(v) => `${v}`} />,
     );
     const fills = container.querySelectorAll(".bar-fill");
     expect(fills[0].style.width).toBe("100%");
@@ -88,57 +79,31 @@ describe("MetricCard", () => {
   });
 });
 
-describe("5. navigation (Sidebar)", () => {
-  it("lists every section and marks the active one", () => {
-    render(<ModeProvider><Sidebar slides={SLIDES} activeId="b" onJump={() => {}} onFullscreen={() => {}} focusMode={false} onToggleFocus={() => {}} /></ModeProvider>);
-    expect(screen.getByText("Section A")).toBeInTheDocument();
-    expect(screen.getByText("Section B")).toBeInTheDocument();
-    expect(screen.getByText("Section C")).toBeInTheDocument();
-    const activeButton = screen.getByText("Section B").closest("button");
-    expect(activeButton.className).toContain("active");
+describe("navigation (Sidebar)", () => {
+  it("lists every page and marks the active one", () => {
+    render(<ModeProvider><Sidebar pages={PAGES} activeId="b" onSelect={() => {}} /></ModeProvider>);
+    expect(screen.getByText("Page A")).toBeInTheDocument();
+    expect(screen.getByText("Page B")).toBeInTheDocument();
+    expect(screen.getByText("Page C")).toBeInTheDocument();
+    expect(screen.getByText("Page B").closest("button").className).toContain("active");
   });
 
-  it("calls onJump with the section id when a link is clicked", () => {
-    const onJump = vi.fn();
-    render(<ModeProvider><Sidebar slides={SLIDES} activeId="a" onJump={onJump} onFullscreen={() => {}} focusMode={false} onToggleFocus={() => {}} /></ModeProvider>);
-    fireEvent.click(screen.getByText("Section C"));
-    expect(onJump).toHaveBeenCalledWith("c");
-  });
-});
-
-describe("sidebar scroll progress", () => {
-  it("reflects the given progress percentage as the fill width", () => {
-    render(<ModeProvider><Sidebar slides={SLIDES} activeId="a" onJump={() => {}} onFullscreen={() => {}} focusMode={false} onToggleFocus={() => {}} progress={42} /></ModeProvider>);
-    const bar = screen.getByRole("progressbar", { name: "Presentation progress" });
-    expect(bar).toHaveAttribute("aria-valuenow", "42");
-    expect(bar.querySelector(".sidebar-progress-fill").style.width).toBe("42%");
+  it("calls onSelect with the page id when a link is clicked", () => {
+    const onSelect = vi.fn();
+    render(<ModeProvider><Sidebar pages={PAGES} activeId="a" onSelect={onSelect} /></ModeProvider>);
+    fireEvent.click(screen.getByText("Page C"));
+    expect(onSelect).toHaveBeenCalledWith("c");
   });
 
-  it("defaults to 0 when no progress is passed", () => {
-    render(<ModeProvider><Sidebar slides={SLIDES} activeId="a" onJump={() => {}} onFullscreen={() => {}} focusMode={false} onToggleFocus={() => {}} /></ModeProvider>);
-    expect(screen.getByRole("progressbar", { name: "Presentation progress" })).toHaveAttribute("aria-valuenow", "0");
+  it("shows an optional status label", () => {
+    render(<ModeProvider><Sidebar pages={PAGES} activeId="a" onSelect={() => {}} statusLabel="Loading historical data…" /></ModeProvider>);
+    expect(screen.getByText("Loading historical data…")).toBeInTheDocument();
   });
 });
 
-describe("10. focus mode / fullscreen controls", () => {
-  it("Focus Mode button calls the toggle handler and label reflects state", () => {
-    const onToggleFocus = vi.fn();
-    render(<ModeProvider><Sidebar slides={SLIDES} activeId="a" onJump={() => {}} onFullscreen={() => {}} focusMode={false} onToggleFocus={onToggleFocus} /></ModeProvider>);
-    const btn = screen.getByRole("button", { name: "Toggle focus mode" });
-    expect(btn.textContent).toBe("Focus Mode");
-    fireEvent.click(btn);
-    expect(onToggleFocus).toHaveBeenCalledTimes(1);
-  });
-
-  it("shows 'Show Sidebar' once focus mode is active", () => {
-    render(<ModeProvider><Sidebar slides={SLIDES} activeId="a" onJump={() => {}} onFullscreen={() => {}} focusMode={true} onToggleFocus={() => {}} /></ModeProvider>);
-    expect(screen.getByRole("button", { name: "Toggle focus mode" }).textContent).toBe("Show Sidebar");
-  });
-
-  it("Fullscreen button calls the fullscreen handler", () => {
-    const onFullscreen = vi.fn();
-    render(<ModeProvider><Sidebar slides={SLIDES} activeId="a" onJump={() => {}} onFullscreen={onFullscreen} focusMode={false} onToggleFocus={() => {}} /></ModeProvider>);
-    fireEvent.click(screen.getByRole("button", { name: "Toggle fullscreen" }));
-    expect(onFullscreen).toHaveBeenCalledTimes(1);
+describe("ProvenanceBadge", () => {
+  it("renders the LIVE/HISTORICAL/EXPERIMENTAL/PRODUCTION label text", () => {
+    render(<ProvenanceBadge kind="LIVE" />);
+    expect(screen.getByText("LIVE")).toBeInTheDocument();
   });
 });

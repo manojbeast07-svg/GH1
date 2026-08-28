@@ -1,4 +1,4 @@
-import { isMissing } from "../data/loadPresentationData.js";
+import { isMissing } from "../utils/isMissing.js";
 
 const COLORS = { cpu: "var(--cpu)", basic: "var(--basic)", enhanced: "var(--enhanced)" };
 
