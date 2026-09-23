@@ -12,6 +12,18 @@ function mockServer({ statusAvailable = true, cudaAvailable = true, runResponses
     if (url.includes("/api/status")) return Promise.resolve({ ok: true, json: () => Promise.resolve({ available: statusAvailable, cuda_available: cudaAvailable }) });
     if (url.includes("/api/dataset_info")) return Promise.resolve({ ok: true, json: () => Promise.resolve({ total_files: 9463 }) });
     if (url.includes("/api/system_info")) return Promise.resolve({ ok: true, json: () => Promise.resolve({ fingerprint: { gpu_name: "Test GPU" } }) });
+    if (url.includes("/api/image_thumbnails")) {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({
+          total: 2, start: 0, count: 2, query: "",
+          items: [
+            { index: 0, relative_path: "train/fractured/a.jpg", filename: "a.jpg", width: 224, height: 224, thumbnail: "data:image/png;base64,AAA" },
+            { index: 7, relative_path: "train/fractured/b.jpg", filename: "b.jpg", width: 224, height: 224, thumbnail: "data:image/png;base64,BBB" },
+          ],
+        }),
+      });
+    }
     if (url.includes("/api/run")) {
       const body = JSON.parse(opts.body);
       requestBodies.push(body);
@@ -58,7 +70,7 @@ describe("Live Processing page", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /^CPU \/ OpenCV/ }));
     fireEvent.click(screen.getByText("Run CPU / OpenCV"));
-    await waitFor(() => expect(screen.getByText("LIVE")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getAllByText("LIVE")[0]).toBeInTheDocument());
     const runCall = global.fetch.mock.calls.find(([u]) => u.includes("/api/run"));
     const body = JSON.parse(runCall[1].body);
     expect(body).toMatchObject({ run_cpu: true, run_basic: false, run_enhanced: false });
@@ -71,7 +83,7 @@ describe("Live Processing page", () => {
     expect(screen.getByRole("button", { name: /^Enhanced CUDA \/ C\+\+/ }).className).toContain("active");
 
     fireEvent.click(screen.getByText("Run Enhanced CUDA / C++"));
-    await waitFor(() => expect(screen.getByText("LIVE")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getAllByText("LIVE")[0]).toBeInTheDocument());
     const body = JSON.parse(global.fetch.mock.calls.find(([u]) => u.includes("/api/run"))[1].body);
     expect(body).toMatchObject({ run_cpu: false, run_basic: false, run_enhanced: true });
   });
@@ -133,7 +145,7 @@ describe("Live Processing page", () => {
     render(<Harness />);
     await waitFor(() => expect(screen.getByText("Compare All")).toBeInTheDocument());
     fireEvent.click(screen.getByText("Compare All"));
-    await waitFor(() => expect(screen.getByText("LIVE")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getAllByText("LIVE")[0]).toBeInTheDocument());
 
     const rows = screen.getAllByRole("row");
     const cpuRow = rows.find((r) => r.textContent.includes("CPU") && !r.textContent.includes("Basic") && !r.textContent.includes("Enhanced"));
@@ -148,7 +160,7 @@ describe("Live Processing page", () => {
     await waitFor(() => expect(screen.getByText("Compare All")).toBeInTheDocument());
     fireEvent.click(screen.getByText("Compare All"));
 
-    await waitFor(() => expect(screen.getByText("LIVE")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getAllByText("LIVE")[0]).toBeInTheDocument());
     expect(screen.getAllByText("PASS").length).toBeGreaterThanOrEqual(2); // Same Input + Same Configuration
     expect(screen.getByText(/Enhanced CUDA took 1.000 ms/)).toBeInTheDocument();
   });
@@ -193,11 +205,15 @@ describe("Live Processing page", () => {
     render(<Harness />);
     await waitFor(() => expect(screen.getByText("Compare All")).toBeInTheDocument());
     fireEvent.click(screen.getByText("Compare All"));
-    await waitFor(() => expect(screen.getByText("LIVE")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getAllByText("LIVE")[0]).toBeInTheDocument());
 
-    fireEvent.change(screen.getByLabelText("Image index"), { target: { value: "5" } });
+    // Pick a different X-ray from the browser -- that is now how the
+    // single-image selection changes, and it must invalidate the result.
+    fireEvent.click(screen.getByRole("button", { name: /^CPU \/ OpenCV/ }));
+    await waitFor(() => expect(screen.getByAltText("train/fractured/b.jpg")).toBeInTheDocument());
+    fireEvent.click(screen.getByAltText("train/fractured/b.jpg"));
     expect(screen.getByText(/Configuration changed/)).toBeInTheDocument();
-    expect(screen.getByText("LIVE")).toBeInTheDocument(); // old result still shown, just flagged
+    expect(screen.getAllByText("LIVE")[0]).toBeInTheDocument(); // old result still shown, just flagged
   });
 
   it("shows a clear error message rather than a fabricated result when a run fails", async () => {

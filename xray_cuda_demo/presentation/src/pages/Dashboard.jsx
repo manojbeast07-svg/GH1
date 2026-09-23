@@ -84,12 +84,11 @@ export function Dashboard({ live, onNavigate }) {
       </div>
 
       <h2>Where to go next</h2>
-      <div className="card-row cols-4">
+      <div className="card-row cols-3">
         {[
           ["live-processing", "Live Processing", "Run CPU/Basic/Enhanced and see fresh metrics"],
           ["filters", "Filters", "Explore each of the five filters"],
-          ["threading", "Threading & Parallelism", "GPU launch configuration, live"],
-          ["experiments", "Experiments", "Save and compare runs"],
+          ["performance", "Performance", "Benchmark this machine, live"],
         ].map(([id, title, desc]) => (
           <button key={id} className="card filter-card" style={{ textAlign: "left", cursor: "pointer" }} onClick={() => onNavigate(id)}>
             <div style={{ fontWeight: 700 }}>{title}</div>

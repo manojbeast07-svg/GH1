@@ -63,6 +63,23 @@ export async function fetchPreviewStages(imageIndex = 0) {
   return getJson(`/api/preview_stages?image_index=${imageIndex}`);
 }
 
+// A browsable page of real dataset thumbnails, so an image can be picked
+// visually. `index` on each item is the real dataset index /api/run takes.
+export async function fetchImageThumbnails({ start = 0, count = 24, q = "" } = {}) {
+  const params = new URLSearchParams({ start: String(start), count: String(count) });
+  if (q) params.set("q", q);
+  return getJson(`/api/image_thumbnails?${params}`);
+}
+
+// The real neighbourhood values, real production coefficients and real
+// output value for one filter at one pixel (see /api/filter_math).
+export async function fetchFilterMath({ imageIndex = 0, stage, x, y }) {
+  const params = new URLSearchParams({ image_index: String(imageIndex), stage });
+  if (x != null) params.set("x", String(x));
+  if (y != null) params.set("y", String(y));
+  return getJson(`/api/filter_math?${params}`);
+}
+
 // The core explicit-action endpoint: [Run CPU] / [Run Basic CUDA] /
 // [Run Enhanced CUDA] / [Compare All] are all this one call with different
 // runCpu/runBasic/runEnhanced flags -- never all three unless requested.
@@ -84,47 +101,3 @@ export async function runLiveBatchSweep({ batchSizes, seed, filterConfig }) {
   return postJson("/api/live/batch_sweep", { batch_sizes: batchSizes, seed, filter_config: filterConfig });
 }
 
-export async function runLiveResolutionBenchmark({ sampleSize, seed, maxResolutions, imagesPerResolution, filterConfig } = {}) {
-  return postJson("/api/live/resolution_benchmark", {
-    sample_size: sampleSize, seed, max_resolutions: maxResolutions,
-    images_per_resolution: imagesPerResolution, filter_config: filterConfig,
-  });
-}
-
-export async function fetchOptimizationLabFilters() {
-  return getJson("/api/optimization_lab/filters");
-}
-
-export async function fetchOptimizationLabVariants(filterName) {
-  return getJson(`/api/optimization_lab/variants?filter_name=${encodeURIComponent(filterName)}`);
-}
-
-export async function runLiveVariantComparison({
-  filterName, variantA, variantB, batchSize, seed, warmupRuns, measurementRuns, filterConfig,
-}) {
-  return postJson("/api/live/variant_comparison", {
-    filter_name: filterName, variant_a: variantA, variant_b: variantB,
-    batch_size: batchSize, seed, warmup_runs: warmupRuns, measurement_runs: measurementRuns,
-    filter_config: filterConfig,
-  });
-}
-
-export async function fetchOptimizationLabHistoricalSweep(filterName) {
-  try {
-    return await getJson(`/api/optimization_lab/historical_sweep?filter_name=${encodeURIComponent(filterName)}`);
-  } catch {
-    return null;
-  }
-}
-
-export async function saveExperiment(liveRunResult, label) {
-  return postJson("/api/save_experiment", { ...liveRunResult, label });
-}
-
-export async function fetchExperiments() {
-  return getJson("/api/experiments");
-}
-
-export async function fetchExperiment(runId) {
-  return getJson(`/api/experiments/${encodeURIComponent(runId)}`);
-}

@@ -1,8 +1,8 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MetricCard } from "../components/MetricCard.jsx";
 
-describe("MetricCard — 3D tilt, colorful accents, motion-on-change", () => {
+describe("MetricCard — implementation accent, motion only on change", () => {
   it("applies a colored accent class matching the given kind", () => {
     const { container } = render(<MetricCard title="X" value="5.0 ms" kind="enhanced" />);
     expect(container.querySelector(".metric-card-3d.enhanced")).toBeInTheDocument();
@@ -14,18 +14,19 @@ describe("MetricCard — 3D tilt, colorful accents, motion-on-change", () => {
     expect(container.querySelector(".cpu, .basic, .enhanced, .historical, .live")).not.toBeInTheDocument();
   });
 
-  it("tilts in 3D as the mouse moves across the card, and resets on mouse leave", () => {
+  // Replaces an earlier test that asserted the card rotated in 3D under the
+  // pointer. That behaviour was deliberately removed: a tile whose job is to
+  // state a measured number must hold still while it is being read. This
+  // test now pins the absence, so the tilt cannot quietly come back.
+  it("does not move under the pointer — no inline transform is ever applied", () => {
     const { container } = render(<MetricCard title="X" value="42" />);
     const card = container.querySelector(".metric-card-3d");
-    vi.spyOn(card, "getBoundingClientRect").mockReturnValue({ left: 0, top: 0, width: 100, height: 100, right: 100, bottom: 100 });
 
-    expect(card.style.transform).toContain("rotateX(0deg)");
+    expect(card.style.transform).toBe("");
     fireEvent.mouseMove(card, { clientX: 90, clientY: 10 });
-    expect(card.style.transform).not.toContain("rotateX(0deg)");
-
+    expect(card.style.transform).toBe("");
     fireEvent.mouseLeave(card);
-    expect(card.style.transform).toContain("rotateX(0deg)");
-    expect(card.style.transform).toContain("rotateY(0deg)");
+    expect(card.style.transform).toBe("");
   });
 
   it("pulses with real motion when its value changes, but not on first render", () => {

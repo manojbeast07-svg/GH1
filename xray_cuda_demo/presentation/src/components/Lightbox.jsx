@@ -26,7 +26,7 @@ export function Lightbox({ src, label, onClose }) {
       <img
         src={src}
         alt={`${label} — full size`}
-        style={{ maxWidth: "90vw", maxHeight: "88vh", borderRadius: 8, boxShadow: "0 20px 60px -20px rgba(0,0,0,0.7)" }}
+        style={{ maxWidth: "90vw", maxHeight: "88vh", borderRadius: "var(--radius)", boxShadow: "var(--shadow-overlay)" }}
       />
       <div style={{ position: "absolute", top: 16, right: 20, color: "#fff", fontSize: "0.85rem" }}>
         Click anywhere or press Esc to close

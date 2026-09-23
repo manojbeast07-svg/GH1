@@ -2676,7 +2676,7 @@ directories).
 ## Project status
 
 **Released and frozen.** Sections 1-20 plus the 20A-20F optimization research arc and the Section 22 final
-release audit are complete and verified. The production CUDA kernels, the Basic CUDA baseline, the Enhanced CUDA
+release audit are complete and verified. The production CUDA kernels, the Basic CUDA baseline, the Enhanced CUDArun it 
 algorithms, and the benchmark methodology are frozen -- see [Known limitations](#known-limitations) below and
 [release/final_validation.md](release/final_validation.md) for the final verification record (test count,
 determinism, build result, benchmark IDs, correctness/performance summary, repository hygiene audit).

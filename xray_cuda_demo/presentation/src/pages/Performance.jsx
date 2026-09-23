@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BarChart } from "../components/BarChart.jsx";
 import { MetricCard } from "../components/MetricCard.jsx";
 import { ProvenanceBadge } from "../components/ProvenanceBadge.jsx";
-import { runLiveBatchSweep, runLiveResolutionBenchmark } from "../data/apiClient.js";
+import { runLiveBatchSweep } from "../data/apiClient.js";
 import { isMissing } from "../utils/isMissing.js";
 import { Why } from "../components/Why.jsx";
 
@@ -98,54 +98,6 @@ function BatchSizeExplorer() {
   );
 }
 
-function ResolutionExplorer() {
-  const [running, setRunning] = useState(false);
-  const [error, setError] = useState(null);
-  const [rows, setRows] = useState(null);
-
-  async function runTest() {
-    setRunning(true);
-    setError(null);
-    try {
-      const data = await runLiveResolutionBenchmark({});
-      setRows(data.rows);
-    } catch (e) {
-      setError(e.message);
-    } finally {
-      setRunning(false);
-    }
-  }
-
-  return (
-    <div>
-      <p style={{ color: "var(--muted)", fontSize: "0.85rem" }}>
-        Samples the real dataset for whatever distinct resolutions are actually present, then benchmarks each —
-        sparse results (even one image for a rare shape) are expected, not a bug.
-      </p>
-      <button className="btn-primary" onClick={runTest} disabled={running}>{running ? "Running…" : "Benchmark Resolutions"}</button>
-      {error && <p style={{ color: "var(--error)", fontSize: "0.82rem" }}>{error}</p>}
-      {rows && (
-        <>
-          <ProvenanceBadge kind="LIVE" />
-          {rows.map((r) => (
-            <div key={`${r.width}x${r.height}`} style={{ marginBottom: "0.6rem" }}>
-              <p style={{ margin: "0.2rem 0", fontSize: "0.8rem", color: "var(--muted)" }}>{r.width}×{r.height} ({r.n_images} image{r.n_images === 1 ? "" : "s"} sampled)</p>
-              <BarChart
-                bars={[
-                  { label: "CPU", value: r.cpu_ms_per_image, kind: "cpu" },
-                  { label: "Basic CUDA", value: r.basic_ms_per_image, kind: "basic" },
-                  { label: "Enhanced CUDA", value: r.enhanced_ms_per_image, kind: "enhanced" },
-                ]}
-                formatValue={(v) => `${v.toFixed(3)} ms/img`}
-              />
-            </div>
-          ))}
-        </>
-      )}
-    </div>
-  );
-}
-
 export function Performance({ historical }) {
   return (
     <div className="page">
@@ -166,18 +118,6 @@ export function Performance({ historical }) {
           past that point).
         </Why>
         <BatchSizeExplorer />
-      </div>
-
-      <h2><ProvenanceBadge kind="LIVE" /> Resolution Explorer</h2>
-      <div className="section-live">
-        <Why question="Why can CPU win for small images?">
-          A GPU run always pays a small fixed cost — uploading the image, launching kernels, downloading the
-          result — before any parallelism advantage kicks in. For a very small or very simple workload, that fixed
-          cost can outweigh the benefit of running in parallel, so CPU/OpenCV (with no transfer overhead at all)
-          can come out ahead. Run the Resolution Explorer below on this machine's actual smallest images to see
-          whether that happens here.
-        </Why>
-        <ResolutionExplorer />
       </div>
     </div>
   );

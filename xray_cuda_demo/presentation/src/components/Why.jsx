@@ -9,7 +9,7 @@ export function Why({ question, children }) {
   return (
     <span className="why-inline">
       <button className="why-toggle" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
-        ❓ {question}
+        {question}
       </button>
       {open && <div className="why-answer">{children}</div>}
     </span>

@@ -4,6 +4,7 @@ import { ProvenanceBadge } from "../components/ProvenanceBadge.jsx";
 import { MetricCard } from "../components/MetricCard.jsx";
 import { checkApiStatus, fetchDatasetInfo, fetchPreviewStages, runLivePerFilter } from "../data/apiClient.js";
 import { Lightbox, Zoomable } from "../components/Lightbox.jsx";
+import { FilterMath } from "../components/FilterMath.jsx";
 import { isMissing } from "../utils/isMissing.js";
 
 const FILTERS = [
@@ -112,6 +113,10 @@ export function Filters({ historical }) {
           </div>
         )}
         {zoomSrc && <Lightbox src={zoomSrc} label={filter.name} onClose={() => setZoomSrc(null)} />}
+
+        {serverAvailable && stages?.stages && (
+          <FilterMath stage={selected} imageIndex={imageIndex} imageSrc={stages.stages[filter.prevStage]} />
+        )}
 
         <h4 style={{ marginTop: "1.2rem" }}><ProvenanceBadge kind="LIVE" /> Current live kernel time</h4>
         <button className="btn-primary" onClick={runLiveTiming} disabled={liveRunning || !serverAvailable}>

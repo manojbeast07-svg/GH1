@@ -9,12 +9,7 @@ import { Dashboard } from "./pages/Dashboard.jsx";
 import { LiveProcessing } from "./pages/LiveProcessing.jsx";
 import { Performance } from "./pages/Performance.jsx";
 import { Filters } from "./pages/Filters.jsx";
-import { CudaArchitecture } from "./pages/CudaArchitecture.jsx";
-import { Threading } from "./pages/Threading.jsx";
-import { OptimizationLab } from "./pages/OptimizationLab.jsx";
-import { Correctness } from "./pages/Correctness.jsx";
 import { System } from "./pages/System.jsx";
-import { Experiments } from "./pages/Experiments.jsx";
 import { Research } from "./pages/Research.jsx";
 
 const PAGES = [
@@ -22,13 +17,8 @@ const PAGES = [
   { id: "live-processing", title: "Live Processing" },
   { id: "performance", title: "Performance" },
   { id: "filters", title: "Filters" },
-  { id: "cuda-architecture", title: "CUDA Architecture" },
-  { id: "threading", title: "Threading & Parallelism" },
-  { id: "optimization-lab", title: "Optimization Lab" },
-  { id: "correctness", title: "Correctness" },
-  { id: "system", title: "System" },
-  { id: "experiments", title: "Experiments" },
   { id: "research", title: "Research / Decisions" },
+  { id: "system", title: "System" },
 ];
 
 export default function App() {
@@ -65,12 +55,7 @@ export default function App() {
       case "live-processing": return <LiveProcessing live={live} />;
       case "performance": return <Performance historical={historical} />;
       case "filters": return <Filters historical={historical?.per_filter_results} />;
-      case "cuda-architecture": return <CudaArchitecture live={live} />;
-      case "threading": return <Threading live={live} />;
-      case "optimization-lab": return <OptimizationLab />;
-      case "correctness": return <Correctness live={live} historical={historical?.correctness} />;
       case "system": return <System />;
-      case "experiments": return <Experiments live={live} />;
       case "research": return <Research historical={historical} />;
       default: return null;
     }

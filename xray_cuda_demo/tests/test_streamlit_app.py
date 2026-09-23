@@ -143,6 +143,59 @@ def test_select_random_batch_and_load_images_same_order():
         assert img.dtype == np.uint8
 
 
+@pytest.mark.skipif(get_real_dataset_path() is None, reason="Real X-ray dataset not present on this machine.")
+def test_parallel_loading_matches_sequential_byte_for_byte_and_in_order():
+    """load_selection_images() decodes in a thread pool. The images it
+    returns must be IDENTICAL, and in the same order, as loading them one
+    at a time -- every implementation in a comparison depends on that."""
+    from pipeline.image_loader import load_image
+    from ui import services
+
+    dm, _info = services.scan_dataset(str(get_real_dataset_path()))
+    selection = services.select_random_batch(dm, batch_size=12, seed=7)
+
+    parallel = services.load_selection_images(selection)
+    sequential = [load_image(item.absolute_path) for item in selection.items]
+
+    assert len(parallel) == len(sequential) == 12
+    for got, expected in zip(parallel, sequential):
+        np.testing.assert_array_equal(got, expected)
+
+
+@pytest.mark.skipif(get_real_dataset_path() is None, reason="Real X-ray dataset not present on this machine.")
+def test_small_selection_below_parallel_threshold_still_loads():
+    """Selections smaller than the pool threshold take the sequential
+    path; they must behave identically."""
+    from ui import services
+
+    dm, _info = services.scan_dataset(str(get_real_dataset_path()))
+    selection = services.select_random_batch(dm, batch_size=2, seed=3)
+    images = services.load_selection_images(selection)
+    assert len(images) == 2
+    assert all(img.dtype == np.uint8 for img in images)
+
+
+def test_load_failure_reports_the_specific_file_even_when_loaded_in_parallel(tmp_path):
+    """A bad file inside a parallel batch must still surface as a
+    ServiceError naming THAT file -- the pool must not swallow or
+    anonymize the failure."""
+    import cv2
+    from pipeline.dataset import DatasetManager
+    from ui import services
+
+    for i in range(6):
+        cv2.imwrite(str(tmp_path / f"good_{i}.png"), np.full((8, 8), i * 10, dtype=np.uint8))
+    (tmp_path / "broken.png").write_bytes(b"this is not a PNG")
+
+    dm = DatasetManager(tmp_path)
+    dm.scan()
+    selection = dm.random_batch(batch_size=7, seed=1)
+
+    with pytest.raises(services.ServiceError) as excinfo:
+        services.load_selection_images(selection)
+    assert "broken.png" in str(excinfo.value)
+
+
 def test_group_images_by_shape_groups_correctly():
     from ui import services
 

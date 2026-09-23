@@ -1,19 +1,49 @@
+/* Palette: a restrained, instrument-panel neutral rather than a neon one.
+   Greys carry a faint cool bias so they read as chosen, not default; the
+   three implementation colours (steel / bronze / teal) stay distinguishable
+   without any of them shouting, and the semantic colours (pass / warning /
+   error) are deliberately a separate, softer family from those three so a
+   status never reads as a series.
+
+   Decoration rule: this is a measurement instrument, so nothing decorative
+   moves and nothing glows. Colour carries meaning (which implementation,
+   which provenance, pass/fail) and nothing else. Motion is reserved for
+   things that genuinely changed -- a bar re-drawing to a new measured
+   width, a metric that just took a new value -- never for hover states,
+   never for page entry, never on a loop. Surfaces are flat: the only
+   drop shadow anywhere is --shadow-overlay, used by the image lightbox,
+   which genuinely does float above the page. Everything else that needs
+   to look selected uses a 1px ring, because a card showing a number is
+   not hovering over anything. */
 :root {
-  --bg: #0a0e18;
-  --panel: #151b2b;
-  --panel-hover: #1b2338;
-  --border: #2b3450;
-  --text: #eef2fb;
-  --muted: #93a1c2;
-  --cpu: #5b8cff;
-  --basic: #ffb020;
-  --enhanced: #2fe6a8;
-  --experimental: #c17dff;
-  --pass: #2fe6a8;
-  --warning: #ffb020;
-  --error: #ff5c72;
-  --accent-gradient: linear-gradient(135deg, #5b8cff 0%, #2fe6a8 100%);
-  --glow-enhanced: 0 0 0 1px color-mix(in srgb, var(--enhanced) 45%, transparent), 0 8px 24px -8px color-mix(in srgb, var(--enhanced) 55%, transparent);
+  --bg: #0f1216;
+  --panel: #171b21;
+  --panel-hover: #1e232b;
+  --border: #2a3039;
+  --text: #e7eaee;
+  --muted: #8d959f;
+  --cpu: #6f9dc9;
+  --basic: #b8926a;
+  --enhanced: #4c9e8a;
+  --experimental: #8f83aa;
+  --pass: #5f9e72;
+  --warning: #c2a04a;
+  --error: #cf6b74;
+  /* A recessed surface (chart tracks, code wells) sitting below --panel,
+     and the dark ink that stays legible on top of a filled accent. */
+  --well: #0a0d11;
+  --on-accent: #0b1013;
+  /* One solid accent for primary actions. A gradient fill and a coloured
+     glow both read as consumer marketing; a flat, slightly desaturated
+     blue reads as a control. */
+  --accent: #4a7ba7;
+  --accent-hover: #5a8cb8;
+  /* A selected/active control is marked with a solid inset ring rather
+     than a bloom, so selection stays legible on a projector. */
+  --ring-enhanced: inset 0 0 0 1px var(--enhanced);
+  --shadow-overlay: 0 24px 60px -24px rgba(0, 0, 0, 0.72);
+  --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --radius: 6px;
 
   /* Spacing scale -- every new margin/padding/gap in this file should be
      one of these, so vertical rhythm reads as intentional rather than
@@ -43,13 +73,19 @@ html, body, #root {
 }
 
 body {
-  background:
-    radial-gradient(1100px 600px at 12% -8%, color-mix(in srgb, var(--cpu) 14%, transparent), transparent 60%),
-    radial-gradient(900px 500px at 100% 10%, color-mix(in srgb, var(--enhanced) 10%, transparent), transparent 55%),
-    var(--bg);
-  background-attachment: fixed;
+  background: var(--bg);
   color: var(--text);
   font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Every measured number in the app is a figure in a column that a viewer
+   compares against the one above it, so digits must not change width as
+   the value changes. */
+.metric-value, .bar-fill, .image-picker-count, table td, table th, code, pre {
+  font-variant-numeric: tabular-nums;
 }
 
 .app-shell {
@@ -99,12 +135,12 @@ body {
   padding: 0.25rem 0.7rem;
   font-size: 0.78rem;
   cursor: pointer;
-  transition: background 0.18s ease, transform 0.18s ease;
+  transition: background 0.12s ease, border-color 0.12s ease;
 }
 
 .why-toggle:hover {
   background: color-mix(in srgb, var(--experimental) 22%, transparent);
-  transform: translateY(-1px);
+  border-color: var(--experimental);
 }
 
 .why-answer {
@@ -143,7 +179,7 @@ body {
 
 .sidebar-progress-fill {
   height: 100%;
-  background: var(--accent-gradient);
+  background: var(--accent);
   transition: width 0.15s linear;
 }
 
@@ -171,26 +207,22 @@ body {
   padding: 0.45rem 0.6rem;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
 }
 
 .sidebar-links button:hover {
   background: var(--panel-hover);
   color: var(--text);
-  transform: translateX(2px);
 }
 
+/* The current section is marked by a solid rule and a weight change. It
+   used to pulse on a 2.4s loop, which drew the eye away from the numbers
+   for as long as the page was open. */
 .sidebar-links button.active {
-  background: color-mix(in srgb, var(--enhanced) 16%, transparent);
-  color: var(--enhanced);
+  background: color-mix(in srgb, var(--enhanced) 14%, transparent);
+  color: var(--text);
   font-weight: 600;
   border-left-color: var(--enhanced);
-  animation: activeGlowPulse 2.4s ease-in-out infinite;
-}
-
-@keyframes activeGlowPulse {
-  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--enhanced) 35%, transparent); }
-  50% { box-shadow: 0 0 12px 1px color-mix(in srgb, var(--enhanced) 35%, transparent); }
 }
 
 .sidebar-num {
@@ -243,13 +275,11 @@ body {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.4s ease;
 }
 
 .scroll-section.is-visible {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .scroll-section:last-child {
@@ -257,13 +287,13 @@ body {
 }
 
 .page-container {
-  padding: 3.5rem 4rem 1.5rem;
-  animation: pageFadeIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  animation: pageFadeIn 0.16s ease;
 }
 
 @keyframes pageFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .section-live {
@@ -283,20 +313,29 @@ body {
   width: 100%;
 }
 
+/* Solid ink, not a clipped gradient. A gradient-filled headline is the
+   single loudest "marketing site" tell, and it costs contrast on a
+   projector for no information gained. */
 .slide h1, .page h1 {
-  font-size: 2.4rem;
-  margin: 0 0 0.3rem 0;
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem 0;
   letter-spacing: -0.01em;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--text);
 }
 
 .slide h2, .page h2 {
-  font-size: 1.5rem;
-  margin: 1.6rem 0 0.7rem 0;
-  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: var(--space-5) 0 var(--space-2) 0;
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .slide h3, .page h3 {
@@ -312,23 +351,21 @@ body {
 }
 
 .slide .subtitle, .page .subtitle {
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   color: var(--muted);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-4);
+  max-width: 68ch;
 }
 
+/* A card is a flat panel. It does not lift, glow or re-colour on hover:
+   a card that reacts to the pointer implies it is clickable, and most of
+   these only display a number. The ones that ARE buttons (.filter-card)
+   declare their own hover below. */
 .card {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.2rem 1.4rem;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--enhanced) 45%, var(--border));
-  box-shadow: 0 10px 28px -14px color-mix(in srgb, var(--enhanced) 40%, transparent);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-3);
 }
 
 .card-row {
@@ -342,57 +379,39 @@ body {
 .card-row.cols-4 { grid-template-columns: repeat(4, 1fr); }
 .card-row.cols-5 { grid-template-columns: repeat(5, 1fr); }
 
+/* Which implementation a number belongs to is carried by a solid rule
+   down its leading edge -- readable at a glance across a row, and from
+   the back of a room. (The class is still named -3d for its callers; the
+   3D mouse-tilt it used to do was removed, because a KPI tile that
+   rotates under the pointer undercuts the numbers on it.) */
 .metric-card-3d {
   position: relative;
-  transition: transform 0.12s ease-out, box-shadow 0.2s ease;
-  transform-style: preserve-3d;
-  will-change: transform;
-  overflow: hidden;
+  border-left: 3px solid var(--border);
 }
 
-.metric-card-3d::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--accent-gradient);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  pointer-events: none;
-}
-
-.metric-card-3d:hover {
-  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55), 0 0 0 1px color-mix(in srgb, var(--enhanced) 30%, var(--border));
-}
-
-.metric-card-3d:hover::before {
-  opacity: 0.05;
-}
-
-.metric-card-3d.cpu:hover { box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55), 0 0 0 1px color-mix(in srgb, var(--cpu) 45%, var(--border)); }
-.metric-card-3d.basic:hover { box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55), 0 0 0 1px color-mix(in srgb, var(--basic) 45%, var(--border)); }
-.metric-card-3d.enhanced:hover, .metric-card-3d.live:hover { box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55), 0 0 0 1px color-mix(in srgb, var(--enhanced) 45%, var(--border)); }
-.metric-card-3d.historical:hover { box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55), 0 0 0 1px color-mix(in srgb, var(--cpu) 45%, var(--border)); }
+.metric-card-3d.cpu { border-left-color: var(--cpu); }
+.metric-card-3d.basic { border-left-color: var(--basic); }
+.metric-card-3d.enhanced, .metric-card-3d.live { border-left-color: var(--enhanced); }
+.metric-card-3d.historical { border-left-color: var(--cpu); }
 
 .metric-card-3d.cpu .metric-value { color: var(--cpu); }
 .metric-card-3d.basic .metric-value { color: var(--basic); }
 .metric-card-3d.enhanced .metric-value, .metric-card-3d.live .metric-value { color: var(--enhanced); }
 .metric-card-3d.historical .metric-value { color: var(--cpu); }
 
+/* The one motion that survives on a metric: a brief tint when the value
+   actually changed, so a re-measurement is noticed rather than silently
+   swapped. No scaling -- the card holds its place in the grid. */
 .metric-pulse {
-  animation: metricPulse 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: metricPulse 0.5s ease-out;
 }
 
 @keyframes metricPulse {
-  0% { transform: scale(1); }
-  35% { transform: scale(1.06); box-shadow: 0 0 0 3px color-mix(in srgb, var(--enhanced) 55%, transparent), 0 18px 40px -18px rgba(0, 0, 0, 0.6); }
-  100% { transform: scale(1); }
+  0% { background: color-mix(in srgb, var(--enhanced) 22%, var(--panel)); }
+  100% { background: var(--panel); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .metric-card-3d {
-    transition: none;
-    transform: none !important;
-  }
   .metric-pulse {
     animation: none;
   }
@@ -407,8 +426,9 @@ body {
 }
 
 .metric-card .metric-value {
-  font-size: 1.7rem;
-  font-weight: 650;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .metric-card .metric-subtitle {
@@ -456,7 +476,7 @@ body {
 
 .bar-track {
   flex: 1;
-  background: #0b0e13;
+  background: var(--well);
   border-radius: 5px;
   height: 26px;
   overflow: hidden;
@@ -471,7 +491,7 @@ body {
   align-items: center;
   justify-content: flex-end;
   padding-right: 8px;
-  color: #0b0e13;
+  color: var(--on-accent);
   font-size: 0.72rem;
   font-weight: 700;
   white-space: nowrap;
@@ -491,17 +511,13 @@ body {
   padding: 0.25rem 0.6rem;
   font-size: 0.78rem;
   cursor: pointer;
-  transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  transition: border-color 0.12s ease, color 0.12s ease, background 0.12s ease;
 }
 
 .tech-toggle:hover {
-  border-color: var(--enhanced);
+  border-color: color-mix(in srgb, var(--enhanced) 60%, var(--border));
+  background: var(--panel-hover);
   color: var(--text);
-  box-shadow: var(--glow-enhanced);
-}
-
-.tech-toggle:active {
-  transform: scale(0.97);
 }
 
 .tech-toggle.active {
@@ -516,162 +532,283 @@ body {
    which button actually triggers a GPU run vs which one just reveals
    more text. */
 .btn-primary {
-  background: var(--accent-gradient);
-  color: #04140f;
-  border: none;
-  border-radius: 8px;
-  padding: 0.7rem 1.4rem;
-  font-size: 0.95rem;
-  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 0.55rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 10px 26px -12px color-mix(in srgb, var(--enhanced) 60%, transparent);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  transition: background 0.12s ease, border-color 0.12s ease;
 }
 
 .btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  filter: brightness(1.08);
-  box-shadow: 0 14px 32px -12px color-mix(in srgb, var(--enhanced) 70%, transparent);
-}
-
-.btn-primary:active:not(:disabled) {
-  transform: translateY(0);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 .btn-primary:disabled {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
 }
 
 .btn-action {
   background: var(--panel);
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
   color: var(--text);
-  border-radius: 8px;
-  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius);
+  padding: 0.55rem 1.1rem;
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.12s ease, background 0.12s ease;
 }
 
 .btn-action:hover:not(:disabled) {
-  transform: translateY(-2px);
+  background: var(--panel-hover);
 }
 
 .btn-action:disabled {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: not-allowed;
-  transform: none;
 }
 
-.gpu3d-card {
-  text-align: center;
+/* Image picker: browse the real dataset and choose by eye. */
+.image-picker-toolbar {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
 }
 
-.gpu3d-canvas-wrap {
-  height: 320px;
-  border-radius: 10px;
-  overflow: hidden;
+.image-picker-toolbar input[type="search"] {
+  flex: 1 1 260px;
+  min-width: 0;
+  padding: 0.45rem 0.6rem;
+  background: var(--well);
   border: 1px solid var(--border);
-  cursor: grab;
-  touch-action: none;
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.85rem;
 }
 
-.gpu3d-canvas-wrap:active {
-  cursor: grabbing;
+.image-picker-paging {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-.gpu3d-canvas-wrap canvas {
+.image-picker-count {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.image-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 6px;
+  padding: 8px;
+  background: var(--well);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.image-picker-tile {
+  position: relative;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  cursor: pointer;
+  overflow: hidden;
+  line-height: 0;
+  transition: border-color 0.12s ease;
+}
+
+.image-picker-tile img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
   display: block;
 }
 
-.threadblock2d {
-  display: grid;
-  gap: 2px;
-  background: #050810;
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  padding: 10px;
-  max-width: 420px;
-  margin: 0 auto;
+.image-picker-tile:hover {
+  border-color: color-mix(in srgb, var(--enhanced) 55%, var(--border));
 }
 
-.threadblock2d-cell {
-  aspect-ratio: 1;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: transform 0.1s ease;
+.image-picker-tile.selected {
+  border-color: var(--enhanced);
+  box-shadow: var(--ring-enhanced);
 }
 
-.threadblock2d-cell.hovered {
-  transform: scale(1.3);
-  z-index: 1;
+.image-picker-tile-index {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 1px 5px;
+  font-size: 0.62rem;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  background: color-mix(in srgb, var(--well) 82%, transparent);
+  border-top-right-radius: 5px;
 }
 
-.gpu3d-die-2d {
-  display: grid;
-  gap: 6px;
-  background: linear-gradient(135deg, #10151f, #050810);
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-  box-shadow: 0 0 40px -10px color-mix(in srgb, var(--enhanced) 40%, transparent), inset 0 0 20px rgba(0, 0, 0, 0.6);
+.image-picker-tile.selected .image-picker-tile-index {
+  background: var(--enhanced);
+  color: var(--on-accent);
+  font-weight: 600;
 }
 
-.gpu3d-sm {
-  aspect-ratio: 1;
-  background: linear-gradient(160deg, color-mix(in srgb, var(--enhanced) 35%, var(--panel)), var(--panel));
-  border: 1px solid color-mix(in srgb, var(--enhanced) 50%, var(--border));
-  border-radius: 4px;
-  font-size: 0.55rem;
+.image-picker-selection {
+  font-size: 0.8rem;
+  color: var(--text);
+  margin: var(--space-2) 0 0;
+}
+
+.image-picker-selection .muted-inline {
   color: var(--muted);
+}
+
+/* Pipeline execution breakdown: bar length = measured stage time. */
+.pipeline-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pipeline-stage {
+  display: grid;
+  grid-template-columns: 90px 1fr 92px;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  color: var(--text);
+  text-align: left;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.pipeline-stage:hover {
+  border-color: color-mix(in srgb, var(--enhanced) 45%, var(--border));
+  background: var(--panel-hover);
+}
+
+.pipeline-stage.active {
+  border-color: var(--enhanced);
+  box-shadow: var(--ring-enhanced);
+}
+
+.pipeline-stage.unmeasured {
+  opacity: 0.55;
+}
+
+.pipeline-stage-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.pipeline-stage-track {
+  height: 16px;
+  background: var(--well);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.pipeline-stage-fill {
+  display: block;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pipeline-stage-fill.kernel {
+  background: var(--enhanced);
+}
+
+.pipeline-stage-fill.transfer {
+  background: var(--basic);
+}
+
+.pipeline-stage-value {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: var(--muted);
+  text-align: right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pipeline-stage, .pipeline-stage-fill {
+    transition: none;
+  }
+}
+
+/* Filter-math explorer: real neighbourhood values, real coefficients. */
+.pixel-matrix {
+  display: grid;
+  gap: 3px;
+  max-width: 320px;
+}
+
+.pixel-matrix-cell {
+  aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-
-.gpu3d-sm.hovered {
-  background: var(--enhanced);
-  color: #04140f;
-  transform: translateZ(10px) scale(1.15);
-  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--enhanced) 70%, transparent);
-}
-
-.hierarchy3d-stage {
-  perspective: 900px;
-  height: 220px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  transform-style: preserve-3d;
-}
-
-.hierarchy3d-layer {
-  position: absolute;
-  width: 260px;
-  padding: 0.8rem;
-  text-align: center;
-  font-weight: 700;
-  border-radius: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 0.72rem;
   background: var(--panel);
-  border: 1.5px solid var(--border);
-  color: var(--muted);
-  cursor: pointer;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.hierarchy3d-layer:hover {
-  border-color: color-mix(in srgb, var(--enhanced) 50%, var(--border));
-}
-
-.hierarchy3d-layer.active {
-  color: var(--enhanced);
+.pixel-matrix-cell.center {
   border-color: var(--enhanced);
-  box-shadow: 0 12px 32px -12px color-mix(in srgb, var(--enhanced) 60%, transparent);
+  box-shadow: 0 0 0 1px var(--enhanced);
+}
+
+.pixel-crosshair {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border: 2px solid var(--enhanced);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.sorted-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.sorted-value {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+
+.sorted-value.median {
+  background: color-mix(in srgb, var(--enhanced) 25%, transparent);
+  border-color: var(--enhanced);
+  color: var(--enhanced);
+  font-weight: 700;
 }
 
 .gpu-status-indicator {
@@ -680,12 +817,12 @@ body {
   gap: 0.5rem;
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 0.45rem 1rem;
-  font-weight: 700;
-  font-size: 0.85rem;
+  border-radius: var(--radius);
+  padding: 0.35rem 0.8rem;
+  font-weight: 600;
+  font-size: 0.8rem;
   letter-spacing: 0.02em;
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--space-3);
 }
 
 .gpu-status-dot {
@@ -702,8 +839,6 @@ body {
 }
 .gpu-status-indicator[data-status="available"] .gpu-status-dot {
   background: var(--enhanced);
-  box-shadow: 0 0 8px 1px color-mix(in srgb, var(--enhanced) 70%, transparent);
-  animation: statusPulse 2s ease-in-out infinite;
 }
 
 .gpu-status-indicator[data-status="unavailable"] {
@@ -712,11 +847,6 @@ body {
 }
 .gpu-status-indicator[data-status="unavailable"] .gpu-status-dot {
   background: var(--error);
-}
-
-@keyframes statusPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
 }
 
 .impl-card {
@@ -729,19 +859,17 @@ body {
   border-color: var(--enhanced);
 }
 
-.impl-card.cpu.active { border-color: var(--cpu); box-shadow: var(--glow-enhanced); }
+.impl-card.cpu.active { border-color: var(--cpu); }
 .impl-card.basic.active { border-color: var(--basic); }
-.impl-card.enhanced.active { border-color: var(--enhanced); box-shadow: var(--glow-enhanced); }
+.impl-card.enhanced.active { border-color: var(--enhanced); }
 
-.btn-action.cpu:hover:not(:disabled) { border-color: var(--cpu); box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--cpu) 50%, transparent); }
-.btn-action.basic:hover:not(:disabled) { border-color: var(--basic); box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--basic) 50%, transparent); }
-.btn-action.enhanced:hover:not(:disabled) { border-color: var(--enhanced); box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--enhanced) 50%, transparent); }
+.btn-action.cpu:hover:not(:disabled) { border-color: var(--cpu); }
+.btn-action.basic:hover:not(:disabled) { border-color: var(--basic); }
+.btn-action.enhanced:hover:not(:disabled) { border-color: var(--enhanced); }
 
 .tech-toggle:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
 }
 
 @keyframes lightboxFadeIn {
@@ -767,28 +895,28 @@ body {
 
 .mode-toggle button.active {
   background: var(--enhanced);
-  color: #0b0e13;
+  color: var(--on-accent);
   font-weight: 700;
 }
 
 .filter-card {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: 0.9rem;
   cursor: pointer;
   text-align: center;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: border-color 0.12s ease, background 0.12s ease;
 }
 
 .filter-card:hover {
-  transform: translateY(-2px);
   background: var(--panel-hover);
+  border-color: color-mix(in srgb, var(--enhanced) 45%, var(--border));
 }
 
 .filter-card.active {
   border-color: var(--enhanced);
-  box-shadow: var(--glow-enhanced);
+  box-shadow: var(--ring-enhanced);
 }
 
 .pixel-grid {
@@ -802,13 +930,13 @@ body {
 }
 
 code, pre {
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-family: var(--mono);
 }
 
 pre.diagram {
-  background: #0b0e13;
+  background: var(--well);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: 1rem;
   overflow-x: auto;
   font-size: 0.85rem;
@@ -822,15 +950,15 @@ pre.diagram {
   background: var(--panel);
   border: 1px solid var(--border);
   color: var(--text);
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: 0.7rem 1rem;
   margin: 0.4rem 0;
   cursor: pointer;
-  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  transition: border-color 0.12s ease, background 0.12s ease;
 }
 
 .quiz-option:hover {
-  transform: translateX(3px);
+  background: var(--panel-hover);
   border-color: color-mix(in srgb, var(--enhanced) 40%, var(--border));
 }
 
@@ -877,22 +1005,18 @@ pre.diagram {
   }
 }
 
+/* Most of what this block used to disable (hover lifts, a looping nav
+   glow, a pulsing status dot, sliding page entry) no longer exists at
+   all, so only the genuine transitions need switching off here. */
 @media (prefers-reduced-motion: reduce) {
   .scroll-section {
     opacity: 1;
-    transform: none;
     transition: none;
   }
   .page-container {
     animation: none;
   }
-  .sidebar-links button.active {
-    animation: none;
-  }
-  .card:hover, .filter-card:hover, .sidebar-links button:hover, .quiz-option:hover {
-    transform: none;
-  }
-  .gpu-status-indicator[data-status="available"] .gpu-status-dot {
-    animation: none;
+  .bar-fill {
+    transition: none;
   }
 }

@@ -13,7 +13,7 @@ describe("App integration (Section 25 paged interactive application)", () => {
     render(<App />);
     await waitFor(() => expect(screen.getByRole("heading", { name: "Dashboard" })).toBeInTheDocument());
     const nav = screen.getByRole("navigation", { name: "Section navigation" });
-    for (const title of ["Dashboard", "Live Processing", "Performance", "Filters", "CUDA Architecture", "Threading & Parallelism", "Optimization Lab", "Correctness", "System", "Experiments", "Research / Decisions"]) {
+    for (const title of ["Dashboard", "Live Processing", "Performance", "Filters", "Research / Decisions", "System"]) {
       expect(nav.textContent).toContain(title);
     }
   });
@@ -43,7 +43,7 @@ describe("App integration (Section 25 paged interactive application)", () => {
     render(<App />);
     await waitFor(() => expect(screen.getByRole("heading", { name: "Dashboard" })).toBeInTheDocument());
     fireEvent.keyDown(window, { key: "End" });
-    await waitFor(() => expect(screen.getByRole("heading", { name: "What Didn't Work?" })).toBeInTheDocument()); // Research page's content heading
+    await waitFor(() => expect(screen.getByRole("heading", { name: "System" })).toBeInTheDocument()); // last page in the navigation
     fireEvent.keyDown(window, { key: "Home" });
     await waitFor(() => expect(screen.getByRole("heading", { name: "Dashboard" })).toBeInTheDocument());
   });

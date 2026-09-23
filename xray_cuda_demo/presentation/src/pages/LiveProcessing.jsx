@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { checkApiStatus, fetchDatasetInfo, fetchSystemInfo, saveExperiment } from "../data/apiClient.js";
+import { checkApiStatus, fetchDatasetInfo, fetchSystemInfo } from "../data/apiClient.js";
 import { MetricCard } from "../components/MetricCard.jsx";
 import { BarChart } from "../components/BarChart.jsx";
 import { Pill } from "../components/Pill.jsx";
 import { ProvenanceBadge, SourceTag } from "../components/ProvenanceBadge.jsx";
 import { FilterConfigPanel } from "../components/FilterConfigPanel.jsx";
+import { ImagePicker } from "../components/ImagePicker.jsx";
 import { Lightbox, Zoomable } from "../components/Lightbox.jsx";
+import { PipelineFlow } from "../components/PipelineFlow.jsx";
 import { isMissing } from "../utils/isMissing.js";
 import { buildRunNarrative } from "../utils/narrative.js";
 
@@ -27,7 +29,6 @@ export function LiveProcessing({ live }) {
   const [datasetInfo, setDatasetInfo] = useState(null);
   const [systemInfo, setSystemInfo] = useState(null);
   const [diffView, setDiffView] = useState("basic_vs_cpu");
-  const [saveMessage, setSaveMessage] = useState(null);
   const [zoomSrc, setZoomSrc] = useState(null);
   const [implementation, setImplementation] = useState(null);
   const [allowCpuFallback, setAllowCpuFallback] = useState(false);
@@ -65,17 +66,6 @@ export function LiveProcessing({ live }) {
       } else {
         setFallbackNotice({ kind: "error", message: `GPU execution failed: ${outcome.error}` });
       }
-    }
-  }
-
-  async function handleSave() {
-    if (!result) return;
-    setSaveMessage(null);
-    try {
-      const saved = await saveExperiment(result, `Live Processing — ${result.mode}`);
-      setSaveMessage(`Saved as experiment ${saved.run_id}.`);
-    } catch (e) {
-      setSaveMessage(`Save failed: ${e.message}`);
     }
   }
 
@@ -128,7 +118,7 @@ export function LiveProcessing({ live }) {
               </select>
             </label>
           </div>
-          {selection.mode === "batch" ? (
+          {selection.mode === "batch" && (
             <div>
               <label style={{ display: "block", fontSize: "0.8rem", color: "var(--muted)" }}>
                 Batch size
@@ -136,16 +126,20 @@ export function LiveProcessing({ live }) {
                   onChange={(e) => setSelection({ batchSize: Number(e.target.value) })} style={{ width: "100%", padding: "0.4rem" }} />
               </label>
             </div>
-          ) : (
-            <div>
-              <label style={{ display: "block", fontSize: "0.8rem", color: "var(--muted)" }}>
-                Image index
-                <input type="number" min={0} value={selection.imageIndex}
-                  onChange={(e) => setSelection({ imageIndex: Number(e.target.value) })} style={{ width: "100%", padding: "0.4rem" }} />
-              </label>
-            </div>
           )}
         </div>
+
+        {selection.mode === "single" && (
+          <div style={{ marginTop: "0.8rem" }}>
+            <div style={{ fontSize: "0.8rem", color: "var(--muted)", marginBottom: "0.4rem" }}>
+              Choose the X-ray to process
+            </div>
+            <ImagePicker
+              selectedIndex={selection.imageIndex}
+              onSelect={(index) => setSelection({ imageIndex: index })}
+            />
+          </div>
+        )}
         {selection.mode === "batch" && (
           <div style={{ marginTop: "0.6rem" }}>
             <label style={{ display: "block", fontSize: "0.8rem", color: "var(--muted)" }}>
@@ -228,8 +222,6 @@ export function LiveProcessing({ live }) {
             <span style={{ color: "var(--muted)", fontSize: "0.8rem" }}>
               run {result.run_id} — {result.batch_size} image{result.batch_size === 1 ? "" : "s"}, {result.resolution[0]}×{result.resolution[1]}
             </span>
-            <button className="tech-toggle" onClick={handleSave}>💾 Save Experiment</button>
-            {saveMessage && <span style={{ fontSize: "0.8rem", color: "var(--muted)" }}>{saveMessage}</span>}
           </div>
 
           <div className="card-row cols-2" style={{ marginTop: "0.8rem" }}>
@@ -285,18 +277,8 @@ export function LiveProcessing({ live }) {
           </table>
           <p style={{ color: "var(--muted)", fontSize: "0.82rem" }}>CPU has no H2D/D2H (no GPU transfer involved), so those cells show N/A rather than zero.</p>
 
-          <h3>Per-filter GPU timing <SourceTag source="CUDA event timing, per stage" /></h3>
-          {Object.entries(result.implementations).filter(([l]) => l !== "CPU").map(([label, impl]) => (
-            <div key={label} style={{ marginBottom: "0.8rem" }}>
-              <p style={{ fontWeight: 600, marginBottom: "0.3rem" }}>{label}</p>
-              <BarChart
-                bars={["gaussian", "median", "sobel", "laplacian", "threshold"].map((stage) => ({
-                  label: stage, value: impl.per_stage_ms?.[stage], kind: IMPL_KIND[label],
-                }))}
-                formatValue={fmtMs}
-              />
-            </div>
-          ))}
+          <h3>Where the time went — input → H2D → filters → D2H → output</h3>
+          <PipelineFlow result={result} />
 
           <h3>Correctness — this run <SourceTag source="current live run output comparison" /></h3>
           <div className="card-row cols-1" style={{ gridTemplateColumns: "1fr" }}>
